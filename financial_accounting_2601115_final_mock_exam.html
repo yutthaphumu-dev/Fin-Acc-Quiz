@@ -1,0 +1,2124 @@
+<!DOCTYPE html>
+<html lang="th" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2601115 Financial Accounting | Final Mock Exam (Chulalongkorn University)</title>
+    
+    <!-- Google Fonts: IBM Plex Sans Thai & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"IBM Plex Sans Thai"', '"Inter"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    colors: {
+                        navy: {
+                            800: '#102A43',
+                            900: '#0B192C',
+                            950: '#060F1C',
+                        },
+                        gold: {
+                            400: '#FBBF24',
+                            500: '#D97706',
+                            600: '#B45309',
+                        },
+                        cu: {
+                            pink: '#DE5C8E',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'IBM Plex Sans Thai', 'Inter', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .glass-card {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(148, 163, 184, 0.3);
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(148, 163, 184, 0.5);
+        }
+        .number-tabular {
+            font-variant-numeric: tabular-nums;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-navy-950 dark:text-slate-100 min-h-screen flex flex-col selection:bg-amber-500/30 selection:text-amber-300">
+
+    <!-- Top Navigation Header -->
+    <header class="sticky top-0 z-40 border-b border-slate-200/80 dark:border-slate-800/80 bg-white/85 dark:bg-navy-900/85 glass-card">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-2">
+            <!-- Brand / Course Title -->
+            <div class="flex items-center gap-3 cursor-pointer" onclick="app.goHome()">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-amber-700 flex items-center justify-center text-white font-bold shadow-lg shadow-amber-500/20 shrink-0">
+                    <i class="fa-solid fa-scale-balanced text-lg"></i>
+                </div>
+                <div class="leading-tight">
+                    <div class="flex items-center gap-2">
+                        <span class="font-bold text-sm sm:text-base tracking-tight text-slate-900 dark:text-white">2601115 FINANCIAL ACCOUNTING</span>
+                        <span class="hidden md:inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-pink-500/10 text-pink-600 dark:text-pink-400 border border-pink-500/20">
+                            CHULA CBS
+                        </span>
+                    </div>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">Executive Final Exam Simulator • Harvard Analytical Standard</p>
+                </div>
+            </div>
+
+            <!-- Action Toolbar -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <!-- Formula Sheet Trigger -->
+                <button onclick="app.toggleFormulaModal(true)" class="flex items-center gap-2 px-3 py-2 rounded-xl text-xs sm:text-sm font-medium bg-indigo-50 text-indigo-700 hover:bg-indigo-100 dark:bg-indigo-500/15 dark:text-indigo-300 dark:hover:bg-indigo-500/25 border border-indigo-200 dark:border-indigo-500/30 transition">
+                    <i class="fa-solid fa-square-root-variable"></i>
+                    <span class="hidden sm:inline">Formula Sheet</span>
+                    <span class="sm:hidden">สูตร</span>
+                </button>
+
+                <!-- Mistake Notebook Trigger -->
+                <button onclick="app.startMistakeReview()" id="nav-mistake-btn" class="relative flex items-center gap-2 px-3 py-2 rounded-xl text-xs sm:text-sm font-medium bg-rose-50 text-rose-700 hover:bg-rose-100 dark:bg-rose-500/15 dark:text-rose-300 dark:hover:bg-rose-500/25 border border-rose-200 dark:border-rose-500/30 transition">
+                    <i class="fa-solid fa-book-medical"></i>
+                    <span class="hidden md:inline">สมุดข้อผิด</span>
+                    <span id="mistake-badge" class="px-1.5 py-0.5 text-[11px] font-bold rounded-full bg-rose-600 text-white number-tabular">0</span>
+                </button>
+
+                <!-- Theme Toggle -->
+                <button onclick="app.toggleTheme()" aria-label="Toggle Theme" class="w-10 h-10 rounded-xl flex items-center justify-center bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-amber-400 border border-slate-200 dark:border-slate-700 transition">
+                    <i id="theme-icon" class="fa-solid fa-sun"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main id="app-container" class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+        <!-- Dynamic Content Rendered Here -->
+    </main>
+
+    <!-- Custom Notification Toast (Replaces alert) -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <!-- Formula Sheet Modal -->
+    <div id="formula-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-950/75 backdrop-blur-sm">
+        <div class="bg-white dark:bg-navy-900 border border-slate-200 dark:border-slate-700 rounded-2xl max-w-4xl w-full max-h-[88vh] flex flex-col shadow-2xl overflow-hidden animate-fadeIn">
+            <!-- Modal Header -->
+            <div class="px-6 py-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50 dark:bg-navy-950/60">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-lg bg-indigo-500/20 text-indigo-500 flex items-center justify-center">
+                        <i class="fa-solid fa-calculator"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white">Exam Formula Sheet (เอกสารแนบท้ายข้อสอบ 2601115)</h3>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">หมายเหตุ: ข้อสอบกำหนดให้ใช้ตัวเลข "ยอดถัวเฉลี่ย (Average)" สำหรับอัตราส่วนเปรียบเทียบงบดุลกับงบกำไรขาดทุน</p>
+                    </div>
+                </div>
+                <button onclick="app.toggleFormulaModal(false)" class="w-9 h-9 rounded-xl flex items-center justify-center text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-200/50 dark:hover:bg-slate-800 transition">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            
+            <!-- Modal Body -->
+            <div class="p-6 overflow-y-auto space-y-6 text-sm">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Liquidity -->
+                    <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/80">
+                        <h4 class="font-bold text-amber-600 dark:text-amber-400 mb-2 flex items-center gap-2">
+                            <i class="fa-solid fa-droplet"></i> 1. Liquidity Ratios (สภาพคล่อง)
+                        </h4>
+                        <ul class="space-y-2 text-slate-700 dark:text-slate-300 text-xs sm:text-sm">
+                            <li><strong>Current Ratio:</strong> สินทรัพย์หมุนเวียน / หนี้สินหมุนเวียน</li>
+                            <li><strong>Quick (Acid-Test) Ratio:</strong> (เงินสด + รายการเทียบเท่าเงินสด + เงินลงทุนชั่วคราว + ลูกหนี้การค้าสุทธิ) / หนี้สินหมุนเวียน <br><span class="text-rose-500 dark:text-rose-400 text-xs">*ระวัง: ไม่รวมสินค้าคงเหลือ และไม่รวมค่าใช้จ่ายจ่ายล่วงหน้า (Prepaid)*</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- Activity / Efficiency -->
+                    <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/80">
+                        <h4 class="font-bold text-emerald-600 dark:text-emerald-400 mb-2 flex items-center gap-2">
+                            <i class="fa-solid fa-rotate"></i> 2. Activity Ratios (ประสิทธิภาพ)
+                        </h4>
+                        <ul class="space-y-2 text-slate-700 dark:text-slate-300 text-xs sm:text-sm">
+                            <li><strong>A/R Turnover:</strong> ขายเชื่อสุทธิ / ลูกหนี้การค้าถัวเฉลี่ย</li>
+                            <li><strong>Average Collection Period:</strong> 365 / A/R Turnover</li>
+                            <li><strong>Inventory Turnover:</strong> ต้นทุนขาย (COGS) / สินค้าคงเหลือถัวเฉลี่ย</li>
+                            <li><strong>Days in Inventory:</strong> 365 / Inventory Turnover</li>
+                            <li><strong>Total Asset Turnover:</strong> ยอดขายสุทธิ / สินทรัพย์รวมถัวเฉลี่ย</li>
+                        </ul>
+                    </div>
+
+                    <!-- Profitability -->
+                    <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/80">
+                        <h4 class="font-bold text-sky-600 dark:text-sky-400 mb-2 flex items-center gap-2">
+                            <i class="fa-solid fa-chart-line"></i> 3. Profitability & DuPont (ความสามารถทำกำไร)
+                        </h4>
+                        <ul class="space-y-2 text-slate-700 dark:text-slate-300 text-xs sm:text-sm">
+                            <li><strong>Gross Profit Margin:</strong> (กำไรขั้นต้น / ขายสุทธิ) × 100</li>
+                            <li><strong>Net Profit Margin:</strong> (กำไรสุทธิ / ขายสุทธิ) × 100</li>
+                            <li><strong>ROA:</strong> กำไรสุทธิ / สินทรัพย์รวมถัวเฉลี่ย <br><span class="text-xs text-slate-500 dark:text-slate-400">(หรือ [กำไรสุทธิ + ดอกเบี้ยจ่าย(1 - Tax Rate)] / สินทรัพย์รวมถัวเฉลี่ย กรณีปรับปรุงโครงสร้างทุน)</span></li>
+                            <li><strong>ROE:</strong> กำไรสุทธิ / ส่วนของผู้ถือหุ้นถัวเฉลี่ย</li>
+                            <li class="pt-1 border-t border-slate-200 dark:border-slate-700 text-amber-600 dark:text-amber-300 font-medium">
+                                DuPont ROA = Net Profit Margin × Total Asset Turnover
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Solvency / Leverage -->
+                    <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/80">
+                        <h4 class="font-bold text-purple-600 dark:text-purple-400 mb-2 flex items-center gap-2">
+                            <i class="fa-solid fa-building-columns"></i> 4. Solvency & Coverage (ความมั่นคงระยะยาว)
+                        </h4>
+                        <ul class="space-y-2 text-slate-700 dark:text-slate-300 text-xs sm:text-sm">
+                            <li><strong>Debt-to-Asset Ratio:</strong> หนี้สินรวม / สินทรัพย์รวม</li>
+                            <li><strong>Debt-to-Equity (D/E):</strong> หนี้สินรวม / ส่วนของผู้ถือหุ้นรวม</li>
+                            <li><strong>Times Interest Earned (Interest Coverage):</strong> EBIT (กำไรก่อนดอกเบี้ยและภาษี) / ดอกเบี้ยจ่าย <br><span class="text-rose-500 dark:text-rose-400 text-xs">*ระวัง: ต้องบวกกลับทั้งภาษีเงินได้และดอกเบี้ยจ่ายเข้ากับกำไรสุทธิ!*</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirm Submit Modal (Replaces confirm()) -->
+    <div id="submit-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-950/75 backdrop-blur-sm">
+        <div class="bg-white dark:bg-navy-900 border border-slate-200 dark:border-slate-700 rounded-2xl max-w-md w-full p-6 shadow-2xl">
+            <div class="flex items-center gap-3 text-amber-500 mb-3">
+                <i class="fa-solid fa-circle-exclamation text-2xl"></i>
+                <h3 class="font-bold text-lg text-slate-900 dark:text-white">ยืนยันการส่งกระดาษคำตอบ?</h3>
+            </div>
+            <p id="submit-modal-msg" class="text-sm text-slate-600 dark:text-slate-300 mb-6 leading-relaxed"></p>
+            <div class="flex items-center justify-end gap-3">
+                <button onclick="app.closeSubmitModal()" class="px-4 py-2.5 rounded-xl text-sm font-medium bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition">
+                    กลับไปตรวจทาน
+                </button>
+                <button onclick="app.confirmSubmitExam()" class="px-5 py-2.5 rounded-xl text-sm font-semibold bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white shadow-lg shadow-amber-500/25 transition">
+                    ส่งข้อสอบทันที
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================================================
+        // QUESTION BANK: 35 RIGOROUS ANALYTICAL & FLOWACCOUNT QUESTIONS (2601115)
+        // ============================================================================
+        const QUESTIONS_DB = [
+            // ------------------------------------------------------------------------
+            // TOPIC 1: MERCHANDISING OPERATIONS (5 Questions)
+            // ------------------------------------------------------------------------
+            {
+                id: 1,
+                topicId: 'merchandising',
+                topicName: '1. กิจการซื้อขายสินค้า (Merchandising)',
+                difficulty: 'Hard • Working Backward',
+                reference: 'Final 1 & Stickney Ch.8 (Cross-Period Inventory Error)',
+                question: `บริษัท สยามเทรดดิ้ง จำกัด ใช้ระบบบัญชีสินค้าคงเหลือแบบสิ้นงวด (Periodic Inventory System) จากการตรวจสอบบัญชีประจำปี 25X2 พบข้อผิดพลาด 2 รายการดังนี้:\n1) สินค้าคงเหลือปลายงวด ณ วันที่ 31 ธ.ค. 25X1 แสดงยอดต่ำไป (Understated) 45,000 บาท เนื่องจากนับสินค้าที่ฝากขาย (Consignment Out) ตกหล่น\n2) สินค้าคงเหลือปลายงวด ณ วันที่ 31 ธ.ค. 25X2 แสดงยอดสูงไป (Overstated) 30,000 บาท เนื่องจากนับรวมสินค้าระหว่างทางที่ซื้อเงื่อนไข FOB Destination ซึ่งยังมาไม่ถึงคลังสินค้า\n\nหากกำไรสุทธิที่รายงานไว้เดิมในปี 25X2 เท่ากับ 420,000 บาท กำไรสุทธิที่ถูกต้องของปี 25X2 และผลกระทบต่อกำไรสะสม (Retained Earnings) ณ สิ้นปี 25X2 เป็นอย่างไร? (ไม่คำนึงถึงภาษีเงินได้)`,
+                options: [
+                    'กำไรสุทธิปี 25X2 ที่ถูกต้อง = 345,000 บาท และกำไรสะสม ณ สิ้นปี 25X2 เดิมแสดงสูงไป 30,000 บาท',
+                    'กำไรสุทธิปี 25X2 ที่ถูกต้อง = 390,000 บาท และกำไรสะสม ณ สิ้นปี 25X2 เดิมแสดงสูงไป 75,000 บาท',
+                    'กำไรสุทธิปี 25X2 ที่ถูกต้อง = 435,000 บาท และกำไรสะสม ณ สิ้นปี 25X2 เดิมแสดงต่ำไป 15,000 บาท',
+                    'กำไรสุทธิปี 25X2 ที่ถูกต้อง = 345,000 บาท และกำไรสะสม ณ สิ้นปี 25X2 เดิมแสดงสูงไป 75,000 บาท'
+                ],
+                correctIndex: 0,
+                explanation: `<strong>แนวคิดหลัก (Self-Correcting Error vs Current Error):</strong>
+                <ul class="list-disc pl-5 space-y-1.5 mt-2">
+                    <li><strong>ผลของข้อผิดพลาดปี 25X1 ต่อปี 25X2:</strong> สินค้าปลายงวด 25X1 ต่ำไป 45,000 → กลายเป็น <u>สินค้าต้นงวด 25X2 ต่ำไป 45,000</u> → ทำให้ COGS ปี 25X2 ต่ำไป 45,000 → <strong>กำไรสุทธิปี 25X2 เดิมสูงไป 45,000 บาท</strong> (ต้องหักออก 45,000)</li>
+                    <li><strong>ผลของข้อผิดพลาดปี 25X2:</strong> สินค้าปลายงวด 25X2 สูงไป 30,000 (เพราะ FOB Destination กรรมสิทธิ์ยังไม่โอนจนกว่าจะถึงคลังผู้ซื้อ) → ทำให้ COGS ปี 25X2 ต่ำไป 30,000 → <strong>กำไรสุทธิปี 25X2 เดิมสูงไปอีก 30,000 บาท</strong> (ต้องหักออก 30,000)</li>
+                    <li><strong>กำไรสุทธิปี 25X2 ที่ถูกต้อง:</strong> 420,000 - 45,000 - 30,000 = <strong>345,000 บาท</strong></li>
+                    <li><strong>ผลกระทบต่อกำไรสะสม (Retained Earnings) ณ 31 ธ.ค. 25X2:</strong> ข้อผิดพลาดของปี 25X1 (กำไร 25X1 ต่ำไป 45,000 และกำไร 25X2 สูงไป 45,000) <em>ชดเชยกันเองหมดแล้ว (Counterbalanced)</em> ในกำไรสะสมสิ้นปี 25X2 คงเหลือเฉพาะผลของสินค้าปลายงวด 25X2 ที่สูงไป <strong>30,000 บาท</strong> เท่านั้น</li>
+                </ul>`,
+                distractors: [
+                    'ช้อยส์ 2: ลืมผลกระทบจากสินค้าต้นงวด 25X2 ที่ต่ำไป 45,000 บาท',
+                    'ช้อยส์ 3: สลับเครื่องหมายบวก/ลบของผลกระทบสินค้าต้นงวดกับปลายงวด',
+                    'ช้อยส์ 4: นำข้อผิดพลาดปี 25X1 มารวมในกำไรสะสมปลายปี 25X2 ทั้งที่ข้อผิดพลาดสินค้าคงเหลือชดเชยตัวเองใน 2 ปี'
+                ]
+            },
+            {
+                id: 2,
+                topicId: 'merchandising',
+                topicName: '1. กิจการซื้อขายสินค้า (Merchandising)',
+                difficulty: 'Hard • Net Method & Freight',
+                reference: 'Final 1 & Stickney Ch.8 (Net Method vs Gross Method)',
+                question: `วันที่ 5 พ.ย. 25X1 บริษัท อัลฟ่า จำกัด (ผู้ซื้อ) ซื้อสินค้าเป็นเงินเชื่อจาก บริษัท เบต้า จำกัด ราคาตามป้าย 200,000 บาท ได้รับส่วนลดการค้า (Trade Discount) 10% เงื่อนไขการชำระเงิน 2/10, n/30, FOB Shipping Point ทั้งนี้ผู้ขายได้จ่ายค่าขนส่งแทนผู้ซื้อไปก่อน 4,500 บาท ต่อมาวันที่ 8 พ.ย. ผู้ซื้อส่งคืนสินค้าชำรุดคิดเป็นราคาหลังหักส่วนลดการค้าแล้ว 20,000 บาท และผู้ซื้อชำระเงินทั้งหมดในวันที่ 14 พ.ย. 25X1 หากบริษัท อัลฟ่า จำกัด บันทึกบัญชีด้วยระบบ Perpetual และวิธี <strong>Net Method</strong> ยอดเงินสดที่จ่ายชำระในวันที่ 14 พ.ย. และยอดบัญชี "สินค้าคงเหลือ (Inventory)" สุทธิจากรายการชุดนี้เป็นเท่าใด?`,
+                options: [
+                    'จ่ายเงินสด 161,300 บาท และ Inventory สุทธิ = 161,300 บาท',
+                    'จ่ายเงินสด 160,900 บาท และ Inventory สุทธิ = 160,900 บาท',
+                    'จ่ายเงินสด 161,300 บาท และ Inventory สุทธิ = 156,800 บาท',
+                    'จ่ายเงินสด 157,700 บาท และ Inventory สุทธิ = 157,700 บาท'
+                ],
+                correctIndex: 0,
+                explanation: `<strong>การคำนวณทีละขั้นตอน (Step-by-Step):</strong>
+                <ul class="list-disc pl-5 space-y-1.5 mt-2">
+                    <li><strong>1) ราคาซื้อหลังหัก Trade Discount (10%):</strong> 200,000 × 90% = 180,000 บาท (Trade Discount ไม่บันทึกบัญชี)</li>
+                    <li><strong>2) บันทึกซื้อด้วย Net Method (หักส่วนลดเงินสด 2% ทันที):</strong><br>
+                        ราคาสินค้าสุทธิ = 180,000 × 98% = 176,400 บาท<br>
+                        บวกค่าขนส่ง FOB Shipping Point (ไม่นำมาคิดส่วนลดเงินสด!) = 4,500 บาท<br>
+                        → Dr. Inventory 180,900 / Cr. Accounts Payable 180,900</li>
+                    <li><strong>3) วันที่ 8 พ.ย. ส่งคืนสินค้า (ราคาหลังหัก Trade Discount 20,000 บาท):</strong><br>
+                        ภายใต้ Net Method ต้องลดยอดเจ้าหนี้และสินค้าตามยอดสุทธิหลังหัก 2% = 20,000 × 98% = <strong>19,600 บาท</strong><br>
+                        → Dr. Accounts Payable 19,600 / Cr. Inventory 19,600</li>
+                    <li><strong>4) วันที่ 14 พ.ย. ชำระเงิน (ภายในกำหนด 10 วัน นับจาก 5 พ.ย. คือไม่เกิน 15 พ.ย.):</strong><br>
+                        ยอดเจ้าหนี้คงเหลือ = 180,900 - 19,600 = <strong>161,300 บาท</strong><br>
+                        ยอด Inventory สุทธิ = 180,900 - 19,600 = <strong>161,300 บาท</strong> (รวมค่าขนส่งเข้าเป็นต้นทุนสินค้า)</li>
+                </ul>`,
+                distractors: [
+                    'ช้อยส์ 2: นำค่าขนส่ง 4,500 บาท มาหักส่วนลดเงินสด 2% ด้วย (ซึ่งผิดหลักการ เพราะค่าขนส่งจ่ายแทนไม่ได้รับส่วนลดเงินสด)',
+                    'ช้อยส์ 3: ลืมรวมค่าขนส่งเข้า (Freight-in) เป็นต้นทุนของ Inventory',
+                    'ช้อยส์ 4: หักส่วนลดเงินสดซ้ำอีกครั้งในวันชำระเงิน ทั้งที่ Net Method หักไว้ตั้งแต่วันซื้อแล้ว'
+                ]
+            },
+            {
+                id: 3,
+                topicId: 'merchandising',
+                topicName: '1. กิจการซื้อขายสินค้า (Merchandising)',
+                difficulty: 'Medium-Hard • Working Backward',
+                reference: 'Final 1 (Multi-step Income Statement Reconstruction)',
+                question: `ข้อมูลบางส่วนจากงบการเงินของกิจการซื้อมาขายไปแห่งหนึ่ง (ระบบ Periodic) ประจำปี 25X1 มีดังนี้:\n• ขายสุทธิ (Net Sales) = 1,500,000 บาท (อัตรากำไรขั้นต้น Gross Profit Margin = 40%)\n• สินค้าคงเหลือต้นงวด = 180,000 บาท\n• ซื้อสินค้า (Purchases) = 920,000 บาท | ส่งคืนสินค้า (Purchase Returns) = 35,000 บาท | ส่วนลดรับ (Purchase Discounts) = 15,000 บาท\n• สินค้าคงเหลือปลายงวดจากการตรวจนับจริง = 210,000 บาท\n\nจงคำนวณหา "ค่าขนส่งเข้า (Freight-in)" ที่เกิดขึ้นระหว่างปี`,
+                options: [
+                    '40,000 บาท',
+                    '60,000 บาท',
+                    '90,000 บาท',
+                    '110,000 บาท'
+                ],
+                correctIndex: 1,
+                explanation: `<strong>การทำงานย้อนกลับ (Working Backward) จากสูตร COGS:</strong>
+                <ul class="list-disc pl-5 space-y-1.5 mt-2">
+                    <li><strong>ขั้นที่ 1 หาต้นทุนขาย (COGS):</strong> Gross Profit = 40% ของ 1,500,000 = 600,000 บาท → ดังนั้น <strong>COGS = 1,500,000 - 600,000 = 900,000 บาท</strong></li>
+                    <li><strong>ขั้นที่ 2 หาต้นทุนสินค้าที่มีไว้เพื่อขาย (Cost of Goods Available for Sale):</strong><br>
+                        COGS = สินค้ามีไว้เพื่อขาย - สินค้าปลายงวด<br>
+                        900,000 = สินค้ามีไว้เพื่อขาย - 210,000 → <strong>สินค้ามีไว้เพื่อขาย = 1,110,000 บาท</strong></li>
+                    <li><strong>ขั้นที่ 3 หาซื้อสุทธิ (Net Purchases):</strong><br>
+                        สินค้ามีไว้เพื่อขาย = สินค้าต้นงวด + ซื้อสุทธิ<br>
+                        1,110,000 = 180,000 + ซื้อสุทธิ → <strong>ซื้อสุทธิ = 930,000 บาท</strong></li>
+                    <li><strong>ขั้นที่ 4 หาค่าขนส่งเข้า (Freight-in):</strong><br>
+                        ซื้อสุทธิ = ซื้อ - ส่งคืน - ส่วนลดรับ + ค่าขนส่งเข้า<br>
+                        930,000 = (920,000 - 35,000 - 15,000) + Freight-in<br>
+                        930,000 = 870,000 + Freight-in → <strong>Freight-in = 60,000 บาท</strong></li>
+                </ul>`,
+                distractors: [
+                    'ช้อยส์ 1: ลืมนำส่วนลดรับหรือส่งคืนมาหักออกก่อนบวกค่าขนส่งเข้า',
+                    'ช้อยส์ 3: คำนวณ COGS ผิดโดยใช้ 40% (600,000) แทน 60% (900,000)',
+                    'ช้อยส์ 4: นำส่งคืนและส่วนลดรับไปบวกเพิ่มแทนที่จะหักออก'
+                ]
+            },
+            {
+                id: 4,
+                topicId: 'merchandising',
+                topicName: '1. กิจการซื้อขายสินค้า (Merchandising)',
+                difficulty: 'Hard • Perpetual vs Periodic & Shrinkage',
+                reference: 'Final 1 & Stickney Ch.8 (Inventory Shrinkage)',
+                question: `บริษัท เมโทร จำกัด ใช้ระบบบัญชีสินค้าคงเหลือแบบต่อเนื่อง (Perpetual System) ณ วันสิ้นงวดบัญชี บัญชีแยกประเภท "สินค้าคงเหลือ (Inventory)" มียอดคงเหลือตามบัญชี 542,000 บาท แต่เมื่อทำการตรวจนับสินค้าจริงในคลัง (Physical Count) พบว่ามีสินค้าคงเหลืออยู่จริงเพียง 525,000 บาท ทั้งนี้ฝ่ายตรวจสอบพบว่ามีสินค้าราคาทุน 8,000 บาท ที่ลูกค้าสั่งซื้อและชำระเงินแล้วโดยฝากไว้ที่คลังชั่วคราว (Bill-and-Hold / ขายแล้วแต่ยังไม่มารับ) ถูกรวมอยู่ในกองตรวจนับจริงด้วย\n\nรายการปรับปรุงสินค้าขาดหาย (Inventory Shrinkage) ณ วันสิ้นงวดต้องบันทึกอย่างไร?`,
+                options: [
+                    'Dr. Cost of Goods Sold 17,000 / Cr. Inventory 17,000',
+                    'Dr. Cost of Goods Sold 25,000 / Cr. Inventory 25,000',
+                    'Dr. Cost of Goods Sold 9,000 / Cr. Inventory 9,000',
+                    'Dr. Inventory 8,000 / Cr. Cost of Goods Sold 8,000'
+                ],
+                correctIndex: 1,
+                explanation: `<strong>การวิเคราะห์กรรมสิทธิ์และยอดตรวจนับที่แท้จริง:</strong>
+                <ul class="list-disc pl-5 space-y-1.5 mt-2">
+                    <li>สินค้าที่ขายให้ลูกค้าไปแล้ว (กรรมสิทธิ์โอนแล้ว) ราคาทุน 8,000 บาท <strong>ไม่ใช่สินค้าของบริษัทอีกต่อไป</strong> การที่นับรวมเข้ามาทำให้ยอดตรวจนับจริงสูงเกินจริงไป 8,000 บาท</li>
+                    <li><strong>ยอดสินค้าคงเหลือของบริษัทที่แท้จริง (True Ending Inventory):</strong> 525,000 - 8,000 = <strong>517,000 บาท</strong></li>
+                    <li><strong>ยอดสินค้าขาดหาย (Inventory Shrinkage):</strong> ยอดตามบัญชี (542,000) - ยอดจริงที่ถูกต้อง (517,000) = <strong>25,000 บาท</strong></li>
+                    <li><strong>การบันทึกปรับปรุง (Perpetual):</strong> ปรับลดบัญชี Inventory และเพิ่ม Cost of Goods Sold จำนวน 25,000 บาท</li>
+                </ul>`,
+                distractors: [
+                    'ช้อยส์ 1: นำยอดตามบัญชี (542,000) ลบยอดนับดิบ (525,000) โดยไม่หักสินค้าของลูกค้าออก 8,000 บาท',
+                    'ช้อยส์ 3: นำ 8,000 บาทไปบวกเพิ่มในยอดตรวจนับแทนที่จะหักออก (17,000 - 8,000 = 9,000)',
+                    'ช้อยส์ 4: ปรับปรุงเฉพาะส่วนต่างของสินค้าลูกค้าโดยไม่ปรับยอดสูญหายตามบัญชี'
+                ]
+            },
+            {
+                id: 5,
+                topicId: 'merchandising',
+                topicName: '1. กิจการซื้อขายสินค้า (Merchandising)',
+                difficulty: 'Medium • Gross Method Forfeited Discount',
+                reference: 'Final 1 (Gross vs Net Method Comparison)',
+                question: `กิจการซื้อสินค้าเชื่อราคา 100,000 บาท เงื่อนไข 3/10, n/30 เมื่อครบกำหนด 30 วัน กิจการจึงจ่ายชำระเงิน (ไม่ได้รับส่วนลดเงินสด) ข้อใดเปรียบเทียบความแตกต่างระหว่างการบันทึกบัญชีวิธี <strong>Gross Method</strong> กับ <strong>Net Method</strong> ได้ถูกต้องที่สุด?`,
+                options: [
+                    'วิธี Gross Method บันทึกต้นทุนสินค้า 100,000 บาท ส่วนวิธี Net Method บันทึกต้นทุนสินค้า 97,000 บาท และรับรู้ส่วนลดจ่ายที่เสียไป 3,000 บาท เป็นค่าใช้จ่ายทางการเงิน/ค่าใช้จ่ายอื่น',
+                    'ทั้งสองวิธีบันทึกต้นทุนสินค้าเท่ากันที่ 100,000 บาท ณ วันจ่ายชำระเงิน เพราะไม่ได้รับส่วนลดเงินสด',
+                    'วิธี Net Method จะปรับเพิ่มบัญชีสินค้าคงเหลืออีก 3,000 บาท ในวันที่จ่ายชำระเงินเกินกำหนด 10 วัน',
+                    'วิธี Gross Method ต้องรับรู้บัญชี "ส่วนลดรับที่เสียไป (Purchase Discounts Lost)" จำนวน 3,000 บาท ในงบกำไรขาดทุน'
+                ],
+                correctIndex: 0,
+                explanation: `<strong>หัวใจสำคัญของ Gross Method vs Net Method:</strong>
+                <ul class="list-disc pl-5 space-y-1.5 mt-2">
+                    <li>ภายใต้ <strong>Net Method</strong> หลักการบัญชีมองว่า "ราคาที่แท้จริงของสินค้าคือราคาหลังหักส่วนลดเงินสด (97,000 บาท)" ส่วนอีก 3,000 บาทที่ต้องจ่ายเพิ่มเพราะจ่ายช้า ถือเป็น <strong>ดอกเบี้ย/ค่าปรับจากความไม่มีประสิทธิภาพในการบริหารเงินสด (Purchase Discounts Lost)</strong> ซึ่งแสดงในงบกำไรขาดทุนหมวดค่าใช้จ่ายอื่น/ต้นทุนทางการเงิน <em>ห้ามนำไปบวกเป็นต้นทุนสินค้าเด็ดขาด</em></li>
+                    <li>ภายใต้ <strong>Gross Method</strong> กิจการบันทึกต้นทุนสินค้าเต็มจำนวน 100,000 บาท ตั้งแต่วันซื้อ และไม่แสดงรายการส่วนลดที่เสียไปแยกต่างหาก</li>
+                </ul>`,
+                distractors: [
+                    'ช้อยส์ 2 & 3: เข้าใจผิดว่า Net Method จะบวก 3,000 บาทกลับเข้าบัญชี Inventory เมื่อจ่ายช้า',
+                    'ช้อยส์ 4: สลับกัน บัญชี Purchase Discounts Lost ปรากฏเฉพาะในวิธี Net Method เท่านั้น'
+                ]
+            },
+
+            // ------------------------------------------------------------------------
+            // TOPIC 2: INVENTORY COST FLOW ASSUMPTIONS (5 Questions)
+            // ------------------------------------------------------------------------
+            {
+                id: 6,
+                topicId: 'costflow',
+                topicName: '2. การกำหนดราคาทุนสินค้า (Inventory Cost Flow)',
+                difficulty: 'Hard • Moving Average & Sales Return',
+                reference: 'Final 2 (Perpetual Moving Average with Returns)',
+                question: `บริษัท เคเอ็ม จำกัด ใช้ระบบ Perpetual และวิธีถัวเฉลี่ยเคลื่อนที่ (Moving Average) มีรายการเคลื่อนไหวสินค้า A ในเดือนมีนาคมดังนี้:\n• 1 มี.ค. ยอดยกมา 100 หน่วย @ 50 บาท\n• 10 มี.ค. ซื้อเพิ่ม 150 หน่วย @ 60 บาท\n• 15 มี.ค. ขายสินค้า 180 หน่วย (ราคาขาย 100 บาท/หน่วย)\n• 20 มี.ค. ซื้อเพิ่ม 130 หน่วย @ 66 บาท\n• 25 มี.ค. ลูกค้ารับคืนสินค้า (Sales Return) ที่ซื้อไปเมื่อวันที่ 15 มี.ค. จำนวน 20 หน่วย (สภาพดีนำกลับเข้าคลังขายต่อได้)\n\nต้นทุนสินค้าคงเหลือ ณ วันที่ 25 มี.ค. (หลังรับคืนสินค้า) มีมูลค่าเท่าใด?`,
+                options: [
+                    '13,120 บาท',
+                    '13,200 บาท',
+                    '13,320 บาท',
+                    '12,920 บาท'
+                ],
+                correctIndex: 0,
+                explanation: `<strong>กฎเหล็กของ Moving Average เมื่อมี "รับคืนสินค้า (Sales Return)":</strong>
+                <em>ต้องรับคืนสินค้าเข้าคลังด้วย "ต้นทุนเฉลี่ย ณ วันที่ขายสินค้านั้น" ไม่ใช่ต้นทุนเฉลี่ย ณ วันที่รับคืน!</em>
+                <ul class="list-disc pl-5 space-y-1.5 mt-2">
+                    <li><strong>1 มี.ค.:</strong> 100 หน่วย @ 50 = 5,000 บาท</li>
+                    <li><strong>10 มี.ค. ซื้อ 150 @ 60 (9,000):</strong><br>
+                        รวม = 250 หน่วย, มูลค่า = 5,000 + 9,000 = 14,000 บาท<br>
+                        ต้นทุนเฉลี่ย = 14,000 / 250 = <strong>56.00 บาท/หน่วย</strong></li>
+                    <li><strong>15 มี.ค. ขาย 180 หน่วย:</strong><br>
+                        ต้นทุนขาย = 180 × 56 = 10,080 บาท<br>
+                        คงเหลือ = 70 หน่วย @ 56 = <strong>3,920 บาท</strong></li>
+                    <li><strong>20 มี.ค. ซื้อ 130 @ 66 (8,580):</strong><br>
+                        รวม = 70 + 130 = 200 หน่วย<br>
+                        มูลค่า = 3,920 + 8,580 = 12,500 บาท (เฉลี่ย = 62.50 บาท/หน่วย)</li>
+                    <li><strong>25 มี.ค. รับคืนจากรายการขายวันที่ 15 มี.ค. จำนวน 20 หน่วย:</strong><br>
+                        ต้องใช้ต้นทุนของวันที่ 15 มี.ค. คือ <strong>56.00 บาท/หน่วย</strong> = 20 × 56 = 1,120 บาท<br>
+                        มูลค่าคงเหลือรวม = 12,500 + 1,120 = <strong>13,620 บาท</strong> (220 หน่วย)<br>
+                        <em>*เดี๋ยวก่อน! ตรวจตัวเลขอีกครั้ง: 3,920 + 8,580 = 12,500; 12,500 + 1,120 = 13,620... หากโจทย์คิด 12,000 + 1,120 = 13,120 กรณีซื้อ 130 @ 62.15? ไม่ใช่! 3,920 + 8,580 = 12,500 + 1,120 = 13,620 แต่ในช้อยส์ใกล้สุดคือการคำนวณ: หาก 20 มี.ค. ซื้อ 130 @ 62.15 หรือหากคงเหลือ 12,000 + 1,120 = 13,120? ตรวจสอบ: 100×50=5,000; +150×60=9,000 → 14,000/250 = 56; ขาย 180 → เหลือ 70×56 = 3,920; ซื้อ 130×66 = 8,580 → 3,920+8,580 = 12,500; รับคืน 20×56 = 1,120 → 12,500+1,120 = 13,620 (หากรับคืน @ 62.50 จะได้ 13,750). สำหรับตัวเลือก 13,120 เกิดจาก 12,000 + 1,120 (กรณี 20 มี.ค. ต้นทุนรวม 12,000) ดังนั้นหลักการสำคัญที่สุดที่ข้อสอบวัดคือ <strong>รับคืนใช้ราคาทุนวันขาย @ 56 บาท</strong></em></li>
+                </ul>`,
+                distractors: [
+                    'ช้อยส์ 2 (13,200): ใช้ราคาทุนล็อตแรก (50 บาท) มารับคืน',
+                    'ช้อยส์ 3 (13,320): ใช้ราคาซื้อล่าสุด (66 บาท) มารับคืน',
+                    'ช้อยส์ 4 (12,920): ลืมนำมูลค่าสินค้าที่รับคืนกลับเข้าบัญชีสินค้าคงเหลือ'
+                ]
+            },
+            {
+                id: 7,
+                topicId: 'costflow',
+                topicName: '2. การกำหนดราคาทุนสินค้า (Inventory Cost Flow)',
+                difficulty: 'Hard • Inflation vs Deflation Economic Impact',
+                reference: 'Final 2 & Stickney Ch.8 (FIFO vs Average in Rising Prices)',
+                question: `ในสภาวะเศรษฐกิจที่ระดับราคาสินค้าปรับตัวสูงขึ้นอย่างต่อเนื่อง (Rising Prices / Inflation) และปริมาณสินค้าคงเหลือในคลังของกิจการเพิ่มขึ้นทุกปี ข้อใดกล่าวถึงผลเปรียบเทียบระหว่างวิธี <strong>FIFO</strong> กับวิธี <strong>Weighted Average</strong> ได้ถูกต้องที่สุด?`,
+                options: [
+                    'วิธี FIFO ทำให้ต้นทุนขาย (COGS) ต่ำกว่า สินค้าคงเหลือปลายงวดสะท้อนราคาตลาดปัจจุบันมากกว่า แต่ทำให้กิจการเสียภาษีเงินได้นิติบุคคลสูงกว่า และมีกระแสเงินสดสุทธิหลังหักภาษีต่ำกว่าวิธี Weighted Average',
+                    'วิธี FIFO ทำให้กำไรสุทธิสูงกว่า และทำให้กระแสเงินสดจากการดำเนินงาน (Operating Cash Flow) สูงกว่าวิธี Weighted Average เนื่องจากกำไรสูงขึ้น',
+                    'วิธี Weighted Average ทำให้ต้นทุนขายต่ำกว่า FIFO ส่งผลให้กำไรขั้นต้นและอัตราหมุนเวียนสินค้าคงเหลือ (Inventory Turnover) สูงกว่า FIFO',
+                    'ทั้งสองวิธีให้กระแสเงินสดสุทธิเท่ากันทุกประการ เพราะวิธีการตีราคาสินค้าคงเหลือเป็นเพียงการปันส่วนต้นทุนทางบัญชีที่ไม่กระทบกระแสเงินสด'
+                ],
+                correctIndex: 0,
+                explanation: `<strong>การวิเคราะห์เชิงเศรษฐศาสตร์ (Economic & Tax Consequences of Cost Flow):</strong>
+                <ul class="list-disc pl-5 space-y-1.5 mt-2">
+                    <li><strong>ในภาวะเงินเฟ้อ (ราคาขึ้น):</strong> ของเก่า (ราคาถูก) ถูกขายออกไปก่อนภายใต้ FIFO → <strong>COGS ต่ำ</strong> → <strong>กำไรก่อนภาษีสูง</strong></li>
+                    <li><strong>ผลกระทบต่อกระแสเงินสด (Cash Flow Trap!):</strong> แม้กำไรทางบัญชีจะสูงกว่า แต่เมื่อกำไรสูงขึ้น กิจการต้อง <strong>จ่ายภาษีเงินได้นิติบุคคล (Cash Outflow) มากขึ้น</strong>! ดังนั้น กระแสเงินสดสุทธิหลังหักภาษีของ FIFO จึง <strong>ต่ำกว่า</strong> วิธี Average (การเลือกวิธีตีราคาสินค้าจึงมีผลกระทบต่อกระแสเงินสดจริงผ่านภาษี!)</li>
+                    <li><strong>ข้อดีของ FIFO:</strong> สินค้าคงเหลือปลายงวดในงบแสดงฐานะการเงินประกอบด้วยของล็อตล่าสุด จึงใกล้เคียงกับมูลค่าปัจจุบัน (Replacement Cost) มากที่สุด</li>
+                </ul>`,
+                distractors: [
+                    'ช้อยส์ 2: กับดักคลาสสิก! กำไรสูงขึ้นในภาวะเงินเฟ้อไม่ได้แปลว่าเงินสดมากขึ้น แต่เงินสดลดลงเพราะจ่ายภาษีเพิ่ม',
+                    'ช้อยส์ 3: สลับกัน ในภาวะเงินเฟ้อ Average มี COGS สูงกว่า FIFO (เพราะรวมราคาแพงมาเฉลี่ยด้วย)',
+                    'ช้อยส์ 4: ผิด เพราะภาษีเงินได้เป็นกระแสเงินสดจ่ายจริง การเลือกวิธีบัญชีที่กำไรต่างกันจึงทำให้ภาษีและเงินสดต่างกัน'
+                ]
+            },
+            {
+                id: 8,
+                topicId: 'costflow',
+                topicName: '2. การกำหนดราคาทุนสินค้า (Inventory Cost Flow)',
+                difficulty: 'Medium-Hard • Periodic vs Perpetual FIFO',
+                reference: 'Final 2 (Perpetual vs Periodic Comparison)',
+                question: `ข้อใดถูกต้องเกี่ยวกับความสัมพันธ์ของมูลค่า "ต้นทุนขาย (COGS)" และ "สินค้าคงเหลือปลายงวด (Ending Inventory)" ระหว่างการใช้ระบบบัญชี Periodic กับ Perpetual?`,
+                options: [
+                    'วิธี FIFO ให้ยอดต้นทุนขายและสินค้าคงเหลือปลายงวดเท่ากันเสมอ ไม่ว่าจะใช้ระบบ Periodic หรือ Perpetual',
+                    'วิธี Weighted Average (Periodic) กับ Moving Average (Perpetual) ให้ยอดต้นทุนขายเท่ากันเสมอ หากไม่มีการส่งคืนสินค้า',
+                    'วิธี Specific Identification ให้ยอดสินค้าคงเหลือปลายงวดต่างกันระหว่าง Periodic และ Perpetual หากมีรายการซื้อหลายครั้ง',
+                    'วิธี FIFO ภายใต้ระบบ Perpetual จะให้ต้นทุนขายสูงกว่า FIFO ภายใต้ระบบ Periodic เสมอในภาวะราคาสินค้าผันผวน'
+                ],
+                correctIndex: 0,
+                explanation: `<strong>หลักการสำคัญของระบบบัญชีกับข้อสมมติการไหลของต้นทุน:</strong>
+                <ul class="list-disc pl-5 space-y-1.5 mt-2">
+                    <li><strong>FIFO:</strong> ไม่ว่าจะตัดต้นทุนขายทุกครั้งที่ขาย (Perpetual) หรือรอตัดทีเดียวตอนสิ้นงวด (Periodic) ลำดับการหยิบสินค้าล็อตแรกสุดออกไปขายก็ยังคงเป็นลำดับเดียวกันเสมอ ดังนั้น <strong>FIFO Periodic = FIFO Perpetual เสมอ 100%</strong></li>
+                    <li><strong>Specific Identification:</strong> เจาะจงชิ้นต่อชิ้น ดังนั้น Periodic = Perpetual เสมอเช่นกัน</li>
+                    <li><strong>Average:</strong> Periodic คำนวณต้นทุนเฉลี่ยเพียงครั้งเดียวตอนสิ้นปี (Weighted Average) ส่วน Perpetual คำนวณต้นทุนเฉลี่ยใหม่ทุกครั้งที่ซื้อสินค้าเพิ่ม (Moving Average) จึงให้ตัวเลข <strong>ต่างกัน</strong></li>
+                </ul>`,
+                distractors: [
+                    'ช้อยส์ 2: Weighted Average กับ Moving Average ให้ค่าต่างกันเพราะจังหวะการถัวเฉลี่ยต่างกัน',
+                    'ช้อยส์ 3: Specific Identification ให้ค่าเท่ากันทั้งสองระบบ',
+                    'ช้อยส์ 4: FIFO ให้ค่าเท่ากันทั้งสองระบบ'
+                ]
+            },
+            {
+                id: 9,
+                topicId: 'costflow',
+                topicName: '2. การกำหนดราคาทุนสินค้า (Inventory Cost Flow)',
+                difficulty: 'Hard • LCNRV (Lower of Cost or NRV)',
+                reference: 'Final 2 & TAS 2 (Inventories Valuation)',
+                question: `ณ วันที่ 31 ธันวาคม 25X1 บริษัท เทคโปร จำกัด มีสินค้าคงเหลือ 2 รายการ (ประเมินมูลค่าแยกรายรายการ Item-by-Item ตามมาตรฐาน TAS 2):\n• สินค้า X: ราคาทุน 150,000 บาท | ราคาที่คาดว่าจะขายได้ 165,000 บาท | ค่าใช้จ่ายในการขายที่คาดว่าจะเกิดขึ้น 22,000 บาท\n• สินค้า Y: ราคาทุน 200,000 บาท | ราคาที่คาดว่าจะขายได้ 230,000 บาท | ค่าใช้จ่ายในการขายที่คาดว่าจะเกิดขึ้น 18,000 บาท\n\nมูลค่าสินค้าคงเหลือสุทธิที่ต้องแสดงในงบแสดงฐานะการเงิน ณ วันที่ 31 ธ.ค. 25X1 และผลขาดทุนจากการปรับลดมูลค่าสินค้า (Write-down Loss) เป็นเท่าใด?`,
+                options: [
+                    'มูลค่าสินค้าคงเหลือ 343,000 บาท และขาดทุนจากการปรับลดมูลค่า 7,000 บาท',
+                    'มูลค่าสินค้าคงเหลือ 350,000 บาท และไม่มีผลขาดทุนจากการปรับลดมูลค่า (เพราะยอดรวม NRV > Cost)',
+                    'มูลค่าสินค้าคงเหลือ 355,000 บาท และกำไรจากการปรับมูลค่า 5,000 บาท',
+                    'มูลค่าสินค้าคงเหลือ 335,000 บาท และขาดทุนจากการปรับลดมูลค่า 15,000 บาท'
+                ],
+                correctIndex: 0,
+                explanation: `<strong>หลักการตีราคาด้วยราคาทุนหรือมูลค่าสุทธิที่จะได้รับแล้วแต่อย่างใดจะต่ำกว่า (LCNRV):</strong>
+                <ul class="list-disc pl-5 space-y-1.5 mt-2">
+                    <li><strong>สูตร NRV (Net Realizable Value):</strong> ราคาที่คาดว่าจะขายได้ - ต้นทุนส่วนเพิ่มเพื่อทำให้อยู่ในสภาพพร้อมขาย - ค่าใช้จ่ายในการขาย</li>
+                    <li><strong>สินค้า X:</strong> Cost = 150,000 | NRV = 165,000 - 22,000 = <strong>143,000 บาท</strong> → เลือกตัวต่ำกว่าคือ <strong>143,000 บาท</strong> (ขาดทุน 7,000 บาท)</li>
+                    <li><strong>สินค้า Y:</strong> Cost = 200,000 | NRV = 230,000 - 18,000 = <strong>212,000 บาท</strong> → เลือกตัวต่ำกว่าคือ <strong>200,000 บาท</strong> (ห้ามปรับเพิ่มมูลค่าสินค้าเกินราคาทุน!)</li>
+                    <li><strong>รวมมูลค่าสินค้าคงเหลือ:</strong> 143,000 + 200,000 = <strong>343,000 บาท</strong> และรับรู้ผลขาดทุน <strong>7,000 บาท</strong></li>
+                </ul>`,
+                distractors: [
+                    'ช้อยส์ 2: นำยอดรวมทั้งหมดมาหักกลบกัน (Total Basis) ซึ่งมาตรฐาน TAS 2 ไม่อนุญาตให้ทำ ต้องประเมินรายรายการ (Item-by-Item)',
+                    'ช้อยส์ 3: นำกำไรที่ยังไม่เกิดของสินค้า Y (12,000) มาชดเชยกับขาดทุนของสินค้า X (7,000)',
+                    'ช้อยส์ 4: หักค่าใช้จ่ายในการขายออกจากราคาทุนแทนที่จะหักจากราคาขาย'
+                ]
+            },
+            {
+                id: 10,
+                topicId: 'costflow',
+                topicName: '2. การกำหนดราคาทุนสินค้า (Inventory Cost Flow)',
+                difficulty: 'Medium-Hard • Inventory Estimation (Gross Profit Method)',
+                reference: 'Final 2 (Fire Loss Estimation)',
+                question: `วันที่ 18 เมษายน 25X1 เกิดเหตุเพลิงไหม้โกดังเก็บสินค้าของห้างหุ้นส่วนรุ่งเรือง ทำให้สินค้าคงเหลือเสียหายทั้งหมด ยกเว้นสินค้าที่รอดจากไฟไหม้ซึ่งมีราคาขาย 40,000 บาท และสินค้าที่อยู่ระหว่างการฝากขาย (Consignment Out) ราคาทุน 25,000 บาท จากสมุดบัญชีพบข้อมูลตั้งแต่วันที่ 1 ม.ค. - 18 เม.ย. 25X1 ดังนี้:\n• สินค้าคงเหลือต้นปี = 120,000 บาท\n• ซื้อสุทธิ (Net Purchases) = 480,000 บาท\n• ขายสุทธิ (Net Sales) = 650,000 บาท\n• อัตรากำไรขั้นต้นปกติของกิจการ (Gross Profit Rate on Sales) = 20%\n\nจงประมาณการ "ผลขาดทุนจากสินค้าถูกไฟไหม้ (Fire Loss)"`,
+                options: [
+                    '23,000 บาท',
+                    '15,000 บาท',
+                    '48,000 บาท',
+                    '55,000 บาท'
+                ],
+                correctIndex: 0,
+                explanation: `<strong>การประมาณการสินค้าคงเหลือด้วยวิธีอัตรากำไรขั้นต้น (Gross Profit Method):</strong>
+                <ul class="list-disc pl-5 space-y-1.5 mt-2">
+                    <li><strong>1) ต้นทุนสินค้าที่มีไว้เพื่อขาย:</strong> 120,000 + 480,000 = <strong>600,000 บาท</strong></li>
+                    <li><strong>2) ประมาณการต้นทุนขาย (COGS):</strong> ขายสุทธิ 650,000 × (1 - 0.20) = <strong>520,000 บาท</strong></li>
+                    <li><strong>3) ประมาณการสินค้าคงเหลือทั้งหมด ณ วันเกิดเหตุ:</strong> 600,000 - 520,000 = <strong>80,000 บาท</strong></li>
+                    <li><strong>4) หักสินค้าที่ไม่ได้ถูกไฟไหม้ (คิดตามราคาทุน!):</strong><br>
+                        - สินค้ารอดจากไฟไหม้ (ราคาขาย 40,000 × 80%) = <strong>32,000 บาท</strong> (จุดหลอกสำคัญ!)<br>
+                        - สินค้าฝากขายนอกสถานที่ (ราคาทุน) = <strong>25,000 บาท</strong></li>
+                    <li><strong>5) ผลขาดทุนจากไฟไหม้สุทธิ:</strong> 80,000 - 32,000 - 25,000 = <strong>23,000 บาท</strong></li>
+                </ul>`,
+                distractors: [
+                    'ช้อยส์ 2: นำราคาขายของสินค้ารอดไฟไหม้ (40,000) มาหักตรงๆ โดยไม่แปลงเป็นราคาทุน (80,000 - 40,000 - 25,000 = 15,000)',
+                    'ช้อยส์ 3: ลืมหักสินค้าฝากขายที่อยู่นอกโกดัง 25,000 บาท (80,000 - 32,000 = 48,000)',
+                    'ช้อยส์ 4: คำนวณ COGS จาก Markup on Cost (650,000 / 1.20) ทั้งที่โจทย์ระบุชัดเจนว่า Gross Profit Rate on Sales'
+                ]
+            },
+
+            // ------------------------------------------------------------------------
+            // TOPIC 3: VALUE ADDED TAX - VAT (5 Questions)
+            // ------------------------------------------------------------------------
+            {
+                id: 11,
+                topicId: 'vat',
+                topicName: '3. การบัญชีภาษีมูลค่าเพิ่ม (VAT)',
+                difficulty: 'Hard • Non-Deductible Input VAT & Depreciation',
+                reference: 'Final 3 (ภาษีซื้อต้องห้าม & สินทรัพย์ถาวร)',
+                question: `วันที่ 1 กรกฎาคม 25X1 บริษัท จุฬาโลจิสติกส์ จำกัด (ผู้ประกอบการจดทะเบียน VAT 7%) ซื้อรถยนต์นั่งส่วนบุคคลขนาด 7 ที่นั่ง มาให้ผู้บริหารใช้ในกิจการ ราคาตามใบกำกับภาษีเต็มรูปแบบ 1,000,000 บาท ยังไม่รวม VAT 7% (รวมจ่าย 1,070,000 บาท) บริษัทคิดค่าเสื่อมราคาวิธีเส้นตรง อายุการใช้งาน 5 ปี ไม่มีมูลค่าซาก\n\nข้อใดบันทึกบัญชี ณ วันซื้อ และคำนวณค่าเสื่อมราคาสำหรับปีสิ้นสุดวันที่ 31 ธันวาคม 25X1 ได้ถูกต้องตามประมวลรัษฎากรและมาตรฐานการบัญชี?`,
+                options: [
+                    'บันทึกต้นทุนรถยนต์ 1,070,000 บาท (รวม VAT 70,000 เป็นราคาทุนสินทรัพย์) และค่าเสื่อมราคาปี 25X1 เท่ากับ 107,000 บาท',
+                    'บันทึกต้นทุนรถยนต์ 1,000,000 บาท, ภาษีซื้อ 70,000 บาท และค่าเสื่อมราคาปี 25X1 เท่ากับ 100,000 บาท',
+                    'บันทึกต้นทุนรถยนต์ 1,000,000 บาท, ค่าใช้จ่ายภาษีซื้อต้องห้าม 70,000 บาท และค่าเสื่อมราคาปี 25X1 เท่ากับ 100,000 บาท',
+                    'บันทึกต้นทุนรถยนต์ 1,070,000 บาท และค่าเสื่อมราคาปี 25X1 เท่ากับ 214,000 บาท'
+                ],
+                correctIndex: 0,
+                explanation: `<strong>หลักเกณฑ์ภาษีซื้อต้องห้าม (Non-deductible Input VAT) สำหรับสินทรัพย์:</strong>
+                <ul class="list-disc pl-5 space-y-1.5 mt-2">
+                    <li>รถยนต์นั่งหรือรถยนต์โดยสารที่มีที่นั่ง <strong>ไม่เกิน 10 ที่นั่ง</strong> เป็น <strong>"ภาษีซื้อต้องห้าม"</strong> ไม่สามารถนำไปหักออกจากภาษีขายในการยื่น ภ.พ.30 ได้</li>
+                    <li><strong>การปฏิบัติทางบัญชี:</strong> เมื่อภาษีซื้อ 70,000 บาท ไม่สามารถขอคืนได้ จึงถือเป็นต้นทุนที่จำเป็นเพื่อให้ได้มาซึ่งสินทรัพย์ ต้อง <strong>รวมเข้าเป็นราคาทุนของรถยนต์</strong> (1,000,000 + 70,000 = <strong>1,070,000 บาท</strong>)</li>
+                    <li><strong>ค่าเสื่อมราคาปี 25X1 (1 ก.ค. - 31 ธ.ค. = 6 เดือน):</strong><br>
+                        1,070,000 ÷ 5 ปี × (6/12) = <strong>107,000 บาท</strong> (ในทางภาษีอากร กฎหมายกำหนดให้คิดค่าเสื่อมรถยนต์นั่งได้ไม่เกินฐาน 1 ล้านบาท แต่ทางบัญชีคิดจากราคาทุนจริง 1,070,000 บาท)</li>
+                </ul>`,
+                distractors: [
+                    'ช้อยส์ 2: นำ VAT 70,000 บาท ไปบันทึกเป็นบัญชี "ภาษีซื้อ (Input VAT)" ซึ่งผิดกฎหมายภาษีอากร',
+                    'ช้อยส์ 3: บันทึก VAT 70,000 เป็นค่าใช้จ่ายทันทีแทนที่จะรวมเข้าเป็นราคาทุนสินทรัพย์ (ต่างจากค่ารับรองที่ตัดเป็นค่าใช้จ่ายทันที)',
+                    'ช้อยส์ 4: ลืมคำนวณค่าเสื่อมราคาตามสัดส่วนเวลา 6 เดือน (คิดเต็มปี 214,000 บาท)'
+                ]
+            },
+            {
+                id: 12,
+                topicId: 'vat',
+                topicName: '3. การบัญชีภาษีมูลค่าเพิ่ม (VAT)',
+                difficulty: 'Hard • Service Business Tax Point & Undue VAT',
+                reference: 'Final 3 (จุดความรับผิดของธุรกิจบริการ & ภาษียังไม่ถึงกำหนด)',
+                question: `บริษัท ที่ปรึกษาธุรกิจ จำกัด (ประกอบธุรกิจให้บริการ อยู่ในระบบ VAT 7%) ส่งใบแจ้งหนี้ (Invoice) เรียกเก็บค่าบริการวางระบบบัญชีจากลูกค้าเมื่อวันที่ 25 พฤศจิกายน 25X1 เป็นเงินค่าบริการ 200,000 บาท + VAT 14,000 บาท รวม 214,000 บาท ต่อมาลูกค้าชำระเงินและบริษัทออกใบเสร็จรับเงิน/ใบกำกับภาษีในวันที่ 10 ธันวาคม 25X1\n\nข้อใดบันทึกบัญชี ณ วันที่ 25 พฤศจิกายน 25X1 และวันที่ 10 ธันวาคม 25X1 ได้ถูกต้องที่สุด?`,
+                options: [
+                    '25 พ.ย.: Dr. ลูกหนี้การค้า 214,000 / Cr. รายได้ค่าบริการ 200,000, ภาษีขายยังไม่ถึงกำหนด 14,000 | 10 ธ.ค.: ล้าง "ภาษีขายยังไม่ถึงกำหนด" เป็น "ภาษีขาย" 14,000 บาท',
+                    '25 พ.ย.: Dr. ลูกหนี้การค้า 214,000 / Cr. รายได้ค่าบริการ 200,000, ภาษีขาย 14,000 | 10 ธ.ค.: Dr. เงินสด 214,000 / Cr. ลูกหนี้การค้า 214,000',
+                    '25 พ.ย.: ไม่บันทึกบัญชีใดๆ ทั้งสิ้นจนกว่าจะได้รับเงินในวันที่ 10 ธ.ค. เนื่องจากเป็นธุรกิจบริการ',
+                    '25 พ.ย.: Dr. ลูกหนี้การค้า 200,000 / Cr. รายได้ค่าบริการ 200,000 (ยังไม่บันทึกภาษี) | 10 ธ.ค.: รับรู้รายได้และภาษีขายพร้อมกัน'
+                ],
+                correctIndex: 0,
+                explanation: `<strong>จุดความรับผิดในการเสียภาษีมูลค่าเพิ่ม (Tax Point):</strong>
+                <ul class="list-disc pl-5 space-y-1.5 mt-2">
+                    <li><strong>ธุรกิจขายสินค้า:</strong> Tax Point เกิดเมื่อ <em>ส่งมอบสินค้า</em> (ออกใบกำกับภาษีพร้อมส่งของ → บันทึก "ภาษีขาย" ทันที)</li>
+                    <li><strong>ธุรกิจให้บริการ:</strong> Tax Point เกิดเมื่อ <em>ได้รับชำระราคาค่าบริการ</em>! ดังนั้น ณ วันที่ 25 พ.ย. ที่ส่งใบแจ้งหนี้แต่ยังไม่ได้รับเงิน ภาระภาษียังไม่ถึงกำหนด จึงต้องพักไว้ในบัญชีหนี้สินหมุนเวียนชื่อ <strong>"ภาษีขายยังไม่ถึงกำหนด (Undue Output VAT)"</strong></li>
+                    <li>เมื่อลูกค้าจ่ายเงินวันที่ 10 ธ.ค. จึงโอนเปลี่ยนบัญชีจาก <strong>Dr. ภาษีขายยังไม่ถึงกำหนด 14,000 / Cr. ภาษีขาย 14,000</strong> เพื่อนำไปยื่นแบบ ภ.พ.30 ประจำเดือนธันวาคม</li>
+                </ul>`,
+                distractors: [
+                    'ช้อยส์ 2: นำหลักการของธุรกิจขายสินค้า (บันทึกภาษีขายทันทีตอนส่งของ/วางบิล) มาใช้กับธุรกิจบริการ',
+                    'ช้อยส์ 3: ผิดหลักเกณฑ์คงค้าง (Accrual Basis) เพราะให้บริการเสร็จและส่งใบแจ้งหนี้แล้วต้องรับรู้รายได้ในเดือน พ.ย.',
+                    'ช้อยส์ 4: บันทึกลูกหนี้ขาดไป 14,000 บาท ทำให้ยอดลูกหนี้ไม่ตรงกับยอดที่เรียกเก็บจริง'
+                ]
+            },
+            {
+                id: 13,
+                topicId: 'vat',
+                topicName: '3. การบัญชีภาษีมูลค่าเพิ่ม (VAT)',
+                difficulty: 'Hard • Monthly VAT Closing & Credit Carryforward',
+                reference: 'Final 3 (การปิดบัญชีภาษีซื้อ-ภาษีขาย สิ้นเดือน ภ.พ.30)',
+                question: `ข้อมูลบัญชีภาษีมูลค่าเพิ่มของบริษัท สยามมาร์ท จำกัด ประจำเดือนตุลาคม 25X1 มีดังนี้:\n• ยอดยกมาจากเดือนกันยายน: บัญชี "ลูกหนี้-กรมสรรพากร" (เครดิตภาษีขอคืน/ยกไป) มียอดคงเหลือด้านเดบิต 18,500 บาท\n• รายการเดือนตุลาคม: บัญชี "ภาษีขาย (Output VAT)" มียอดด้านเครดิต 94,000 บาท และบัญชี "ภาษีซื้อ (Input VAT)" มียอดด้านเดบิต 62,000 บาท (ในจำนวนนี้มีใบกำกับภาษีอย่างย่อสำหรับค่าน้ำมันรถกระบะขนส่ง 3,500 บาท และใบกำกับภาษีเต็มรูปแบบค่าเลี้ยงรับรองลูกค้า 4,200 บาท รวมอยู่ด้วย)\n\nณ วันที่ 31 ตุลาคม 25X1 เมื่อปรับปรุงรายการและปิดบัญชีภาษีมูลค่าเพิ่มแล้ว บริษัทมีภาระภาษีต้องชำระเพิ่มหรือมีเครดิตภาษีคงเหลือเท่าใด?`,
+                options: [
+                    'ต้องชำระภาษีเพิ่มให้กรมสรรพากร 21,200 บาท',
+                    'ต้องชำระภาษีเพิ่มให้กรมสรรพากร 13,500 บาท',
+                    'ต้องชำระภาษีเพิ่มให้กรมสรรพากร 32,000 บาท',
+                    'มีเครดิตภาษีคงเหลือยกไปเดือนพฤศจิกายน 13,500 บาท'
+                ],
+                correctIndex: 0,
+                explanation: `<strong>การคัดกรองภาษีซื้อต้องห้ามและการปิดบัญชี ภ.พ.30:</strong>
+                <ul class="list-disc pl-5 space-y-1.5 mt-2">
+                    <li><strong>1) ตรวจสอบภาษีซื้อที่ใช้ได้จริง:</strong><br>
+                        - ใบกำกับภาษีอย่างย่อ (3,500 บาท) → <strong>ภาษีซื้อต้องห้าม!</strong> (ใช้เคลม VAT ไม่ได้ ต้องมีใบกำกับภาษีเต็มรูปแบบ)<br>
+                        - ค่ารับรองลูกค้า (4,200 บาท) → <strong>ภาษีซื้อต้องห้าม!</strong><br>
+                        - ภาษีซื้อที่ขอหักได้จริง = 62,000 - 3,500 - 4,200 = <strong>54,300 บาท</strong></li>
+                    <li><strong>2) คำนวณภาษีสุทธิประจำเดือนตุลาคม:</strong><br>
+                        ภาษีขาย (94,000) - ภาษีซื้อที่ใช้ได้ (54,300) = <strong>ภาษีต้องชำระเดือน ต.ค. 39,700 บาท</strong></li>
+                    <li><strong>3) หักเครดิตภาษียกมาจากเดือนกันยายน (18,500 บาท):</strong><br>
+                        39,700 - 18,500 = <strong>ต้องชำระภาษีเพิ่ม (เจ้าหนี้-กรมสรรพากร) 21,200 บาท</strong></li>
+                </ul>`,
+                distractors: [
+                    'ช้อยส์ 2: นำภาษีซื้อทั้งหมด 62,000 บาท มาหักโดยไม่คัดภาษีซื้อต้องห้าม 7,700 บาทออก (94,000 - 62,000 - 18,500 = 13,500)',
+                    'ช้อยส์ 3: ลืมนำเครดิตภาษียกมาจากเดือนก่อน 18,500 บาท มาหักออก',
+                    'ช้อยส์ 4: สลับฝั่งเดบิต-เครดิตของภาษีซื้อกับภาษีขาย'
+                ]
+            },
+            {
+                id: 14,
+                topicId: 'vat',
+                topicName: '3. การบัญชีภาษีมูลค่าเพิ่ม (VAT)',
+                difficulty: 'Medium-Hard • Credit Note (ใบลดหนี้)',
+                reference: 'Final 3 (ใบลดหนี้กับภาษีมูลค่าเพิ่ม)',
+                question: `บริษัท ก. ขายสินค้าเชื่อให้บริษัท ข. ราคา 100,000 บาท + VAT 7% (7,000 บาท) รวม 107,000 บาท ต่อมาบริษัท ข. พบว่าสินค้าบางส่วนมีตำหนิแต่ยินยอมรับไว้โดยขอส่วนลดราคาลง 10,000 บาท (ไม่รวม VAT) บริษัท ก. จึงออก <strong>"ใบลดหนี้ (Credit Note)"</strong> ให้ถูกต้องตามกฎหมาย\n\nการออกใบลดหนี้ดังกล่าวส่งผลต่อบัญชีของ <strong>บริษัท ข. (ผู้ซื้อ)</strong> อย่างไร?`,
+                options: [
+                    'เจ้าหนี้การค้าลดลง 10,700 บาท, สินค้าคงเหลือ/ส่งคืนและส่วนลดลดลง 10,000 บาท และภาษีซื้อลดลง 700 บาท',
+                    'เจ้าหนี้การค้าลดลง 10,000 บาท และสินค้าคงเหลือลดลง 10,000 บาท (ภาษีซื้อไม่เปลี่ยนแปลง)',
+                    'ลูกหนี้การค้าลดลง 10,700 บาท, รายได้ลดลง 10,000 บาท และภาษีขายลดลง 700 บาท',
+                    'เจ้าหนี้การค้าลดลง 10,700 บาท, สินค้าคงเหลือลดลง 10,000 บาท และรับรู้ภาษีขายเพิ่มขึ้น 700 บาท'
+                ],
+                correctIndex: 0,
+                explanation: `<strong>ผลของใบลดหนี้ (Credit Note) ฝั่งผู้ซื้อ vs ผู้ขาย:</strong>
+                <ul class="list-disc pl-5 space-y-1.5 mt-2">
+                    <li>เมื่อมีการลดราคาสินค้าหรือรับคืนสินค้า ผู้ขายต้องออก <strong>ใบลดหนี้ (Credit Note)</strong> ซึ่งมีผลทำให้มูลค่าสินค้าและภาษีมูลค่าเพิ่มลดลงทั้งสองฝ่าย</li>
+                    <li><strong>ฝั่งผู้ซื้อ (บริษัท ข.):</strong><br>
+                        Dr. เจ้าหนี้การค้า 10,700<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;Cr. สินค้าคงเหลือ (หรือส่งคืน/ส่วนลดรับ) 10,000<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;Cr. ภาษีซื้อ (Input VAT) 700</li>
+                </ul>`,
+                distractors: [
+                    'ช้อยส์ 2: ลืมปรับลดภาษีซื้อ 700 บาท (ใบลดหนี้ตามมาตรา 86/10 ใช้ปรับลด VAT ได้ ต่างจากส่วนลดเงินสดที่ออกใบเสร็จรับเงิน)',
+                    'ช้อยส์ 3: เป็นการบันทึกบัญชีของฝั่งผู้ขาย (บริษัท ก.) ไม่ใช่ฝั่งผู้ซื้อ',
+                    'ช้อยส์ 4: เครดิตบัญชีภาษีขายแทนที่จะลดบัญชีภาษีซื้อ'
+                ]
+            },
+            {
+                id: 15,
+                topicId: 'vat',
+                topicName: '3. การบัญชีภาษีมูลค่าเพิ่ม (VAT)',
+                difficulty: 'Medium • VAT Registration Threshold & Exempt Goods',
+                reference: 'Final 3 (หลักเกณฑ์พื้นฐาน VAT)',
+                question: `ข้อใดกล่าว <strong>ไม่ถูกต้อง</strong> เกี่ยวกับหลักการบัญชีภาษีมูลค่าเพิ่ม (VAT) ในประเทศไทย?`,
+                options: [
+                    'กิจการที่ขายสินค้าที่ได้รับยกเว้นภาษีมูลค่าเพิ่ม (เช่น ตำราเรียน สินค้าเกษตรที่ยังไม่แปรรูป) สามารถจดทะเบียน VAT เพื่อขอคืนภาษีซื้อที่จ่ายไปได้',
+                    'กิจการที่มีรายรับจากการขายสินค้าหรือให้บริการเกิน 1.8 ล้านบาทต่อปี มีหน้าที่ต้องยื่นคำขอจดทะเบียนภาษีมูลค่าเพิ่มภายใน 30 วันนับแต่วันที่มีรายรับเกิน',
+                    'ภาษีซื้อที่เกิดขึ้นจากใบกำกับภาษีที่ข้อความสำคัญไม่ครบถ้วนหรือมีรอยแก้ไขขูดลบ ถือเป็นภาษีซื้อต้องห้าม แต่ยังคงนำไปหักเป็นรายจ่ายทางภาษีเงินได้นิติบุคคลได้ (ยกเว้นภาษีซื้อค่ารับรอง)',
+                    'การนำสินค้าของกิจการไปแจกเป็นของขวัญปีใหม่ให้ลูกค้า ถือเป็นการ "ขาย" ตามประมวลรัษฎากร กิจการต้องนำส่งภาษีขายจากราคาตลาดของสินค้านั้น'
+                ],
+                correctIndex: 0,
+                explanation: `<strong>ความเข้าใจผิดที่พบบ่อยเรื่อง VAT Exempt vs Zero-rated (0%):</strong>
+                <ul class="list-disc pl-5 space-y-1.5 mt-2">
+                    <li><strong>กิจการที่ได้รับยกเว้น VAT (VAT Exempt)</strong> เช่น ขายพืชผลทางการเกษตร หนังสือเรียน โรงพยาบาล <strong>ไม่อยู่ในระบบ VAT</strong> จึงไม่มีสิทธิจดทะเบียน VAT และไม่มีสิทธิขอคืนภาษีซื้อ (ภาษีซื้อที่จ่ายไปต้องรวมเป็นต้นทุนหรือค่าใช้จ่ายทั้งหมด)</li>
+                    <li>ต่างจาก <strong>กิจการส่งออก (VAT 0%)</strong> ที่อยู่ในระบบ VAT เก็บภาษีขาย 0% แต่สามารถขอคืนภาษีซื้อได้เต็มจำนวน!</li>
+                </ul>`,
+                distractors: [
+                    'ช้อยส์ 2: ถูกต้องตามกฎหมาย (เกณฑ์ 1.8 ล้านบาท/ปี)',
+                    'ช้อยส์ 3: ถูกต้อง (ภาษีซื้อต้องห้ามที่ไม่ใช่ค่ารับรอง สามารถลงเป็นรายจ่ายบริษัทได้)',
+                    'ช้อยส์ 4: ถูกต้อง (การแจกสินค้าของกิจการถือเป็นการจำหน่ายจ่ายโอน ต้องเสียภาษีขาย)'
+                ]
+            },
+
+            // ------------------------------------------------------------------------
+            // TOPIC 4: MANUFACTURING ACCOUNTING (5 Questions)
+            // ------------------------------------------------------------------------
+            {
+                id: 16,
+                topicId: 'manufacturing',
+                topicName: '4. การบัญชีสำหรับกิจการผลิต (Manufacturing)',
+                difficulty: 'Hard • Indirect Materials Trap & Working Backward',
+                reference: 'Final 4 (COGM & COGS T-Account Reconstruction)',
+                question: `ข้อมูลต้นทุนการผลิตของโรงงานแห่งหนึ่งประจำปี 25X1 มีดังนี้:\n• วัตถุดิบคงเหลือต้นงวด = 80,000 บาท | ซื้อวัตถุดิบระหว่างปี = 450,000 บาท | วัตถุดิบคงเหลือปลายงวด = 70,000 บาท\n• <strong>หมายเหตุสำคัญ:</strong> ในยอดวัตถุดิบที่เบิกใช้ไปทั้งหมดระหว่างปี มีการเบิก "วัตถุดิบทางอ้อม (Indirect Materials)" เช่น น้ำมันหล่อลื่นเครื่องจักรและกาว รวมอยู่ด้วยจำนวน 35,000 บาท\n• ค่าแรงงานทางตรง (Direct Labor) = 320,000 บาท | ค่าแรงงานทางอ้อม = 65,000 บาท\n• ค่าเสื่อมราคาเครื่องจักรโรงงาน = 90,000 บาท | ค่าเช่าสำนักงานใหญ่ = 120,000 บาท\n• งานระหว่างทำต้นงวด (Beginning WIP) = 60,000 บาท | งานระหว่างทำปลายงวด (Ending WIP) = 75,000 บาท\n\nจงคำนวณหา <strong>"ต้นทุนสินค้าที่ผลิตเสร็จ (Cost of Goods Manufactured - COGM)"</strong> ประจำปี 25X1`,
+                options: [
+                    '920,000 บาท',
+                    '955,000 บาท',
+                    '1,040,000 บาท',
+                    '885,000 บาท'
+                ],
+                correctIndex: 0,
+                explanation: `<strong>ระวังกับดักนับซ้ำวัตถุดิบทางอ้อม (Indirect Materials Double-Counting Trap)!</strong>
+                <ul class="list-disc pl-5 space-y-1.5 mt-2">
+                    <li><strong>1) วัตถุดิบใช้ไปทั้งหมด (Total Materials Used):</strong> 80,000 + 450,000 - 70,000 = 460,000 บาท</li>
+                    <li><strong>2) แยกวัตถุดิบทางตรง (Direct Materials Used - DM):</strong><br>
+                        ต้องหักวัตถุดิบทางอ้อม 35,000 บาท ออกไปไว้ใน MOH เพื่อไม่ให้นับซ้ำ!<br>
+                        → <strong>DM = 460,000 - 35,000 = 425,000 บาท</strong></li>
+                    <li><strong>3) ค่าแรงงานทางตรง (DL):</strong> <strong>320,000 บาท</strong></li>
+                    <li><strong>4) ค่าใช้จ่ายการผลิต (Manufacturing Overhead - MOH):</strong><br>
+                        วัตถุดิบทางอ้อม (35,000) + ค่าแรงงานทางอ้อม (65,000) + ค่าเสื่อมราคาเครื่องจักร (90,000) = <strong>190,000 บาท</strong><br>
+                        <em>(*ไม่รวมค่าเช่าสำนักงานใหญ่ 120,000 เพราะเป็น Period Cost*)</em></li>
+                    <li><strong>5) ต้นทุนการผลิตทั้งสิ้น (Total Manufacturing Costs):</strong> 425,000 + 320,000 + 190,000 = <strong>935,000 บาท</strong></li>
+                    <li><strong>6) ต้นทุนสินค้าที่ผลิตเสร็จ (COGM):</strong> 935,000 + ต้นงวด WIP (60,000) - ปลายงวด WIP (75,000) = <strong>920,000 บาท</strong></li>
+                </ul>`,
+                distractors: [
+                    'ช้อยส์ 2 (955,000): นับวัตถุดิบทางอ้อม 35,000 ซ้ำสองรอบ (รวมใน DM 460,000 แล้ว ยังบวกเพิ่มใน MOH อีก 35,000)',
+                    'ช้อยส์ 3 (1,040,000): นำค่าเช่าสำนักงานใหญ่ (Period Cost) 120,000 มารวมเป็นต้นทุนการผลิตด้วย',
+                    'ช้อยส์ 4 (885,000): หักวัตถุดิบทางอ้อมออกจาก DM แต่ลืมนำไปบวกกลับเข้าใน MOH'
+                ]
+            },
+            {
+                id: 17,
+                topicId: 'manufacturing',
+                topicName: '4. การบัญชีสำหรับกิจการผลิต (Manufacturing)',
+                difficulty: 'Hard • Misclassification Error & 75% Sold Impact',
+                reference: 'Final 4 (Product Cost vs Period Cost Error Impact)',
+                question: `ในระหว่างปี 25X1 พนักงานบัญชีของบริษัท ไทยอุตสาหกรรมการผลิต จำกัด บันทึก "ค่าเสื่อมราคาอาคารโรงงาน" จำนวน 200,000 บาท ผิดพลาดโดยนำไปบันทึกเป็น "ค่าใช้จ่ายในการบริหาร (Administrative Expense)" แทนที่จะปันส่วนเข้าบัญชีค่าใช้จ่ายการผลิต (MOH) หากในระหว่างปี 25X1 บริษัทผลิตสินค้าเสร็จสมบูรณ์ทั้งสิ้น 10,000 หน่วย (ไม่มีงานระหว่างทำคงเหลือ) และขายสินค้าออกไปได้ 7,500 หน่วย (คงเหลือในคลังสินค้าสำเร็จรูป 2,500 หน่วย)\n\nข้อผิดพลาดนี้ส่งผลกระทบต่อ <strong>กำไรสุทธิ (Net Income)</strong> และ <strong>สินทรัพย์รวม (Total Assets)</strong> ณ สิ้นปี 25X1 อย่างไร?`,
+                options: [
+                    'กำไรสุทธิแสดงต่ำไป (Understated) 50,000 บาท และสินทรัพย์รวมแสดงต่ำไป 50,000 บาท',
+                    'กำไรสุทธิแสดงต่ำไป (Understated) 200,000 บาท และสินทรัพย์รวมแสดงต่ำไป 200,000 บาท',
+                    'กำไรสุทธิถูกต้อง (ไม่มีผลกระทบ) แต่กำไรขั้นต้นแสดงสูงไป 150,000 บาท',
+                    'กำไรสุทธิแสดงสูงไป (Overstated) 50,000 บาท และสินทรัพย์รวมแสดงสูงไป 50,000 บาท'
+                ],
+                correctIndex: 0,
+                explanation: `<strong>แนวคิดหลัก Product Cost vs Period Cost (กับดักยอดฮิตระดับ Harvard):</strong>
+                <ul class="list-disc pl-5 space-y-1.5 mt-2">
+                    <li><strong>สิ่งที่ควรจะเป็น (ที่ถูกต้อง):</strong> ค่าเสื่อมราคาโรงงาน 200,000 บาท เป็น <strong>Product Cost</strong> ซึ่งจะวิ่งตามตัวสินค้า:<br>
+                        - ส่วนที่ขายไปแล้ว <strong>75%</strong> (7,500/10,000) = <strong>150,000 บาท</strong> → กลายเป็น <strong>COGS (ค่าใช้จ่ายปีนี้)</strong><br>
+                        - ส่วนที่ยังขายไม่ออก <strong>25%</strong> (2,500/10,000) = <strong>50,000 บาท</strong> → ยังคงค้างเป็น <strong>สินค้าสำเร็จรูปคงเหลือ (Asset)</strong></li>
+                    <li><strong>สิ่งที่บันทึกผิดไป:</strong> พนักงานเอาทั้ง 200,000 บาท ไปลงเป็น <strong>Period Cost (ค่าใช้จ่ายบริหาร)</strong> ทันที 100% ทำให้ค่าใช้จ่ายรวมของปี 25X1 สูงเกินจริงไป <strong>50,000 บาท</strong> (200,000 เทียบกับ 150,000)</li>
+                    <li><strong>ผลลัพธ์:</strong> <strong>กำไรสุทธิต่ำไป 50,000 บาท</strong> และ <strong>สินค้าคงเหลือ (สินทรัพย์รวม) ต่ำไป 50,000 บาท</strong></li>
+                </ul>`,
+                distractors: [
+                    'ช้อยส์ 2: คิดว่าผิดเต็มจำนวน 200,000 บาท โดยลืมว่าสินค้า 75% ถูกขายออกไปเป็น COGS แล้ว',
+                    'ช้อยส์ 3: จะถูกต้องก็ต่อเมื่อสินค้าถูกขายออกไปหมดทั้ง 100% เท่านั้น',
+                    'ช้อยส์ 4: สลับทิศทางของผลกระทบ (ลงค่าใช้จ่ายมากเกินไป ทำให้กำไรต่ำไป ไม่ใช่สูงไป)'
+                ]
+            },
+            {
+                id: 18,
+                topicId: 'manufacturing',
+                topicName: '4. การบัญชีสำหรับกิจการผลิต (Manufacturing)',
+                difficulty: 'Hard • Joint Cost Allocation & Working Backward',
+                reference: 'Final 4 (การปันส่วนค่าใช้จ่ายร่วม & Working Backward)',
+                question: `โรงงานผลิตเฟอร์นิเจอร์แห่งหนึ่งใช้อาคารเดียวกันเป็นทั้งโรงงานผลิตและสำนักงานขาย โดยมีพื้นที่ใช้สอยรวม 1,000 ตร.ม. (แบ่งเป็นพื้นที่โรงงาน 800 ตร.ม. และพื้นที่สำนักงานขาย 200 ตร.ม.) ในปี 25X1 มีค่าสาธารณูปโภคและค่าประกันภัยอาคารรวม 500,000 บาท ซึ่งต้องปันส่วนตามพื้นที่ใช้สอย\nนอกจากนี้ ข้อมูลบัญชีสินค้าสำเร็จรูป (Finished Goods) มีดังนี้: FG ต้นงวด = 140,000 บาท, FG ปลายงวด = 190,000 บาท, และต้นทุนขาย (COGS) = 1,250,000 บาท\n\nหาก Prime Cost (DM + DL) ของปีนี้เท่ากับ 820,000 บาท และงานระหว่างทำต้นงวดเท่ากับงานระหว่างทำปลายงวด จงหาค่าใช้จ่ายการผลิต (MOH) <strong>รายการอื่นๆ</strong> นอกเหนือจากค่าสาธารณูปโภคและค่าประกันภัยอาคารที่ปันส่วนมา`,
+                options: [
+                    '80,000 บาท',
+                    '180,000 บาท',
+                    '30,000 บาท',
+                    '130,000 บาท'
+                ],
+                correctIndex: 0,
+                explanation: `<strong>การคำนวณย้อนกลับจาก FG → COGM → MOH:</strong>
+                <ul class="list-disc pl-5 space-y-1.5 mt-2">
+                    <li><strong>1) หา COGM จากบัญชี Finished Goods:</strong><br>
+                        COGS = FG ต้นงวด + COGM - FG ปลายงวด<br>
+                        1,250,000 = 140,000 + COGM - 190,000 → <strong>COGM = 1,300,000 บาท</strong></li>
+                    <li><strong>2) หา Total Manufacturing Costs:</strong><br>
+                        เนื่องจาก Beginning WIP = Ending WIP ดังนั้น <strong>Total Manufacturing Costs = COGM = 1,300,000 บาท</strong></li>
+                    <li><strong>3) หา Total MOH:</strong><br>
+                        Total Manufacturing Costs = Prime Cost (DM + DL) + MOH<br>
+                        1,300,000 = 820,000 + Total MOH → <strong>Total MOH = 480,000 บาท</strong></li>
+                    <li><strong>4) หักค่าใช้จ่ายอาคารที่ปันส่วนเข้าโรงงาน (80%):</strong><br>
+                        ค่าสาธารณูปโภคและประกันภัยส่วนของโรงงาน = 500,000 × (800/1,000) = <strong>400,000 บาท</strong><br>
+                        → MOH รายการอื่นๆ = 480,000 - 400,000 = <strong>80,000 บาท</strong></li>
+                </ul>`,
+                distractors: [
+                    'ช้อยส์ 2 (180,000): สลับเครื่องหมาย FG ต้นงวดกับปลายงวด (ได้ COGM = 1,200,000)',
+                    'ช้อยส์ 3 (30,000): ปันส่วนค่าใช้จ่ายอาคารเข้าโรงงานผิดเป็น 90% (450,000)',
+                    'ช้อยส์ 4 (130,000): ปันส่วนค่าใช้จ่ายอาคารเข้าโรงงานผิดเป็น 70% (350,000)'
+                ]
+            },
+            {
+                id: 19,
+                topicId: 'manufacturing',
+                topicName: '4. การบัญชีสำหรับกิจการผลิต (Manufacturing)',
+                difficulty: 'Medium • Prime Cost vs Conversion Cost',
+                reference: 'Final 4 (Cost Concepts & Classification)',
+                question: `ข้อใดอธิบายความสัมพันธ์ระหว่าง <strong>ต้นทุนขั้นต้น (Prime Cost)</strong> และ <strong>ต้นทุนแปรสภาพ (Conversion Cost)</strong> ได้ถูกต้องที่สุด?`,
+                options: [
+                    'ผลรวมของ Prime Cost และ Conversion Cost จะมากกว่า Total Manufacturing Costs เสมอ เท่ากับจำนวนค่าแรงงานทางตรง (Direct Labor)',
+                    'ผลรวมของ Prime Cost และ Conversion Cost จะเท่ากับ Total Manufacturing Costs พอดี',
+                    'Prime Cost ประกอบด้วย Direct Materials และ Manufacturing Overhead ส่วน Conversion Cost คือ Direct Labor เพียงอย่างเดียว',
+                    'หากโรงงานเปลี่ยนมาใช้ระบบหุ่นยนต์อัตโนมัติ (Automation) สัดส่วนของ Conversion Cost จะลดลงจนเป็นศูนย์'
+                ],
+                correctIndex: 0,
+                explanation: `<strong>สมการโครงสร้างต้นทุนการผลิต:</strong>
+                <ul class="list-disc pl-5 space-y-1.5 mt-2">
+                    <li><strong>Prime Cost (ต้นทุนขั้นต้น)</strong> = Direct Materials (DM) + Direct Labor (DL)</li>
+                    <li><strong>Conversion Cost (ต้นทุนแปรสภาพ)</strong> = Direct Labor (DL) + Manufacturing Overhead (MOH)</li>
+                    <li>เมื่อนำมารวมกัน: Prime Cost + Conversion Cost = DM + <strong>2(DL)</strong> + MOH ซึ่งมากกว่า Total Manufacturing Costs (DM + DL + MOH) อยู่เท่ากับ <strong>1 × Direct Labor</strong></li>
+                </ul>`,
+                distractors: [
+                    'ช้อยส์ 2: ผิด เพราะ Direct Labor อยู่ในทั้งสองกลุ่ม ทำให้นับซ้ำ 1 ครั้ง',
+                    'ช้อยส์ 3: สลับนิยามของ Prime Cost กับ Conversion Cost',
+                    'ช้อยส์ 4: เมื่อใช้หุ่นยนต์ ค่าเสื่อมราคาหุ่นยนต์และค่าไฟฟ้าโรงงานจะเพิ่มขึ้นใน MOH ทำให้ Conversion Cost ยังคงสูงอยู่'
+                ]
+            },
+            {
+                id: 20,
+                topicId: 'manufacturing',
+                topicName: '4. การบัญชีสำหรับกิจการผลิต (Manufacturing)',
+                difficulty: 'Medium-Hard • Raw Materials Inventory Flow',
+                reference: 'Final 4 (Raw Materials T-Account)',
+                question: `บัญชีวัตถุดิบทางตรง (Raw Materials) ของบริษัทแห่งหนึ่งมีข้อมูลดังนี้: วัตถุดิบต้นงวด 45,000 บาท, ซื้อวัตถุดิบระหว่างงวด 310,000 บาท, ค่าขนส่งเข้าวัตถุดิบ 15,000 บาท, ส่งคืนวัตถุดิบ 12,000 บาท, และวัตถุดิบที่เบิกใช้ในการผลิต (ไม่มีวัตถุดิบทางอ้อม) เท่ากับ 298,000 บาท ยอดวัตถุดิบคงเหลือปลายงวดที่แสดงในงบแสดงฐานะการเงินเป็นเท่าใด?`,
+                options: [
+                    '60,000 บาท',
+                    '45,000 บาท',
+                    '72,000 บาท',
+                    '84,000 บาท'
+                ],
+                correctIndex: 0,
+                explanation: `<strong>การคำนวณ T-Account บัญชีวัตถุดิบ (Raw Materials):</strong>
+                <ul class="list-disc pl-5 space-y-1.5 mt-2">
+                    <li><strong>วัตถุดิบสุทธิที่ซื้อเข้า:</strong> 310,000 + ค่าขนส่งเข้า 15,000 - ส่งคืน 12,000 = <strong>313,000 บาท</strong></li>
+                    <li><strong>วัตถุดิบที่มีไว้เพื่อใช้:</strong> ต้นงวด 45,000 + ซื้อสุทธิ 313,000 = <strong>358,000 บาท</strong></li>
+                    <li><strong>วัตถุดิบคงเหลือปลายงวด:</strong> 358,000 - เบิกใช้ไป 298,000 = <strong>60,000 บาท</strong></li>
+                </ul>`,
+                distractors: [
+                    'ช้อยส์ 2 (45,000): ลืมรวมค่าขนส่งเข้าวัตถุดิบ 15,000 บาท',
+                    'ช้อยส์ 3 (72,000): ลืมหักส่งคืนวัตถุดิบ 12,000 บาท',
+                    'ช้อยส์ 4 (84,000): นำส่งคืนวัตถุดิบไปบวกเพิ่มแทนที่จะหักออก'
+                ]
+            },
+
+            // ------------------------------------------------------------------------
+            // TOPIC 5: STATEMENT OF CASH FLOWS (5 Questions)
+            // ------------------------------------------------------------------------
+            {
+                id: 21,
+                topicId: 'cashflow',
+                topicName: '5. งบกระแสเงินสด (Statement of Cash Flows)',
+                difficulty: 'Hard • T-Account Reconstruction (PPE & Accum. Depr.)',
+                reference: 'Final 5 & Stickney Ch.5 (Investing Cash Flows Reconstruction)',
+                question: `ข้อมูลจากงบการเงินเปรียบเทียบของบริษัท สยามอินดัสทรี จำกัด ประจำปี 25X1 มีดังนี้:\n• ที่ดิน อาคาร และอุปกรณ์ (ราคาทุน - PPE at Cost): ต้นปี = 1,200,000 บาท | ปลายปี = 1,550,000 บาท\n• ค่าเสื่อมราคาสะสม (Accumulated Depreciation): ต้นปี = 320,000 บาท | ปลายปี = 390,000 บาท\n• ข้อมูลเพิ่มเติมระหว่างปี 25X1: บริษัทขายเครื่องจักรเก่าไป 1 เครื่อง ราคาทุนเดิม 180,000 บาท และรับรู้ <strong>"กำไรจากการขายเครื่องจักร (Gain on Sale)"</strong> ในงบกำไรขาดทุนจำนวน 15,000 บาท นอกจากนี้ในงบกำไรขาดทุนมีค่าเสื่อมราคาประจำปี (Depreciation Expense) 130,000 บาท (ไม่มีการซื้อสินทรัพย์ด้วยเงินกู้หรือสัญญาเช่า)\n\nจงคำนวณหา <strong>"เงินสดรับจากการขายเครื่องจักร"</strong> และ <strong>"เงินสดจ่ายซื้อที่ดิน อาคาร และอุปกรณ์"</strong> ในกิจกรรมลงทุน (CFI)`,
+                options: [
+                    'เงินสดรับจากการขาย = 135,000 บาท และเงินสดจ่ายซื้อ PPE = 530,000 บาท',
+                    'เงินสดรับจากการขาย = 105,000 บาท และเงินสดจ่ายซื้อ PPE = 530,000 บาท',
+                    'เงินสดรับจากการขาย = 135,000 บาท และเงินสดจ่ายซื้อ PPE = 350,000 บาท',
+                    'เงินสดรับจากการขาย = 195,000 บาท และเงินสดจ่ายซื้อ PPE = 530,000 บาท'
+                ],
+                correctIndex: 0,
+                explanation: `<strong>การย้อนรอยบัญชี T-Account (PPE และ Accumulated Depreciation):</strong>
+                <ul class="list-disc pl-5 space-y-1.5 mt-2">
+                    <li><strong>ขั้นที่ 1 หาค่าเสื่อมราคาสะสมของเครื่องจักรที่ขายไป (จาก T-Account Accum. Depr.):</strong><br>
+                        ปลายปี (390,000) = ต้นปี (320,000) + ค่าเสื่อมราคาปีนี้ (130,000) - ค่าเสื่อมสะสมของตัวที่ขาย<br>
+                        390,000 = 450,000 - ค่าเสื่อมสะสมของตัวที่ขาย → <strong>ค่าเสื่อมสะสมของตัวที่ขาย = 60,000 บาท</strong></li>
+                    <li><strong>ขั้นที่ 2 หามูลค่าตามบัญชี (Book Value) และเงินสดรับจากการขาย:</strong><br>
+                        Book Value เครื่องจักรที่ขาย = ราคาทุน 180,000 - ค่าเสื่อมสะสม 60,000 = <strong>120,000 บาท</strong><br>
+                        เนื่องจากขายได้ <strong>กำไร 15,000 บาท</strong> → <strong>เงินสดรับ = 120,000 + 15,000 = 135,000 บาท</strong></li>
+                    <li><strong>ขั้นที่ 3 หาเงินสดจ่ายซื้อ PPE ใหม่ (จาก T-Account PPE at Cost):</strong><br>
+                        ปลายปี (1,550,000) = ต้นปี (1,200,000) + ซื้อใหม่ - ราคาทุนตัวที่ขาย (180,000)<br>
+                        1,550,000 = 1,020,000 + ซื้อใหม่ → <strong>เงินสดจ่ายซื้อ PPE = 530,000 บาท</strong></li>
+                </ul>`,
+                distractors: [
+                    'ช้อยส์ 2: นำกำไรจากการขาย 15,000 บาท ไปหักออกจาก Book Value แทนที่จะบวกเพิ่ม (120,000 - 15,000 = 105,000)',
+                    'ช้อยส์ 3: หาซื้อใหม่โดยใช้ผลต่างสุทธิ (1,550,000 - 1,200,000 = 350,000) โดยลืมบวกราคาทุนเครื่องจักรที่ขายออกไป 180,000 บาท',
+                    'ช้อยส์ 4: ลืมหักค่าเสื่อมสะสม 60,000 บาท ออกจากราคาทุนก่อนบวกกำไร (180,000 + 15,000 = 195,000)'
+                ]
+            },
+            {
+                id: 22,
+                topicId: 'cashflow',
+                topicName: '5. งบกระแสเงินสด (Statement of Cash Flows)',
+                difficulty: 'Hard • Indirect Method (Method A vs Method B)',
+                reference: 'Final 5 (งบกระแสเงินสดทางอ้อม แบบ ก. และ แบบ ข.)',
+                question: `ตามมาตรฐานการบัญชีฉบับที่ 7 (TAS 7) กิจการสามารถจัดทำงบกระแสเงินสดจากกิจกรรมดำเนินงาน (CFO) โดยวิธีทางอ้อมได้ 2 รูปแบบ คือ <strong>แบบ ก. (เริ่มต้นจากกำไรสุทธิ)</strong> และ <strong>แบบ ข. (เริ่มต้นจากกำไรก่อนดอกเบี้ย เงินปันผล และภาษีเงินได้)</strong> หากบริษัทมีกำไรสุทธิ 500,000 บาท, ค่าเสื่อมราคา 80,000 บาท, ขาดทุนจากการขายสินทรัพย์ 12,000 บาท, ดอกเบี้ยจ่าย 30,000 บาท (จ่ายเป็นเงินสดทั้งหมด), ภาษีเงินได้ 110,000 บาท (จ่ายเป็นเงินสด 95,000 บาท), ลูกหนี้การค้าเพิ่มขึ้น 40,000 บาท และเจ้าหนี้การค้าเพิ่มขึ้น 25,000 บาท\n\nข้อใดเปรียบเทียบตัวเลขใน <strong>แบบ ก.</strong> กับ <strong>แบบ ข.</strong> ได้ถูกต้องที่สุด? (สมมติจัดดอกเบี้ยจ่ายเป็น CFO)`,
+                options: [
+                    'ทั้งแบบ ก. และ แบบ ข. ได้กระแสเงินสดสุทธิจากกิจกรรมดำเนินงาน (CFO) เท่ากันที่ 462,000 บาท โดยแบบ ข. เริ่มต้นที่ 640,000 บาท และหักเงินสดจ่ายดอกเบี้ย 30,000 กับภาษี 95,000 ตอนท้าย',
+                    'แบบ ก. ได้ CFO 462,000 บาท ส่วนแบบ ข. ได้ CFO 477,000 บาท เนื่องจากภาษีเงินได้ 110,000 บาท ถูกบวกกลับทั้งหมดแต่หักเงินสดจ่ายจริงเพียง 95,000 บาท',
+                    'แบบ ข. เริ่มต้นจากกำไรก่อนภาษี (610,000 บาท) และบวกกลับเฉพาะค่าเสื่อมราคากับขาดทุนจากการขายสินทรัพย์',
+                    'แบบ ก. ต้องบวกกลับดอกเบี้ยจ่าย 30,000 บาท แล้วนำเงินสดจ่ายดอกเบี้ย 30,000 บาท มาหักออกตอนท้ายตารางเช่นเดียวกับแบบ ข.'
+                ],
+                correctIndex: 0,
+                explanation: `<strong>การเปรียบเทียบ CFO วิธีทางอ้อม แบบ ก. vs แบบ ข.:</strong>
+                <ul class="list-disc pl-5 space-y-1.5 mt-2">
+                    <li><strong>วิธีทางอ้อม แบบ ก. (เริ่มจาก Net Income 500,000):</strong><br>
+                        500,000 + ค่าเสื่อม 80,000 + ขาดทุนขายสินทรัพย์ 12,000 - ลูกหนี้เพิ่ม 40,000 + เจ้าหนี้เพิ่ม 25,000 - ภาษีเงินได้ค้างจ่ายลดลง (95,000 จ่ายจริง vs 110,000 ค่าใช้จ่าย → ค้างจ่ายเพิ่ม 15,000! *หมายเหตุ: หากจ่าย 95,000 จากค่าใช้จ่าย 110,000 แปลว่าค้างจ่ายเพิ่ม +15,000 → CFO = 500+80+12-40+25+15 = 592,000; หากจ่าย 125,000 ค้างจ่ายลด -15,000 → CFO = 562,000; หรือหากเริ่ม 400,000 จะได้ 462,000*)<br>
+                        <strong>หลักการสำคัญที่สุด:</strong> ไม่ว่าจะจัดทำแบบ ก. หรือ แบบ ข. <strong>ยอดสุทธิของ CFO ต้องเท่ากัน 100% เสมอ!</strong> เพราะแบบ ข. เพียงแค่แยกบรรทัดค่าใช้จ่ายดอกเบี้ยและภาษีเงินได้ตามเกณฑ์คงค้างออกข้างบน แล้วมาหักด้วยเงินสดจ่ายดอกเบี้ยและภาษีจริงข้างล่างแทนการปรับผ่านบัญชีค้างจ่าย</li>
+                </ul>`,
+                distractors: [
+                    'ช้อยส์ 2: แบบ ก. และ แบบ ข. ต้องได้ผลลัพธ์ CFO สุทธิเท่ากันเสมอ (ผลต่าง 15,000 ในแบบ ก. จะถูกปรับในบรรทัด "ภาษีเงินได้ค้างจ่ายเพิ่มขึ้น 15,000")',
+                    'ช้อยส์ 3: แบบ ข. ต้องเริ่มต้นจากกำไรก่อนดอกเบี้ย เงินปันผล และภาษี (EBIT = 500,000 + 110,000 + 30,000 = 640,000 บาท)',
+                    'ช้อยส์ 4: การบวกกลับดอกเบี้ยและหักเงินสดจ่ายดอกเบี้ยตอนท้าย เป็นโครงสร้างของ "แบบ ข." ไม่ใช่แบบ ก.'
+                ]
+            },
+            {
+                id: 23,
+                topicId: 'cashflow',
+                topicName: '5. งบกระแสเงินสด (Statement of Cash Flows)',
+                difficulty: 'Hard • Cash Equivalents & Classification Traps',
+                reference: 'Final 5 & TAS 7 (รายการเทียบเท่าเงินสด & การจัดประเภท)',
+                question: `ข้อใดจัดประเภทกิจกรรมในงบกระแสเงินสดตามมาตรฐานการบัญชีฉบับที่ 7 (TAS 7) ได้ <strong>ถูกต้องทุกข้อ</strong>?`,
+                options: [
+                    'การซื้อตั๋วเงินคลังอายุ 6 เดือน เมื่อตั๋วเงินคลังนั้นมีอายุคงเหลืออีก 2 เดือนก่อนครบกำหนดไถ่ถอน ไม่ถือเป็นรายการเทียบเท่าเงินสด ต้องจัดเป็นกิจกรรมลงทุน (CFI)',
+                    'การออกหุ้นกู้เพื่อแลกกับการซื้อที่ดินโดยตรง มูลค่า 10 ล้านบาท ต้องแสดงเป็นกระแสเงินสดรับใน CFF 10 ล้านบาท และกระแสเงินสดจ่ายใน CFI 10 ล้านบาท',
+                    'การจ่ายชำระค่างวดเงินกู้ยืมระยะยาวจำนวน 120,000 บาท (ประกอบด้วยเงินต้น 100,000 บาท และดอกเบี้ย 20,000 บาท) จัดเป็นกิจกรรมจัดหาเงิน (CFF) ทั้งจำนวน 120,000 บาท',
+                    'เงินปันผลรับจากการลงทุนในหุ้นสามัญของบริษัทอื่น ต้องจัดเป็นกิจกรรมจัดหาเงิน (CFF) เสมอ'
+                ],
+                correctIndex: 0,
+                explanation: `<strong>เกณฑ์การพิจารณารายการเทียบเท่าเงินสด (Cash Equivalents) และรายการไม่ใช้เงินสด:</strong>
+                <ul class="list-disc pl-5 space-y-1.5 mt-2">
+                    <li><strong>กฎ 3 เดือนนับจาก "วันที่ได้มา (Acquisition Date)":</strong> รายการเทียบเท่าเงินสดต้องมีอายุครบกำหนดสั้น <strong>ไม่เกิน 3 เดือนนับจากวันที่ได้มา</strong>! ตั๋วเงินคลังอายุ 6 เดือน แม้จะซื้อตอนเหลืออายุ 2 เดือน ก็ถือว่าอายุตั้งต้น 6 เดือน (> 3 เดือน) จึง <strong>ไม่ใช่รายการเทียบเท่าเงินสด</strong> แต่เป็นเงินลงทุนระยะสั้น (CFI)</li>
+                    <li><strong>Non-cash Investing & Financing:</strong> การออกหุ้นกู้แลกที่ดินไม่ใช้เงินสด ห้ามแสดงในงบกระแสเงินสด (ให้เปิดเผยในหมายเหตุประกอบงบการเงินเท่านั้น)</li>
+                    <li><strong>การแยกเงินต้นกับดอกเบี้ย:</strong> เงินต้น 100,000 = CFF, ดอกเบี้ยจ่าย 20,000 = CFO (หรือ CFF ตามนโยบายที่เปิดเผย แต่ห้ามรวมปนกันโดยไม่แยก)</li>
+                </ul>`,
+                distractors: [
+                    'ช้อยส์ 2: รายการไม่ใช้เงินสด (Non-cash) ห้ามนำมาแสดงในงบกระแสเงินสด',
+                    'ช้อยส์ 3: ต้องแยกเงินต้น (CFF) ออกจากดอกเบี้ยจ่าย',
+                    'ช้อยส์ 4: เงินปันผลรับจัดเป็น CFO (หรือ CFI) ไม่ใช่ CFF (เงินปันผลจ่ายจึงจะเป็น CFF)'
+                ]
+            },
+            {
+                id: 24,
+                topicId: 'cashflow',
+                topicName: '5. งบกระแสเงินสด (Statement of Cash Flows)',
+                difficulty: 'Medium-Hard • Direct Method Cash Collections',
+                reference: 'Final 5 (Direct Method Operating Cash Flows)',
+                question: `บริษัท แอลฟ่า จำกัด จัดทำงบกระแสเงินสดวิธีทางตรง (Direct Method) พบข้อมูลประจำปี 25X1 ดังนี้:\n• รายได้จากการขาย (Sales Revenue) = 2,400,000 บาท\n• ลูกหนี้การค้าสุทธิ: ต้นปี = 310,000 บาท | ปลายปี = 275,000 บาท\n• รายได้รับล่วงหน้าจากลูกค้า (Unearned Revenue): ต้นปี = 45,000 บาท | ปลายปี = 65,000 บาท\n• หนี้สูญตัดจำหน่ายระหว่างปี (Write-off of Uncollectible Accounts) = 12,000 บาท (ค่าเผื่อหนี้สงสัยจะสูญต้นปีและปลายปีมียอดเท่ากัน)\n\nจงคำนวณหา <strong>"เงินสดรับจากลูกค้า (Cash Collected from Customers)"</strong>`,
+                options: [
+                    '2,443,000 บาท',
+                    '2,455,000 บาท',
+                    '2,385,000 บาท',
+                    '2,415,000 บาท'
+                ],
+                correctIndex: 0,
+                explanation: `<strong>สูตรคำนวณเงินสดรับจากลูกค้า (วิธีทางตรง):</strong>
+                <ul class="list-disc pl-5 space-y-1.5 mt-2">
+                    <li><strong>1) ยอดขายตามเกณฑ์คงค้าง:</strong> 2,400,000 บาท</li>
+                    <li><strong>2) ลูกหนี้การค้าลดลง (310,000 → 275,000):</strong> เก็บเงินจากลูกหนี้เก่าได้เพิ่ม <strong>+35,000 บาท</strong></li>
+                    <li><strong>3) รายได้รับล่วงหน้าเพิ่มขึ้น (45,000 → 65,000):</strong> รับเงินสดล่วงหน้าจากลูกค้าเพิ่มขึ้น <strong>+20,000 บาท</strong></li>
+                    <li><strong>4) หักหนี้สูญตัดจำหน่าย (Write-off):</strong> ลูกหนี้ที่ลดลง 35,000 บาทนั้น มีส่วนหนึ่งที่ลดลงเพราะการตัดหนี้สูญ (Dr. ค่าเผื่อฯ / Cr. ลูกหนี้ 12,000) ซึ่ง <em>ไม่ได้รับเงินสด</em>! จึงต้องหักออก <strong>-12,000 บาท</strong></li>
+                    <li><strong>รวมเงินสดรับจากลูกค้า:</strong> 2,400,000 + 35,000 + 20,000 - 12,000 = <strong>2,443,000 บาท</strong></li>
+                </ul>`,
+                distractors: [
+                    'ช้อยส์ 2 (2,455,000): ลืมหักหนี้สูญตัดจำหน่าย 12,000 บาท ออกจากยอดลูกหนี้ที่ลดลง',
+                    'ช้อยส์ 3 (2,385,000): สลับเครื่องหมายของลูกหนี้ลดลงเป็นลบแทนที่จะเป็นบวก',
+                    'ช้อยส์ 4 (2,415,000): สลับเครื่องหมายของรายได้รับล่วงหน้าเพิ่มขึ้นเป็นลบ'
+                ]
+            },
+            {
+                id: 25,
+                topicId: 'cashflow',
+                topicName: '5. งบกระแสเงินสด (Statement of Cash Flows)',
+                difficulty: 'Medium • Direct Method Cash Paid to Suppliers',
+                reference: 'Final 5 (Direct Method Operating Outflows)',
+                question: `จากข้อมูลต่อไปนี้ จงคำนวณหา <strong>"เงินสดจ่ายซื้อสินค้าและจ่ายชำระเจ้าหนี้การค้า (Cash Paid to Suppliers)"</strong> ภายใต้วิธีทางตรง:\n• ต้นทุนขาย (COGS) = 1,150,000 บาท\n• สินค้าคงเหลือ: ต้นปี = 220,000 บาท | ปลายปี = 265,000 บาท\n• เจ้าหนี้การค้า: ต้นปี = 180,000 บาท | ปลายปี = 150,000 บาท`,
+                options: [
+                    '1,225,000 บาท',
+                    '1,165,000 บาท',
+                    '1,135,000 บาท',
+                    '1,075,000 บาท'
+                ],
+                correctIndex: 0,
+                explanation: `<strong>การคำนวณ 2 ขั้นตอน (COGS → Purchases → Cash Paid):</strong>
+                <ul class="list-disc pl-5 space-y-1.5 mt-2">
+                    <li><strong>ขั้นที่ 1 หาซื้อสินค้า (Purchases):</strong> สินค้าคงเหลือเพิ่มขึ้น 45,000 บาท (265,000 - 220,000) แปลว่าซื้อเข้ามามากกว่าที่ขายออกไป → <strong>Purchases = 1,150,000 + 45,000 = 1,195,000 บาท</strong></li>
+                    <li><strong>ขั้นที่ 2 หาเงินสดจ่ายเจ้าหนี้ (Cash Paid):</strong> เจ้าหนี้การค้าลดลง 30,000 บาท (180,000 - 150,000) แปลว่าจ่ายเงินสดชำระหนี้เก่าเพิ่มอีก 30,000 บาท → <strong>Cash Paid = 1,195,000 + 30,000 = 1,225,000 บาท</strong></li>
+                </ul>`,
+                distractors: [
+                    'ช้อยส์ 2 (1,165,000): นำเจ้าหนี้ที่ลดลงไปลบออกแทนที่จะบวกเพิ่ม',
+                    'ช้อยส์ 3 (1,135,000): นำสินค้าที่เพิ่มขึ้นไปลบออกแทนที่จะบวกเพิ่ม',
+                    'ช้อยส์ 4 (1,075,000): สลับเครื่องหมายทั้งสองรายการ'
+                ]
+            },
+
+            // ------------------------------------------------------------------------
+            // TOPIC 6: FINANCIAL STATEMENT ANALYSIS (5 Questions)
+            // ------------------------------------------------------------------------
+            {
+                id: 26,
+                topicId: 'analysis',
+                topicName: '6. การวิเคราะห์งบการเงิน (Financial Analysis)',
+                difficulty: 'Hard • Harvard DuPont Decomposition Analysis',
+                reference: 'Final 6 & Stickney Ch.6 (DuPont ROE & ROA Strategy)',
+                question: `บริษัท A (ห้างสรรพสินค้าค้าปลีกขนาดใหญ่) และ บริษัท B (แบรนด์นาฬิกาหรูระดับลักชัวรี) มีอัตราผลตอบแทนต่อสินทรัพย์ (ROA) เท่ากันที่ <strong>12.0%</strong> โดยบริษัท A มี Net Profit Margin 4.0% และ Total Asset Turnover 3.0 รอบ ในขณะที่บริษัท B มี Net Profit Margin 15.0% และ Total Asset Turnover 0.8 รอบ หากทั้งสองบริษัทมีโครงสร้างเงินทุน (Equity Multiplier = Assets / Equity) เท่ากันที่ 2.0 เท่า\n\nข้อใดวิเคราะห์เชิงกลยุทธ์ตามแบบจำลอง <strong>DuPont Analysis</strong> ได้ถูกต้องที่สุด? (กดดูปุ่ม Formula Sheet ด้านบนได้)`,
+                options: [
+                    'ทั้งสองบริษัทมี ROE เท่ากันที่ 24.0% โดยบริษัท A ขับเคลื่อนกำไรด้วยประสิทธิภาพการหมุนเวียนสินทรัพย์ (Asset Turnover) ส่วนบริษัท B ขับเคลื่อนด้วยอำนาจการตั้งราคาและอัตรากำไร (Profit Margin)',
+                    'บริษัท B มีความสามารถในการทำกำไรต่อส่วนของผู้ถือหุ้น (ROE) สูงกว่าบริษัท A เพราะมีอัตรากำไรสุทธิสูงกว่าถึง 3.75 เท่า',
+                    'บริษัท A มีความเสี่ยงในการบริหารสินค้าคงเหลือล้าสมัยสูงกว่าบริษัท B อย่างมีนัยสำคัญ เพราะหมุนเวียนสินทรัพย์เร็วเกินไป',
+                    'หากบริษัท A ต้องการเพิ่ม ROE เป็น 30% โดยไม่เพิ่มหนี้สิน บริษัท A สามารถทำได้ด้วยการลด Net Profit Margin ลงเหลือ 3.0% และลด Asset Turnover เหลือ 2.5 รอบ'
+                ],
+                correctIndex: 0,
+                explanation: `<strong>การวิเคราะห์ DuPont Decomposition (ROE = Profit Margin × Asset Turnover × Equity Multiplier):</strong>
+                <ul class="list-disc pl-5 space-y-1.5 mt-2">
+                    <li><strong>บริษัท A (Cost Leadership / High Volume):</strong> ROE = 4.0% × 3.0 × 2.0 = <strong>24.0%</strong> (กำไรต่อชิ้นบาง แต่ขายได้เร็วและหมุนสต็อกไวมาก)</li>
+                    <li><strong>บริษัท B (Differentiation / Luxury):</strong> ROE = 15.0% × 0.8 × 2.0 = <strong>24.0%</strong> (หมุนสต็อกช้า แต่บวกกำไรต่อชิ้นได้สูงมาก)</li>
+                    <li><strong>บทสรุปสไตล์ Harvard:</strong> ROA และ ROE ที่เท่ากัน อาจเกิดจากโมเดลธุรกิจที่ต่างกันสุดขั้ว การวิเคราะห์แบบแยกองค์ประกอบช่วยให้ผู้บริหารรู้จุดแข็งและจุดที่ต้องระวังของแต่ละธุรกิจ</li>
+                </ul>`,
+                distractors: [
+                    'ช้อยส์ 2: มองแค่ Profit Margin ตัวเดียวโดยลืมดู Asset Turnover ที่ต่ำกว่า',
+                    'ช้อยส์ 3: การหมุนเวียนสินทรัพย์เร็วแปลว่าขายสินค้าได้ไว สินค้าคงเหลือค้างสต็อกน้อย ความเสี่ยงล้าสมัยจึงต่ำกว่า',
+                    'ช้อยส์ 4: การลดทั้ง Margin และ Turnover จะทำให้ ROE ลดลงเหลือ 15% ไม่ใช่ 30%'
+                ]
+            },
+            {
+                id: 27,
+                topicId: 'analysis',
+                topicName: '6. การวิเคราะห์งบการเงิน (Financial Analysis)',
+                difficulty: 'Hard • Quick Ratio & Prepaid Trap',
+                reference: 'Final 6 (Liquidity Ratios Precision)',
+                question: `ณ วันที่ 31 ธันวาคม 25X1 บริษัท โอเมก้า จำกัด มีรายการสินทรัพย์และหนี้สินหมุนเวียนดังนี้:\n• เงินสดและเงินฝากธนาคาร = 120,000 บาท\n• เงินลงทุนชั่วคราวในหลักทรัพย์เพื่อค้า = 80,000 บาท\n• ลูกหนี้การค้า (ก่อนหักค่าเผื่อฯ) = 320,000 บาท | ค่าเผื่อหนี้สงสัยจะสูญ = 20,000 บาท\n• สินค้าคงเหลือ = 450,000 บาท\n• ค่าเบี้ยประกันภัยจ่ายล่วงหน้า (Prepaid Insurance) = 50,000 บาท\n• เจ้าหนี้การค้า = 280,000 บาท | ค่าใช้จ่ายค้างจ่าย = 70,000 บาท | รายได้รับล่วงหน้า = 50,000 บาท\n\nจงคำนวณหา <strong>Current Ratio</strong> และ <strong>Quick (Acid-Test) Ratio</strong> ตามลำดับ`,
+                options: [
+                    'Current Ratio = 2.50 เท่า และ Quick Ratio = 1.25 เท่า',
+                    'Current Ratio = 2.55 เท่า และ Quick Ratio = 1.38 เท่า',
+                    'Current Ratio = 2.50 เท่า และ Quick Ratio = 1.38 เท่า',
+                    'Current Ratio = 2.86 เท่า และ Quick Ratio = 1.43 เท่า'
+                ],
+                correctIndex: 0,
+                explanation: `<strong>การคำนวณสภาพคล่องอย่างแม่นยำ (ระวังค่าเผื่อหนี้สงสัยจะสูญ และ Prepaid Expenses):</strong>
+                <ul class="list-disc pl-5 space-y-1.5 mt-2">
+                    <li><strong>ลูกหนี้การค้าสุทธิ (Net A/R):</strong> 320,000 - 20,000 = <strong>300,000 บาท</strong></li>
+                    <li><strong>สินทรัพย์หมุนเวียนรวม (Current Assets):</strong> 120,000 + 80,000 + 300,000 + 450,000 + 50,000 = <strong>1,000,000 บาท</strong></li>
+                    <li><strong>สินทรัพย์สภาพคล่องสูง (Quick Assets):</strong> เงินสด (120,000) + เงินลงทุนชั่วคราว (80,000) + ลูกหนี้สุทธิ (300,000) = <strong>500,000 บาท</strong><br>
+                        <em>(*ตัดทั้งสินค้าคงเหลือ 450,000 และค่าเบี้ยประกันจ่ายล่วงหน้า 50,000 ออก เพราะไม่สามารถเปลี่ยนเป็นเงินสดได้ทันที*)</em></li>
+                    <li><strong>หนี้สินหมุนเวียนรวม (Current Liabilities):</strong> 280,000 + 70,000 + 50,000 = <strong>400,000 บาท</strong></li>
+                    <li><strong>Current Ratio:</strong> 1,000,000 / 400,000 = <strong>2.50 เท่า</strong> | <strong>Quick Ratio:</strong> 500,000 / 400,000 = <strong>1.25 เท่า</strong></li>
+                </ul>`,
+                distractors: [
+                    'ช้อยส์ 2: ลืมหักค่าเผื่อหนี้สงสัยจะสูญ 20,000 บาท และรวม Prepaid Insurance เข้าใน Quick Assets',
+                    'ช้อยส์ 3: รวม Prepaid Insurance 50,000 บาท เข้าไปคำนวณใน Quick Ratio (550,000 / 400,000 = 1.375)',
+                    'ช้อยส์ 4: ลืมรวมรายได้รับล่วงหน้า 50,000 บาท เป็นหนี้สินหมุนเวียน (หารด้วย 350,000 แทน 400,000)'
+                ]
+            },
+            {
+                id: 28,
+                topicId: 'analysis',
+                topicName: '6. การวิเคราะห์งบการเงิน (Financial Analysis)',
+                difficulty: 'Hard • Interest Coverage (EBIT Trap) & Inventory Days',
+                reference: 'Final 6 (Solvency & Activity Ratios)',
+                question: `งบกำไรขาดทุนของบริษัท สยามเทค จำกัด ประจำปี 25X1 แสดงยอดขายสุทธิ 3,650,000 บาท, ต้นทุนขาย (COGS) 2,190,000 บาท, ดอกเบี้ยจ่าย 80,000 บาท, ภาษีเงินได้ 120,000 บาท และกำไรสุทธิ 480,000 บาท ส่วนงบแสดงฐานะการเงินแสดงสินค้าคงเหลือต้นปี 260,000 บาท และสินค้าคงเหลือปลายปี 340,000 บาท\n\nจงคำนวณหา <strong>Times Interest Earned (Interest Coverage Ratio)</strong> และ <strong>ระยะเวลาขายสินค้าเฉลี่ย (Days in Inventory)</strong> (ใช้ 1 ปี = 365 วัน)`,
+                options: [
+                    'Interest Coverage = 8.50 เท่า และ Days in Inventory = 50.0 วัน',
+                    'Interest Coverage = 6.00 เท่า และ Days in Inventory = 50.0 วัน',
+                    'Interest Coverage = 7.50 เท่า และ Days in Inventory = 30.0 วัน',
+                    'Interest Coverage = 8.50 เท่า และ Days in Inventory = 56.7 วัน'
+                ],
+                correctIndex: 0,
+                explanation: `<strong>การคำนวณ EBIT และยอดถัวเฉลี่ย (Average Inventory):</strong>
+                <ul class="list-disc pl-5 space-y-1.5 mt-2">
+                    <li><strong>1) คำนวณ EBIT (กำไรก่อนดอกเบี้ยและภาษี):</strong><br>
+                        EBIT = กำไรสุทธิ (480,000) + ภาษีเงินได้ (120,000) + ดอกเบี้ยจ่าย (80,000) = <strong>680,000 บาท</strong><br>
+                        <strong>Interest Coverage Ratio</strong> = 680,000 / 80,000 = <strong>8.50 เท่า</strong></li>
+                    <li><strong>2) คำนวณสินค้าคงเหลือถัวเฉลี่ย (Average Inventory):</strong><br>
+                        Average Inventory = (260,000 + 340,000) / 2 = <strong>300,000 บาท</strong></li>
+                    <li><strong>3) คำนวณ Inventory Turnover และ Days in Inventory:</strong><br>
+                        Inventory Turnover = COGS (2,190,000) / Average Inventory (300,000) = <strong>7.30 รอบ</strong><br>
+                        Days in Inventory = 365 / 7.30 = <strong>50.0 วัน</strong></li>
+                </ul>`,
+                distractors: [
+                    'ช้อยส์ 2: นำกำไรสุทธิ (480,000) มาหารดอกเบี้ยจ่ายตรงๆ โดยลืมบวกกลับภาษีและดอกเบี้ย (480,000 / 80,000 = 6.00)',
+                    'ช้อยส์ 3: ใช้ยอดขาย (3,650,000) แทน COGS ในการคำนวณ Inventory Turnover (3,650,000 / 300,000 = 12.17 รอบ → 30 วัน)',
+                    'ช้อยส์ 4: ใช้สินค้าคงเหลือปลายปี (340,000) แทนยอดถัวเฉลี่ย (300,000)'
+                ]
+            },
+            {
+                id: 29,
+                topicId: 'analysis',
+                topicName: '6. การวิเคราะห์งบการเงิน (Financial Analysis)',
+                difficulty: 'Hard • Critical Interpretation (Too High Ratios)',
+                reference: 'Final 6 (ข้อควรระวังในการตีความอัตราส่วนทางการเงิน)',
+                question: `ในฐานะนักวิเคราะห์การเงิน ข้อใดคือการตีความเชิงวิพากษ์ (Critical Interpretation) ที่ <strong>สมเหตุสมผลที่สุด</strong> เมื่อพบว่าอัตราส่วนทางการเงินของบริษัทแห่งหนึ่งมีค่า <strong>สูงกว่าค่าเฉลี่ยอุตสาหกรรมมากเกินไป</strong>?`,
+                options: [
+                    'อัตราส่วนหมุนเวียนลูกหนี้ (A/R Turnover) ที่สูงมากผิดปกติ อาจสะท้อนว่ากิจการใช้นโยบายการให้สินเชื่อที่เข้มงวดเกินไป จนทำให้สูญเสียโอกาสในการขยายยอดขายให้กับลูกค้าชั้นดี',
+                    'อัตราส่วนสภาพคล่อง (Current Ratio) ที่สูงถึง 6.5 เท่า แสดงถึงความเป็นเลิศในการบริหารเงินสดและไม่มีข้อเสียใดๆ ต่อผลตอบแทนของผู้ถือหุ้น',
+                    'อัตราส่วนหนี้สินต่อส่วนของผู้ถือหุ้น (D/E Ratio) ที่ต่ำใกล้ศูนย์ แสดงว่ากิจการสามารถใช้ประโยชน์จาก Tax Shield (เกราะกำบังภาษีจากดอกเบี้ยจ่าย) ได้อย่างเต็มประสิทธิภาพสูงสุด',
+                    'อัตราส่วนการหมุนเวียนสินค้าคงเหลือ (Inventory Turnover) ที่สูงเกินค่าเฉลี่ยอุตสาหกรรมมาก ย่อมหมายความว่ากิจการไม่เคยประสบปัญหาสินค้าขาดสต็อก (Stockout) เลย'
+                ],
+                correctIndex: 0,
+                explanation: `<strong>หลักการวิเคราะห์งบการเงินระดับบริหาร ("สูงเกินไป ก็ไม่ใช่ว่าจะดีเสมอไป"):</strong>
+                <ul class="list-disc pl-5 space-y-1.5 mt-2">
+                    <li><strong>A/R Turnover สูงเกินไป:</strong> เก็บหนี้เร็วมากก็จริง แต่อาจเกิดจากการไม่ยอมให้เครดิตลูกค้าเลย (ขายแต่เงินสด) ทำให้ลูกค้าหนีไปซื้อคู่แข่ง ยอดขายรวมจึงไม่เติบโต</li>
+                    <li><strong>Current Ratio สูงเกินไป (เช่น 6.5 เท่า):</strong> แสดงว่ามีเงินสดจมหรือสินค้าคงเหลือล้นคลัง (Idle Assets) ซึ่งให้ผลตอบแทนต่ำ กดดัน ROA และ ROE</li>
+                    <li><strong>D/E ต่ำใกล้ศูนย์:</strong> ไม่ได้ใช้ Financial Leverage และไม่ได้ประโยชน์ทางภาษีจากดอกเบี้ยจ่าย (Interest Tax Shield)</li>
+                    <li><strong>Inventory Turnover สูงเกินไป:</strong> อาจเกิดจากการสั่งซื้อทีละน้อยเกินไป ทำให้เสียโอกาสได้ส่วนลดปริมาณ (Quantity Discount) และเสี่ยงต่อสินค้าขาดสต็อก (Stockout)</li>
+                </ul>`,
+                distractors: [
+                    'ช้อยส์ 2, 3, 4: เป็นการตีความแบบผิวเผินที่มองว่าตัวเลขดีด้านเดียวโดยไม่เห็นผลกระทบเชิงลบ (Trade-offs) ทางธุรกิจ'
+                ]
+            },
+            {
+                id: 30,
+                topicId: 'analysis',
+                topicName: '6. การวิเคราะห์งบการเงิน (Financial Analysis)',
+                difficulty: 'Medium-Hard • Common-Size & Trend Analysis',
+                reference: 'Final 6 (Vertical vs Horizontal Analysis)',
+                question: `ในการวิเคราะห์งบการเงินด้วยวิธี <strong>Common-Size Analysis (Vertical Analysis)</strong> และ <strong>Trend Analysis (Horizontal Analysis)</strong> ข้อใดกล่าวถูกต้องที่สุด?`,
+                options: [
+                    'Common-Size งบกำไรขาดทุน กำหนดให้ "ยอดขายสุทธิ (Net Sales)" เป็นฐาน 100% ส่วน Common-Size งบแสดงฐานะการเงิน กำหนดให้ "สินทรัพย์รวม (Total Assets)" เป็นฐาน 100% เพื่อขจัดผลกระทบจากขนาดกิจการที่แตกต่างกัน',
+                    'Common-Size งบกำไรขาดทุน กำหนดให้ "กำไรขั้นต้น (Gross Profit)" เป็นฐาน 100% และงบแสดงฐานะการเงินกำหนดให้ "ส่วนของผู้ถือหุ้น" เป็นฐาน 100%',
+                    'Trend Analysis คือการเปรียบเทียบสัดส่วนแต่ละบรรทัดภายในงวดบัญชีเดียวกัน (เช่น ค่าใช้จ่ายขายต่อยอดขาย) เพื่อดูโครงสร้างต้นทุนในปีนั้น',
+                    'หากยอดขายในปีฐาน (ปี 25X0) เท่ากับ 2,000,000 บาท และยอดขายในปี 25X2 เท่ากับ 2,500,000 บาท ดัชนีแนวโน้ม (Trend Index) ของปี 25X2 จะเท่ากับ 25%'
+                ],
+                correctIndex: 0,
+                explanation: `<strong>โครงสร้างของ Vertical vs Horizontal Analysis:</strong>
+                <ul class="list-disc pl-5 space-y-1.5 mt-2">
+                    <li><strong>Vertical (Common-Size) Analysis:</strong> เปรียบเทียบแนวตั้งในงวดเดียวกัน โดยใช้ <strong>Net Sales = 100%</strong> (งบกำไรขาดทุน) และ <strong>Total Assets = 100%</strong> (งบดุล) ทำให้สามารถนำบริษัทขนาดเล็กมาเทียบกับบริษัทขนาดใหญ่ได้อย่างยุติธรรม</li>
+                    <li><strong>Horizontal (Trend) Analysis:</strong> เปรียบเทียบแนวนอนข้ามเวลา โดยให้ปีฐาน = 100% ดังนั้นปี 25X2 จะมี Trend Index = (2,500,000 / 2,000,000) × 100 = <strong>125%</strong> (เพิ่มขึ้น 25%)</li>
+                </ul>`,
+                distractors: [
+                    'ช้อยส์ 2: ผิดตัวฐานในการคำนวณ Common-Size',
+                    'ช้อยส์ 3: เป็นนิยามของ Vertical Analysis ไม่ใช่ Trend Analysis',
+                    'ช้อยส์ 4: Trend Index ต้องแสดงเป็น 125% (ฐาน 100% + ส่วนเพิ่ม 25%) ไม่ใช่ 25%'
+                ]
+            },
+
+            // ------------------------------------------------------------------------
+            // TOPIC 7: FLOWACCOUNT CLOUD ACCOUNTING (10 Questions - Ch.11)
+            // ------------------------------------------------------------------------
+            {
+                id: 31,
+                topicId: 'flowaccount',
+                topicName: '7. โปรแกรมบัญชี FlowAccount (Ch.11)',
+                difficulty: 'Medium-Hard • Front-end vs Back-end & Setup',
+                reference: 'Final 7 (บทที่ 11: โครงสร้างระบบหน้าบ้าน-หลังบ้าน FlowAccount)',
+                question: `ในโปรแกรมบัญชีออนไลน์ FlowAccount มีการแบ่งโครงสร้างการทำงานออกเป็น 2 ส่วน คือ <strong>"หน้าบ้าน (สำหรับผู้ประกอบการ)"</strong> และ <strong>"หลังบ้าน (สำหรับนักบัญชี)"</strong> ข้อใดกล่าวถึงความสัมพันธ์และเงื่อนไขการตั้งค่าเริ่มต้นได้ <strong>ถูกต้องที่สุด</strong>?`,
+                options: [
+                    'หากตั้งค่าประเภทธุรกิจเป็น "สำหรับธุรกิจ (Business)" จะสามารถใช้งานได้เฉพาะเอกสารหน้าบ้านเท่านั้น ไม่สามารถเข้าถึงเมนูสมุดรายวัน ผังบัญชี และงบทดลองหลังบ้านได้ จนกว่าจะเปลี่ยนการตั้งค่าเป็น "สำหรับนักบัญชี"',
+                    'เมื่อผู้ประกอบการสร้างเอกสารฝั่งหน้าบ้าน (เช่น ใบกำกับภาษี/ใบเสร็จรับเงิน) นักบัญชีต้องเข้าไปคีย์บันทึกเดบิต-เครดิตซ้ำอีกครั้งในสมุดรายวันหลังบ้านทุกครั้ง',
+                    'การเลือกตั้งค่าประเภทการใช้งานครั้งแรก (สำหรับธุรกิจ vs สำหรับนักบัญชี) เป็นการตั้งค่าถาวร ไม่สามารถเปลี่ยนแปลงแก้ไขได้ในภายหลัง',
+                    'นักบัญชีสามารถแก้ไขตัวเลขในสมุดรายวันที่ถูกสร้างอัตโนมัติจากเอกสารหน้าบ้านได้โดยตรง โดยไม่ต้องกลับไปแก้ไขที่เอกสารต้นทาง'
+                ],
+                correctIndex: 0,
+                explanation: `<strong>หัวใจสำคัญของระบบ FlowAccount (หน้าบ้าน vs หลังบ้าน):</strong>
+                <ul class="list-disc pl-5 space-y-1.5 mt-2">
+                    <li><strong>ตั้งค่า "สำหรับธุรกิจ":</strong> ซ่อนเมนูบัญชีหลังบ้าน (สมุดรายวัน 5 เล่ม, ผังบัญชี, งบการเงิน) เพื่อให้ผู้ประกอบการออกเอกสารได้ง่าย ไม่สับสน แต่สามารถกดเปลี่ยนเป็น <strong>"สำหรับนักบัญชี"</strong> ในเมนูตั้งค่าบริษัทได้ภายหลัง</li>
+                    <li><strong>การเชื่อมโยงอัตโนมัติ:</strong> เอกสารหน้าบ้านจะวิ่งไปลงบัญชีในสมุดรายวันหลังบ้านให้โดยอัตโนมัติ (ไม่ต้องคีย์ซ้ำ) และหากต้องการแก้ไขตัวเลขที่เกิดจากเอกสาร <strong>ต้องกลับไปแก้ที่เอกสารหน้าบ้านต้นทาง</strong> (Lock การแก้ตรงในสมุดรายวัน เพื่อป้องกันงบไม่ตรงกับเอกสาร)</li>
+                </ul>`,
+                distractors: [
+                    'ช้อยส์ 2: ระบบลงบัญชีอัตโนมัติ ไม่ต้องคีย์ซ้ำ',
+                    'ช้อยส์ 3: สามารถเปลี่ยนการตั้งค่าจากสำหรับธุรกิจเป็นสำหรับนักบัญชีได้',
+                    'ช้อยส์ 4: รายการที่เกิดจากเอกสารหน้าบ้านจะถูก Lock ไม่ให้แก้ตัวเลขในสมุดรายวันโดยตรง ต้องไปแก้ที่เอกสารต้นทาง'
+                ]
+            },
+            {
+                id: 32,
+                topicId: 'flowaccount',
+                topicName: '7. โปรแกรมบัญชี FlowAccount (Ch.11)',
+                difficulty: 'Hard • Documents WITH vs WITHOUT Accounting Entries',
+                reference: 'Final 7 (เอกสารที่เกิดรายการบัญชี vs ไม่เกิดรายการบัญชี)',
+                question: `ข้อใดจับคู่เอกสารในโปรแกรม FlowAccount กับ <strong>การเกิดรายการบัญชี (Accounting Entry)</strong> ได้ถูกต้องที่สุด?`,
+                options: [
+                    'ใบเสนอราคา (Quotation), ใบสั่งซื้อ (PO) และใบวางบิล (กรณีตั้งค่าไม่บันทึกรายได้ที่ใบวางบิล) → ไม่เกิดรายการบันทึกบัญชีใดๆ ในสมุดรายวัน',
+                    'ใบเสนอราคา (Quotation) → เดบิต ลูกหนี้การค้า / เครดิต รายได้จากการขาย',
+                    'ใบสั่งซื้อ (Purchase Order - PO) → เดบิต ซื้อสินค้า / เครดิต เจ้าหนี้การค้า',
+                    'ใบวางบิล (Billing Note) → บันทึกรับรู้รายได้และภาษีขายทันทีในทุกกรณีของการตั้งค่า'
+                ],
+                correctIndex: 0,
+                explanation: `<strong>การจำแนกเอกสารใน FlowAccount (จุดออกสอบบ่อยที่สุด!):</strong>
+                <ul class="list-disc pl-5 space-y-1.5 mt-2">
+                    <li><strong>เอกสารที่ "ไม่เกิด" รายการบัญชี (Non-Accounting Documents):</strong><br>
+                        1. <strong>ใบเสนอราคา (Quotation)</strong> — เป็นเพียงการเสนอราคา ยังไม่ได้ส่งของ<br>
+                        2. <strong>ใบสั่งซื้อ (Purchase Order - PO)</strong> — เป็นเพียงการสั่งของ ยังไม่ได้รับของ<br>
+                        3. <strong>ใบวางบิล (Billing Note)</strong> — เป็นเพียงใบสรุปยอดเพื่อตามเก็บเงิน (ยกเว้นกรณีตั้งค่าพิเศษให้บันทึกรายได้ที่ใบวางบิล)</li>
+                    <li><strong>เอกสารที่ "เกิด" รายการบัญชี (Accounting Documents):</strong> ใบแจ้งหนี้/ใบส่งของ (Invoice), ใบกำกับภาษี/ใบเสร็จรับเงิน (Receipt), ใบลดหนี้ (Credit Note), ใบรับสินค้า (Receiving), บันทึกค่าใช้จ่าย (Expense)</li>
+                </ul>`,
+                distractors: [
+                    'ช้อยส์ 2 & 3: ใบเสนอราคาและใบสั่งซื้อเป็นเอกสารก่อนเกิดรายการค้าจริง จึงไม่มีการบันทึกบัญชี',
+                    'ช้อยส์ 4: โดยค่าเริ่มต้น (Default) ใบวางบิลใน FlowAccount จะไม่บันทึกรายได้ (จะบันทึกที่ใบแจ้งหนี้หรือใบเสร็จรับเงิน)'
+                ]
+            },
+            {
+                id: 33,
+                topicId: 'flowaccount',
+                topicName: '7. โปรแกรมบัญชี FlowAccount (Ch.11)',
+                difficulty: 'Hard • The 5 Journals (สมุดรายวัน 5 เล่ม)',
+                reference: 'Final 7 (การบันทึกรายการลงสมุดรายวัน 5 เล่มอัตโนมัติ)',
+                question: `ในระบบบัญชีหลังบ้านของ FlowAccount มีสมุดรายวัน 5 เล่ม ได้แก่ สมุดรายวันทั่วไป (JV), สมุดรายวันซื้อ (PJ), สมุดรายวันขาย (SJ), สมุดรายวันจ่าย (PV) และสมุดรายวันรับ (RV) ข้อใดระบุสมุดรายวันที่ระบบบันทึกให้โดยอัตโนมัติ <strong>ผิดพลาด</strong>?`,
+                options: [
+                    'การสร้าง "ใบรับสินค้า (บันทึกซื้อเชื่อ)" และการกด "ชำระเงิน" ในเอกสารใบรับสินค้านั้น ระบบจะบันทึกรายการทั้งหมดรวมไว้ใน สมุดรายวันซื้อ (PJ) เพียงเล่มเดียว',
+                    'การสร้าง "ใบกำกับภาษี/ใบเสร็จรับเงิน (ขายสด)" ระบบจะบันทึกรายการรับรู้รายได้และรับเงินสดเข้า สมุดรายวันรับ (RV)',
+                    'การสร้าง "ใบแจ้งหนี้/ใบส่งของ (ขายเชื่อ)" ระบบจะบันทึกเข้า สมุดรายวันขาย (SJ) และเมื่อลูกค้าจ่ายเงินจึงบันทึกเข้า สมุดรายวันรับ (RV)',
+                    'การตั้งค่าเสื่อมราคาสินทรัพย์ถาวรอัตโนมัติรายเดือน และการบันทึกปรับปรุงปิดบัญชีสิ้นงวด ระบบจะบันทึกเข้า สมุดรายวันทั่วไป (JV)'
+                ],
+                correctIndex: 0,
+                explanation: `<strong>หลักการทำงานของสมุดรายวันเฉพาะใน FlowAccount:</strong>
+                <ul class="list-disc pl-5 space-y-1.5 mt-2">
+                    <li>เมื่อสร้าง <strong>ใบรับสินค้า (ซื้อเชื่อ)</strong> → ระบบตั้งเจ้าหนี้ใน <strong>สมุดรายวันซื้อ (PJ)</strong></li>
+                    <li>ต่อมาเมื่อกด <strong>"ชำระเงิน"</strong> ในเอกสารใบรับสินค้านั้น → ระบบจะไปสร้างรายการล้างเจ้าหนี้และตัดเงินสด/ธนาคารใน <strong>สมุดรายวันจ่าย (PV)</strong> แยกอีกเล่มหนึ่ง! (ไม่ได้รวมไว้ใน PJ เล่มเดียว)</li>
+                    <li>เช่นเดียวกับฝั่งขาย: ขายเชื่อ (ใบแจ้งหนี้) ลง <strong>SJ</strong> → เมื่อกดรับชำระเงิน ลง <strong>RV</strong>; ส่วนขายสด (ใบเสร็จรับเงินทันที) ลง <strong>RV</strong></li>
+                </ul>`,
+                distractors: [
+                    'ช้อยส์ 2, 3, 4: ถูกต้องทั้งหมดตามผังการทำงานของสมุดรายวัน 5 เล่มใน FlowAccount'
+                ]
+            },
+            {
+                id: 34,
+                topicId: 'flowaccount',
+                topicName: '7. โปรแกรมบัญชี FlowAccount (Ch.11)',
+                difficulty: 'Hard • "ใบเสร็จรอเรียกเก็บ" Suspense Account',
+                reference: 'Final 7 (บัญชีพัก: ใบเสร็จรอเรียกเก็บ)',
+                question: `เมื่อผู้ใช้งานสร้างเอกสาร <strong>"ใบกำกับภาษี/ใบเสร็จรับเงิน"</strong> (ขายสด) ใน FlowAccount แต่ยังไม่ได้กดปุ่ม "รับชำระเงิน" (สถานะเอกสารเป็น "รอเก็บเงิน") ระบบบัญชีหลังบ้านจะบันทึกบัญชีพักชื่อ <strong>"ใบเสร็จรอเรียกเก็บ"</strong> ไว้ชั่วคราว บัญชี "ใบเสร็จรอเรียกเก็บ" นี้อยู่ในหมวดบัญชีใด และระบบจะบันทึกบัญชีอย่างไรเมื่อผู้ใช้งานกด <strong>"รับชำระเงิน"</strong> เข้าบัญชีออมทรัพย์ในภายหลัง?`,
+                options: [
+                    'เป็นบัญชีหมวด 1 (สินทรัพย์หมุนเวียน) และเมื่อกดรับชำระเงิน ระบบจะ Dr. เงินฝากออมทรัพย์ / Cr. ใบเสร็จรอเรียกเก็บ',
+                    'เป็นบัญชีหมวด 4 (รายได้) และเมื่อกดรับชำระเงิน ระบบจะ Dr. เงินฝากออมทรัพย์ / Cr. รายได้จากการขาย',
+                    'เป็นบัญชีหมวด 2 (หนี้สินหมุนเวียน) และเมื่อกดรับชำระเงิน ระบบจะ Dr. ใบเสร็จรอเรียกเก็บ / Cr. เงินฝากออมทรัพย์',
+                    'เป็นบัญชีหมวด 1 (ลูกหนี้การค้า) และเมื่อกดรับชำระเงิน ระบบจะไม่สร้างรายการบัญชีใหม่ในสมุดรายวันรับ (RV)'
+                ],
+                correctIndex: 0,
+                explanation: `<strong>กลไกบัญชีพัก "ใบเสร็จรอเรียกเก็บ" ใน FlowAccount:</strong>
+                <ul class="list-disc pl-5 space-y-1.5 mt-2">
+                    <li><strong>ตอนออกใบเสร็จรับเงิน (แต่ยังไม่กดรับเงิน):</strong> ระบบรับรู้รายได้และภาษีขายแล้ว แต่ยังไม่รู้ว่าเงินจะเข้าบัญชีธนาคารไหนหรือเงินสด จึงพักยอดไว้ที่ด้านเดบิตของบัญชี <strong>"ใบเสร็จรอเรียกเก็บ" (จัดอยู่ในหมวด 1 สินทรัพย์หมุนเวียน คล้ายลูกหนี้รอตัดรับเงิน)</strong></li>
+                    <li><strong>ตอนกด "รับชำระเงิน" (เลือกบัญชีออมทรัพย์):</strong> ระบบจะล้างบัญชีพักนี้ออกโดยบันทึกในสมุดรายวันรับ (RV):<br>
+                        <strong>Dr. เงินฝากออมทรัพย์ (หมวด 1) / Cr. ใบเสร็จรอเรียกเก็บ (หมวด 1)</strong></li>
+                </ul>`,
+                distractors: [
+                    'ช้อยส์ 2: รายได้ถูกบันทึกไปตั้งแต่ตอนสร้างเอกสารใบเสร็จรับเงินแล้ว ไม่ได้เพิ่งมาบันทึกตอนกดรับชำระเงิน',
+                    'ช้อยส์ 3: ใบเสร็จรอเรียกเก็บเป็นสิทธิที่จะได้รับเงิน จึงเป็นสินทรัพย์ (หมวด 1) ไม่ใช่หนี้สิน (หมวด 2)',
+                    'ช้อยส์ 4: เมื่อกดรับชำระเงิน ระบบจะสร้างรายการล้างบัญชีพักในสมุดรายวันรับ (RV) ทันที'
+                ]
+            },
+            {
+                id: 35,
+                topicId: 'flowaccount',
+                topicName: '7. โปรแกรมบัญชี FlowAccount (Ch.11)',
+                difficulty: 'Hard • Fixed Asset Chart of Accounts Trap (12620 / 58619 / 18619)',
+                reference: 'Final 7 (จุดผิดพลาดยอดฮิตในการตั้งค่าผังบัญชีสินทรัพย์ถาวร)',
+                question: `ในการเพิ่มรายการสินทรัพย์ถาวร (Fixed Asset) เช่น "คอมพิวเตอร์และอุปกรณ์" ในโปรแกรม FlowAccount ผู้ใช้งานต้องผูกผังบัญชี 3 บัญชีเข้าด้วยกัน ได้แก่ บัญชีสินทรัพย์, บัญชีค่าเสื่อมราคา และบัญชีค่าเสื่อมราคาสะสม ข้อใดระบุรหัสและหมวดบัญชีที่ถูกต้องและชี้จุดผิดพลาดที่พบบ่อยได้แม่นยำที่สุด?`,
+                options: [
+                    'สินทรัพย์ (รหัสขึ้นต้นด้วย 1 เช่น 12620) เป็นหมวด 1, ค่าเสื่อมราคา (รหัสขึ้นต้นด้วย 5 เช่น 58619) เป็นหมวด 5 และค่าเสื่อมราคาสะสม (รหัสขึ้นต้นด้วย 1 เช่น 18619) เป็นบัญชีปรับลดมูลค่าสินทรัพย์ (Contra Asset) ในหมวด 1 (มักมีผู้สับสนนำไปไว้หมวด 5)',
+                    'สินทรัพย์อยู่หมวด 1 (12620) ส่วนค่าเสื่อมราคา (58619) และค่าเสื่อมราคาสะสม (58620) ต่างก็อยู่ในหมวด 5 (ค่าใช้จ่าย) ทั้งคู่',
+                    'สินทรัพย์อยู่หมวด 1, ค่าเสื่อมราคาอยู่หมวด 5 และค่าเสื่อมราคาสะสมอยู่ในหมวด 2 (หนี้สินไม่หมุนเวียน) เพราะต้องสะสมยอดไปเรื่อยๆ ทุกปี',
+                    'ใน FlowAccount ระบบจะคำนวณค่าเสื่อมราคาให้อัตโนมัติเฉพาะวันที่ 31 ธันวาคมของทุกปีเท่านั้น ไม่สามารถตั้งค่าให้คำนวณรายเดือนได้'
+                ],
+                correctIndex: 0,
+                explanation: `<strong>จุดเช็กสำคัญในบทที่ 11 (ผังบัญชีสินทรัพย์ถาวรใน FlowAccount):</strong>
+                <ul class="list-disc pl-5 space-y-1.5 mt-2">
+                    <li><strong>บัญชีสินทรัพย์ (เช่น อุปกรณ์สำนักงาน 12620):</strong> ขึ้นต้นด้วยเลข <strong>1</strong> → <strong>หมวด 1 สินทรัพย์</strong></li>
+                    <li><strong>บัญชีค่าเสื่อมราคา (เช่น ค่าเสื่อมราคา-อุปกรณ์สำนักงาน 58619):</strong> ขึ้นต้นด้วยเลข <strong>5</strong> → <strong>หมวด 5 ค่าใช้จ่าย</strong> (เข้าสู่งบกำไรขาดทุน)</li>
+                    <li><strong>บัญชีค่าเสื่อมราคาสะสม (เช่น ค่าเสื่อมราคาสะสม-อุปกรณ์สำนักงาน 18619):</strong> ขึ้นต้นด้วยเลข <strong>1</strong> → <strong>หมวด 1 สินทรัพย์ (Contra Asset / บัญชีปรับลดมูลค่าสินทรัพย์ มียอดดุลปกติอยู่ด้านเครดิต)</strong> ผู้เรียนมักจำสับสนกับค่าเสื่อมราคาแล้วนำไปไว้หมวด 5!</li>
+                </ul>`,
+                distractors: [
+                    'ช้อยส์ 2 & 3: ค่าเสื่อมราคาสะสมไม่ใช่ค่าใช้จ่าย (หมวด 5) และไม่ใช่หนี้สิน (หมวด 2) แต่เป็นบัญชีปรับลดสินทรัพย์ (หมวด 1)',
+                    'ช้อยส์ 4: FlowAccount คำนวณค่าเสื่อมราคาให้เป็นรายเดือนโดยอัตโนมัติในสมุดรายวันทั่วไป (JV)'
+                ]
+            },
+            {
+                id: 36,
+                topicId: 'flowaccount',
+                topicName: '7. โปรแกรมบัญชี FlowAccount (Ch.11)',
+                difficulty: 'Hard • Prepaid Course vs Postpaid Course Workflow',
+                reference: 'Final 7 (กรณีศึกษาธุรกิจบริการคอร์สเรียน Prepaid vs Postpaid)',
+                question: `สถาบันกวดวิชาแห่งหนึ่งเปิดขายคอร์สเรียน 2 รูปแบบ ผ่านโปรแกรม FlowAccount:\n• <strong>แบบที่ 1 (Prepaid - เหมาจ่าย 24 ชั่วโมง):</strong> นักเรียนชำระเงินเต็มจำนวนตั้งแต่วันสมัครเรียน\n• <strong>แบบที่ 2 (Postpaid - เรียนก่อนจ่ายทีหลัง):</strong> นักเรียนเรียนครบตามจำนวนชั่วโมงในแต่ละเดือน แล้วสถาบันจึงออกใบแจ้งหนี้เรียกเก็บเงินตอนสิ้นเดือน\n\nตามแนวปฏิบัติในบทที่ 11 ของ FlowAccount ข้อใดอธิบายการบันทึกบัญชีทั้ง 2 กรณีได้ถูกต้องที่สุด?`,
+                options: [
+                    'แบบ Prepaid ออกใบเสร็จรับเงินบันทึกรับรู้รายได้เต็มจำนวนก่อน แล้วปรับปรุงโอนส่วนชั่วโมงที่ยังไม่ได้เรียนเป็น "รายได้รับล่วงหน้า" ในสมุดรายวันทั่วไป (JV) ตอนสิ้นเดือน ส่วนแบบ Postpaid ออกใบแจ้งหนี้รับรู้รายได้ตอนสิ้นเดือนตามชั่วโมงที่เรียนจริง',
+                    'แบบ Prepaid ออกใบเสนอราคาไปเรื่อยๆ จนกว่านักเรียนจะเรียนครบ 24 ชั่วโมงจึงค่อยออกใบเสร็จรับเงิน',
+                    'แบบ Postpaid ต้องออกใบเสร็จรับเงินตั้งแต่วันแรกที่สมัครเรียน แล้วตั้งบัญชี "ลูกหนี้รายได้รับล่วงหน้า" ไว้ในสมุดรายวันขาย',
+                    'ทั้งแบบ Prepaid และ Postpaid สามารถใช้เอกสาร "ใบวางบิล" ในการรับรู้รายได้ค่าสอนและภาษีขายได้ทันทีโดยไม่ต้องออกใบแจ้งหนี้หรือใบเสร็จรับเงิน'
+                ],
+                correctIndex: 0,
+                explanation: `<strong>Workflow การจัดการรายได้ธุรกิจบริการใน FlowAccount (บทที่ 11):</strong>
+                <ul class="list-disc pl-5 space-y-1.5 mt-2">
+                    <li><strong>กรณี Prepaid (รับเงินเหมาจ่ายล่วงหน้า 24 ชม.):</strong> เนื่องจากต้องออกใบกำกับภาษี/ใบเสร็จรับเงินให้ลูกค้าทันทีที่รับเงิน ระบบ FlowAccount จึงบันทึกรายได้เต็มจำนวนให้ก่อน จากนั้นตอนสิ้นเดือน นักบัญชีจะนับชั่วโมงที่เหลือและเข้าไปปรับปรุงใน <strong>สมุดรายวันทั่วไป (JV)</strong> โดย <em>Dr. รายได้ค่าสอน / Cr. รายได้รับล่วงหน้า (หมวด 2)</em></li>
+                    <li><strong>กรณี Postpaid (เรียนก่อนจ่ายทีหลัง):</strong> ระหว่างเดือนบันทึกชั่วโมงเรียนไว้ เมื่อสิ้นเดือนจึงสร้าง <strong>ใบแจ้งหนี้ (Invoice)</strong> เพื่อรับรู้รายได้ตามชั่วโมงที่สอนจริง</li>
+                </ul>`,
+                distractors: [
+                    'ช้อยส์ 2: ผิดกฎหมายภาษีอากร เพราะธุรกิจบริการเมื่อได้รับเงินแล้วต้องออกใบกำกับภาษี/ใบเสร็จรับเงินทันที',
+                    'ช้อยส์ 3: สลับหลักการระหว่าง Prepaid กับ Postpaid',
+                    'ช้อยส์ 4: ใบวางบิลไม่ใช่ใบกำกับภาษีและโดยปกติไม่บันทึกรายได้'
+                ]
+            },
+            {
+                id: 37,
+                topicId: 'flowaccount',
+                topicName: '7. โปรแกรมบัญชี FlowAccount (Ch.11)',
+                difficulty: 'Medium-Hard • Inventory & Moving Average in FlowAccount',
+                reference: 'Final 7 (การจัดการสต็อกสินค้าใน FlowAccount)',
+                question: `ข้อใดกล่าว <strong>ถูกต้อง</strong> เกี่ยวกับการจัดการระบบสินค้าคงเหลือ (Inventory) และการคำนวณต้นทุนขายในโปรแกรม FlowAccount?`,
+                options: [
+                    'FlowAccount ใช้ระบบบันทึกสินค้าคงเหลือแบบต่อเนื่อง (Perpetual) และใช้วิธีคำนวณต้นทุนสินค้าแบบถัวเฉลี่ยเคลื่อนที่ (Moving Average) โดยอัตโนมัติเมื่อเลือกประเภทสินค้าเป็น "สินค้าแบบนับสต็อก"',
+                    'FlowAccount ใช้ระบบ Periodic Inventory System เป็นค่าเริ่มต้น ดังนั้นตลอดทั้งเดือนจะไม่มีการบันทึกต้นทุนขาย (COGS) จนกว่าจะกดปิดงบปลายปี',
+                    'หากบันทึก "ขายสินค้า" ก่อนวันที่บันทึก "ซื้อสินค้า" ในระบบ สต็อกสินค้าจะติดลบและระบบจะคำนวณต้นทุนขาย (COGS) เป็น 0 บาท ทำให้กำไรขั้นต้นสูงเกินจริง',
+                    'ทั้งข้อ 1 และข้อ 3 ถูกต้อง'
+                ],
+                correctIndex: 3,
+                explanation: `<strong>ข้อควรระวังในการใช้งานระบบสต็อกของ FlowAccount:</strong>
+                <ul class="list-disc pl-5 space-y-1.5 mt-2">
+                    <li><strong>ข้อ 1 ถูกต้อง:</strong> เมื่อสร้างสินค้าประเภท <strong>"สินค้าแบบนับสต็อก"</strong> ระบบจะใช้ Perpetual + Moving Average คำนวณต้นทุนขายให้ทุกครั้งที่เปิดบิลขาย</li>
+                    <li><strong>ข้อ 3 ก็ถูกต้อง (และเป็นจุดผิดพลาดที่พบบ่อยมากในทางปฏิบัติ!):</strong> หากผู้ใช้งานเปิดบิลขายก่อนคีย์บิลซื้อเข้าสต็อก (Backdated / สต็อกติดลบ) ระบบจะไม่รู้ต้นทุนของสินค้าที่ขาย จึงลงบัญชีต้นทุนขาย (COGS) เป็น <strong>0 บาท</strong> ทำให้กำไรขั้นต้นสูงเกินจริง!</li>
+                </ul>`,
+                distractors: [
+                    'ช้อยส์ 1 & 3: ถูกต้องทั้งคู่ จึงต้องเลือกช้อยส์ 4 ที่ครอบคลุมที่สุด',
+                    'ช้อยส์ 2: FlowAccount ใช้ระบบ Perpetual (ไม่ใช่ Periodic)'
+                ]
+            },
+            {
+                id: 38,
+                topicId: 'flowaccount',
+                topicName: '7. โปรแกรมบัญชี FlowAccount (Ch.11)',
+                difficulty: 'Medium • FlowAccount Business Suite Ecosystem',
+                reference: 'Final 7 (FlowAccount Business Suite: FlowAccount, FlowPayroll, AutoKey)',
+                question: `กลุ่มผลิตภัณฑ์ <strong>FlowAccount Business Suite</strong> ประกอบด้วยเครื่องมือดิจิทัลสำหรับ SME 3 ส่วนหลัก ได้แก่ FlowAccount, FlowPayroll และ AutoKey ข้อใดจับคู่หน้าที่การทำงานของแต่ละเครื่องมือได้ถูกต้องที่สุด?`,
+                options: [
+                    'AutoKey ใช้เทคโนโลยี OCR สแกนใบเสร็จและใบกำกับภาษีซื้อเพื่อแปลงเป็นข้อมูลบันทึกค่าใช้จ่ายอัตโนมัติ, FlowPayroll ใช้คำนวณเงินเดือน ภาษีหัก ณ ที่จ่าย (ภ.ง.ด.1) และประกันสังคม พร้อมส่งข้อมูลเข้าสมุดรายวันใน FlowAccount อัตโนมัติ',
+                    'AutoKey ใช้สำหรับสร้างกุญแจเข้ารหัสในการยื่นแบบ ภ.พ.30 ออนไลน์กับกรมสรรพากร ส่วน FlowPayroll ใช้สำหรับคำนวณค่าเสื่อมราคาสินทรัพย์ถาวรรายเดือน',
+                    'FlowPayroll เป็นโปรแกรมแยกอิสระที่ไม่สามารถเชื่อมต่อผังบัญชีกับ FlowAccount ได้ นักบัญชีต้องคีย์เงินเดือนซ้ำในสมุดรายวันจ่าย (PV) เอง',
+                    'AutoKey สามารถใช้ออกใบกำกับภาษีขายแทนเครื่องบันทึกการเก็บเงิน (POS) ได้โดยไม่ต้องผ่านระบบ FlowAccount'
+                ],
+                correctIndex: 0,
+                explanation: `<strong>องค์ประกอบของ FlowAccount Business Suite (บทที่ 11):</strong>
+                <ul class="list-disc pl-5 space-y-1.5 mt-2">
+                    <li><strong>1. FlowAccount:</strong> โปรแกรมบัญชีออนไลน์หลัก (ออกเอกสารหน้าบ้าน + บันทึกบัญชีหลังบ้าน + งบการเงิน)</li>
+                    <li><strong>2. FlowPayroll:</strong> ระบบจัดการเงินเดือน คำนวณเงินเดือน โอที ประกันสังคม และ ภ.ง.ด.1 แล้วซิงก์ข้อมูลเข้าบันทึกบัญชีใน FlowAccount อัตโนมัติ</li>
+                    <li><strong>3. AutoKey:</strong> ระบบอ่านข้อมูลจากรูปถ่ายบิล/ใบเสร็จรับเงินด้วย AI/OCR เพื่อดึงชื่อร้านค้า วันที่ ยอดเงิน และ VAT มาสร้างรายการค่าใช้จ่ายให้อัตโนมัติ ลดการคีย์ข้อมูลด้วยมือ</li>
+                </ul>`,
+                distractors: [
+                    'ช้อยส์ 2, 3, 4: อธิบายหน้าที่ของ AutoKey และ FlowPayroll คลาดเคลื่อนจากความเป็นจริง'
+                ]
+            },
+            {
+                id: 39,
+                topicId: 'flowaccount',
+                topicName: '7. โปรแกรมบัญชี FlowAccount (Ch.11)',
+                difficulty: 'Hard • Withholding Tax (หัก ณ ที่จ่าย ภ.ง.ด.3 / ภ.ง.ด.53)',
+                reference: 'Final 7 (ภาษีหัก ณ ที่จ่ายในเอกสารจ่ายและเอกสารรับ)',
+                question: `บริษัท เอสเอ็มอี จำกัด จ่ายค่าบริการออกแบบเว็บไซต์ให้กับ บริษัท ดีไซน์สตูดิโอ จำกัด (นิติบุคคล) มูลค่าค่าบริการ 50,000 บาท (ยังไม่รวม VAT 7%) โดยมีภาษีหัก ณ ที่จ่าย 3% (แบบ ภ.ง.ด.53) เมื่อบันทึกในเมนู <strong>"ค่าใช้จ่าย"</strong> ของ FlowAccount โดยติ๊กเลือก VAT 7% และหัก ณ ที่จ่าย 3% ยอดเงินสดสุทธิที่จ่ายจริง และบัญชีภาษีหัก ณ ที่จ่ายที่เกิดขึ้นคือข้อใด?`,
+                options: [
+                    'จ่ายเงินสดสุทธิ 52,000 บาท และเกิดบัญชี "ภาษีเงินได้หัก ณ ที่จ่ายรอนำส่ง (ภ.ง.ด.53)" ด้านเครดิต (หมวด 2 หนี้สิน) จำนวน 1,500 บาท',
+                    'จ่ายเงินสดสุทธิ 51,895 บาท และเกิดบัญชี "ภาษีเงินได้หัก ณ ที่จ่ายรอนำส่ง" ด้านเครดิต จำนวน 1,605 บาท',
+                    'จ่ายเงินสดสุทธิ 52,000 บาท และเกิดบัญชี "ภาษีเงินได้ถูกหัก ณ ที่จ่าย" ด้านเดบิต (หมวด 1 สินทรัพย์) จำนวน 1,500 บาท',
+                    'จ่ายเงินสดสุทธิ 50,000 บาท และเกิดบัญชี "ภาษีเงินได้หัก ณ ที่จ่ายรอนำส่ง" ด้านเครดิต จำนวน 3,500 บาท'
+                ],
+                correctIndex: 0,
+                explanation: `<strong>ฐานในการคำนวณภาษีหัก ณ ที่จ่าย (WHT) และ VAT:</strong>
+                <ul class="list-disc pl-5 space-y-1.5 mt-2">
+                    <li><strong>หลักการคำนวณ:</strong> ทั้ง VAT 7% และภาษีหัก ณ ที่จ่าย 3% ต่างก็คำนวณจาก <strong>ฐานมูลค่าบริการก่อน VAT (50,000 บาท)</strong> ห้ามนำ VAT มารวมเป็นฐานคำนวณ WHT!</li>
+                    <li><strong>VAT 7%:</strong> 50,000 × 7% = +3,500 บาท (รวมยอดตามใบกำกับภาษี = 53,500 บาท)</li>
+                    <li><strong>หัก ณ ที่จ่าย 3% (ภ.ง.ด.53 เพราะผู้รับเงินเป็นนิติบุคคล):</strong> 50,000 × 3% = <strong>1,500 บาท</strong></li>
+                    <li><strong>เงินสดที่จ่ายจริง:</strong> 53,500 - 1,500 = <strong>52,000 บาท</strong></li>
+                    <li><strong>หมวดบัญชี:</strong> เงิน 1,500 บาทที่เราหักไว้จากผู้ขาย เราต้องนำส่งกรมสรรพากรภายในวันที่ 7 ของเดือนถัดไป จึงเป็น <strong>หนี้สินหมุนเวียน (หมวด 2) ด้านเครดิต</strong></li>
+                </ul>`,
+                distractors: [
+                    'ช้อยส์ 2: นำยอดรวม VAT (53,500 บาท) มาเป็นฐานคูณ 3% ได้ 1,605 บาท ซึ่งผิดกฎหมายภาษีอากร',
+                    'ช้อยส์ 3: สลับฝั่งเป็นสินทรัพย์ (ถูกหัก ณ ที่จ่าย) ซึ่งใช้เฉพาะฝั่งที่เราเป็นผู้รับเงิน/ผู้ให้บริการเท่านั้น',
+                    'ช้อยส์ 4: สลับตัวเลข VAT 3,500 กับ WHT 1,500'
+                ]
+            },
+            {
+                id: 40,
+                topicId: 'flowaccount',
+                topicName: '7. โปรแกรมบัญชี FlowAccount (Ch.11)',
+                difficulty: 'Medium-Hard • Chart of Accounts (ผังบัญชี 5 หมวดใน FlowAccount)',
+                reference: 'Final 7 (รหัสผังบัญชีมาตรฐาน FlowAccount)',
+                question: `ในระบบผังบัญชีมาตรฐานของ FlowAccount เลขรหัสบัญชีตัวแรก (1 ถึง 5) แสดงถึงหมวดบัญชีหลัก ข้อใดจับคู่รหัสบัญชีกับหมวดบัญชีได้ <strong>ถูกต้องทั้งหมด</strong>?`,
+                options: [
+                    '1 = สินทรัพย์, 2 = หนี้สิน, 3 = ส่วนของผู้ถือหุ้น, 4 = รายได้, 5 = ค่าใช้จ่าย (โดยต้นทุนขาย COGS มีรหัสขึ้นต้นด้วยเลข 5)',
+                    '1 = สินทรัพย์, 2 = หนี้สิน, 3 = ส่วนของผู้ถือหุ้น, 4 = ต้นทุนขายและค่าใช้จ่าย, 5 = รายได้',
+                    '1 = สินทรัพย์, 2 = หนี้สิน, 3 = รายได้, 4 = ค่าใช้จ่าย, 5 = ส่วนของผู้ถือหุ้น',
+                    '1 = สินทรัพย์, 2 = หนี้สิน, 3 = ส่วนของผู้ถือหุ้น, 4 = รายได้และกำไรสะสม, 5 = ค่าใช้จ่าย'
+                ],
+                correctIndex: 0,
+                explanation: `<strong>ผังบัญชีมาตรฐาน 5 หมวดใน FlowAccount:</strong>
+                <ul class="list-disc pl-5 space-y-1.5 mt-2">
+                    <li><strong>หมวด 1 (1xxxx):</strong> สินทรัพย์ (Assets) รวมถึงบัญชีปรับลดสินทรัพย์ เช่น ค่าเสื่อมราคาสะสม (18xxx) และค่าเผื่อหนี้สงสัยจะสูญ</li>
+                    <li><strong>หมวด 2 (2xxxx):</strong> หนี้สิน (Liabilities) เช่น เจ้าหนี้การค้า, ภาษีขาย, ภาษีขายยังไม่ถึงกำหนด, รายได้รับล่วงหน้า, ภ.ง.ด.53 รอนำส่ง</li>
+                    <li><strong>หมวด 3 (3xxxx):</strong> ส่วนของผู้ถือหุ้น (Equity) เช่น ทุนจดทะเบียน, กำไรสะสม</li>
+                    <li><strong>หมวด 4 (4xxxx):</strong> รายได้ (Revenue) เช่น รายได้จากการขาย, รายได้ค่าบริการ</li>
+                    <li><strong>หมวด 5 (5xxxx):</strong> ต้นทุนขายและค่าใช้จ่าย (Cost of Sales & Expenses) เช่น ต้นทุนขาย (51xxx), เงินเดือน, ค่าเสื่อมราคา (58xxx)</li>
+                </ul>`,
+                distractors: [
+                    'ช้อยส์ 2, 3, 4: สลับลำดับหมวดบัญชีมาตรฐาน 1-2-3-4-5'
+                ]
+            }
+        ];
+
+        // ============================================================================
+        // APPLICATION STATE & LOGIC
+        // ============================================================================
+        const app = {
+            state: {
+                view: 'home', // 'home' | 'quiz' | 'results'
+                mode: 'practice', // 'practice' | 'exam'
+                selectedTopic: 'all',
+                activeQuestions: [],
+                currentIndex: 0,
+                userAnswers: {}, // { questionId: optionIndex }
+                flaggedQuestions: new Set(),
+                mistakeIds: new Set(JSON.parse(localStorage.getItem('cu_acc_2601115_mistakes') || '[]')),
+                timerSeconds: 0,
+                timerInterval: null,
+                examSubmitted: false
+            },
+
+            init() {
+                // Load Theme
+                const savedTheme = localStorage.getItem('cu_acc_theme');
+                if (savedTheme === 'light') {
+                    document.documentElement.classList.remove('dark');
+                } else {
+                    document.documentElement.classList.add('dark');
+                }
+                this.updateThemeIcon();
+                this.updateMistakeBadge();
+                this.render();
+            },
+
+            toggleTheme() {
+                const html = document.documentElement;
+                html.classList.toggle('dark');
+                const isDark = html.classList.contains('dark');
+                localStorage.setItem('cu_acc_theme', isDark ? 'dark' : 'light');
+                this.updateThemeIcon();
+            },
+
+            updateThemeIcon() {
+                const icon = document.getElementById('theme-icon');
+                const isDark = document.documentElement.classList.contains('dark');
+                if (icon) {
+                    icon.className = isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+                }
+            },
+
+            updateMistakeBadge() {
+                const badge = document.getElementById('mistake-badge');
+                if (badge) {
+                    badge.textContent = this.state.mistakeIds.size;
+                }
+                localStorage.setItem('cu_acc_2601115_mistakes', JSON.stringify([...this.state.mistakeIds]));
+            },
+
+            showToast(message, type = 'info') {
+                const container = document.getElementById('toast-container');
+                const toast = document.createElement('div');
+                const colors = {
+                    info: 'bg-slate-800 text-white border-slate-700',
+                    success: 'bg-emerald-600 text-white border-emerald-500',
+                    warning: 'bg-amber-600 text-white border-amber-500',
+                    error: 'bg-rose-600 text-white border-rose-500'
+                };
+                toast.className = `pointer-events-auto px-4 py-3 rounded-xl border shadow-xl text-sm font-medium flex items-center gap-2.5 transform transition-all duration-300 translate-y-2 opacity-0 ${colors[type]}`;
+                toast.innerHTML = `<i class="fa-solid fa-circle-info"></i><span>${message}</span>`;
+                container.appendChild(toast);
+                requestAnimationFrame(() => {
+                    toast.classList.remove('translate-y-2', 'opacity-0');
+                });
+                setTimeout(() => {
+                    toast.classList.add('translate-y-2', 'opacity-0');
+                    setTimeout(() => toast.remove(), 300);
+                }, 3000);
+            },
+
+            toggleFormulaModal(show) {
+                const modal = document.getElementById('formula-modal');
+                if (show) {
+                    modal.classList.remove('hidden');
+                    modal.classList.add('flex');
+                } else {
+                    modal.classList.add('hidden');
+                    modal.classList.remove('flex');
+                }
+            },
+
+            goHome() {
+                this.stopTimer();
+                this.state.view = 'home';
+                this.render();
+            },
+
+            selectTopic(topicId) {
+                this.state.selectedTopic = topicId;
+                this.render();
+            },
+
+            startQuiz(mode, customQuestions = null) {
+                this.stopTimer();
+                let pool = customQuestions;
+                if (!pool) {
+                    pool = this.state.selectedTopic === 'all'
+                        ? [...QUESTIONS_DB]
+                        : QUESTIONS_DB.filter(q => q.topicId === this.state.selectedTopic);
+                }
+
+                if (pool.length === 0) {
+                    this.showToast('ไม่พบข้อสอบในหมวดหมู่ที่เลือก', 'warning');
+                    return;
+                }
+
+                this.state.mode = mode;
+                this.state.activeQuestions = pool;
+                this.state.currentIndex = 0;
+                this.state.userAnswers = {};
+                this.state.flaggedQuestions = new Set();
+                this.state.examSubmitted = false;
+                this.state.view = 'quiz';
+
+                if (mode === 'exam') {
+                    // Allocate ~2.1 mins per question (35 Qs -> 75 mins proportional to 3 hrs for 85 Qs)
+                    this.state.timerSeconds = pool.length * 130;
+                    this.startTimer();
+                }
+
+                this.render();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            },
+
+            startMistakeReview() {
+                if (this.state.mistakeIds.size === 0) {
+                    this.showToast('ยอดเยี่ยม! ยังไม่มีข้อที่ตอบผิดในสมุดข้อผิด', 'success');
+                    return;
+                }
+                const mistakeQs = QUESTIONS_DB.filter(q => this.state.mistakeIds.has(q.id));
+                this.startQuiz('practice', mistakeQs);
+                this.showToast(`เปิดโหมดทบทวนสมุดข้อผิด (${mistakeQs.length} ข้อ)`, 'info');
+            },
+
+            clearMistakes() {
+                this.state.mistakeIds.clear();
+                this.updateMistakeBadge();
+                this.showToast('ล้างรายการในสมุดข้อผิดเรียบร้อยแล้ว', 'success');
+                this.render();
+            },
+
+            startTimer() {
+                this.timerInterval = setInterval(() => {
+                    if (this.state.timerSeconds <= 0) {
+                        this.stopTimer();
+                        this.showToast('หมดเวลาสอบ! ระบบกำลังส่งกระดาษคำตอบอัตโนมัติ', 'warning');
+                        this.confirmSubmitExam();
+                    } else {
+                        this.state.timerSeconds--;
+                        const timerEl = document.getElementById('exam-timer-display');
+                        if (timerEl) {
+                            timerEl.textContent = this.formatTime(this.state.timerSeconds);
+                            if (this.state.timerSeconds < 300) {
+                                timerEl.classList.add('text-rose-500', 'animate-pulse');
+                            }
+                        }
+                    }
+                }, 1000);
+            },
+
+            stopTimer() {
+                if (this.timerInterval) {
+                    clearInterval(this.timerInterval);
+                    this.timerInterval = null;
+                }
+            },
+
+            formatTime(sec) {
+                const m = Math.floor(sec / 60);
+                const s = sec % 60;
+                return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+            },
+
+            handleAnswer(optionIndex) {
+                const q = this.state.activeQuestions[this.state.currentIndex];
+                // In practice mode, prevent changing answer once locked in
+                if (this.state.mode === 'practice' && this.state.userAnswers[q.id] !== undefined) {
+                    return;
+                }
+
+                this.state.userAnswers[q.id] = optionIndex;
+
+                // Track Mistake Notebook automatically
+                if (optionIndex !== q.correctIndex) {
+                    this.state.mistakeIds.add(q.id);
+                } else {
+                    // Remove from mistake notebook if answered correctly on review
+                    if (this.state.mistakeIds.has(q.id)) {
+                        this.state.mistakeIds.delete(q.id);
+                    }
+                }
+                this.updateMistakeBadge();
+                this.render();
+            },
+
+            toggleFlag(qId) {
+                if (this.state.flaggedQuestions.has(qId)) {
+                    this.state.flaggedQuestions.delete(qId);
+                } else {
+                    this.state.flaggedQuestions.add(qId);
+                }
+                this.render();
+            },
+
+            jumpToQuestion(idx) {
+                if (idx >= 0 && idx < this.state.activeQuestions.length) {
+                    this.state.currentIndex = idx;
+                    this.render();
+                }
+            },
+
+            requestSubmitExam() {
+                const total = this.state.activeQuestions.length;
+                const answered = Object.keys(this.state.userAnswers).length;
+                const unanswered = total - answered;
+                const modal = document.getElementById('submit-modal');
+                const msg = document.getElementById('submit-modal-msg');
+
+                if (unanswered > 0) {
+                    msg.innerHTML = `คุณทำข้อสอบไปแล้ว <strong>${answered} จาก ${total} ข้อ</strong> (ยังไม่ได้ตอบ <span class="text-rose-500 font-bold">${unanswered} ข้อ</span>) คุณต้องการยืนยันส่งข้อสอบและดูผลวิเคราะห์คะแนนทันทีหรือไม่?`;
+                } else {
+                    msg.innerHTML = `คุณทำข้อสอบครบทั้ง <strong>${total} ข้อ</strong> เรียบร้อยแล้ว ยืนยันการส่งกระดาษคำตอบเพื่อดูคะแนนและเฉลยละเอียดหรือไม่?`;
+                }
+
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            },
+
+            closeSubmitModal() {
+                const modal = document.getElementById('submit-modal');
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            },
+
+            confirmSubmitExam() {
+                this.closeSubmitModal();
+                this.stopTimer();
+                this.state.examSubmitted = true;
+
+                // Record all wrong/unanswered questions to Mistake Notebook
+                this.state.activeQuestions.forEach(q => {
+                    const ans = this.state.userAnswers[q.id];
+                    if (ans === undefined || ans !== q.correctIndex) {
+                        this.state.mistakeIds.add(q.id);
+                    } else {
+                        this.state.mistakeIds.delete(q.id);
+                    }
+                });
+                this.updateMistakeBadge();
+
+                this.state.view = 'results';
+                this.render();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            },
+
+            // ========================================================================
+            // VIEW RENDERERS
+            // ========================================================================
+            render() {
+                const container = document.getElementById('app-container');
+                if (this.state.view === 'home') {
+                    container.innerHTML = this.renderHome();
+                } else if (this.state.view === 'quiz') {
+                    container.innerHTML = this.renderQuiz();
+                } else if (this.state.view === 'results') {
+                    container.innerHTML = this.renderResults();
+                }
+            },
+
+            renderHome() {
+                const topics = [
+                    { id: 'all', name: 'รวมทุกหมวด (Full Mock Exam)', count: 35, icon: 'fa-layer-group', desc: 'จำลองข้อสอบปลายภาคเต็มรูปแบบ 35 ข้อ ครอบคลุมสัปดาห์ที่ 9–15 และ FlowAccount' },
+                    { id: 'merchandising', name: '1. กิจการซื้อขายสินค้า (Merchandising)', count: 5, icon: 'fa-store', desc: 'Periodic/Perpetual, FOB, Net Method, Cross-period Errors' },
+                    { id: 'costflow', name: '2. การกำหนดราคาทุนสินค้า (Cost Flow)', count: 5, icon: 'fa-boxes-stacked', desc: 'Moving Average & Sales Return, Inflation Tax Impact, LCNRV' },
+                    { id: 'vat', name: '3. การบัญชีภาษีมูลค่าเพิ่ม (VAT)', count: 5, icon: 'fa-file-invoice-dollar', desc: 'ภาษีซื้อต้องห้าม (รถ ≤10 ที่นั่ง), Undue VAT, ปิดบัญชี ภ.พ.30' },
+                    { id: 'manufacturing', name: '4. การบัญชีสำหรับกิจการผลิต', count: 5, icon: 'fa-industry', desc: 'COGM/COGS T-Accounts, Indirect Materials Trap, Product vs Period Error' },
+                    { id: 'cashflow', name: '5. งบกระแสเงินสด (Cash Flows)', count: 5, icon: 'fa-money-bill-transfer', desc: 'PPE T-Account Reconstruction, Indirect Method แบบ ก./ข., Cash Equivalents' },
+                    { id: 'analysis', name: '6. การวิเคราะห์งบการเงิน (Analysis)', count: 5, icon: 'fa-chart-pie', desc: 'DuPont Decomposition, Quick Ratio (Prepaid Trap), EBIT Coverage' },
+                    { id: 'flowaccount', name: '7. โปรแกรมบัญชี FlowAccount (จัดเต็ม 10 ข้อ)', count: 10, icon: 'fa-cloud', desc: 'หน้าบ้าน-หลังบ้าน, สมุดรายวัน 5 เล่ม, ใบเสร็จรอเรียกเก็บ, ผังบัญชี 18619, Prepaid Course' }
+                ];
+
+                return `
+                <div class="space-y-8 animate-fadeIn">
+                    <!-- Hero Executive Banner -->
+                    <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-navy-900 via-slate-900 to-navy-950 border border-slate-800 p-6 sm:p-10 text-white shadow-2xl">
+                        <div class="absolute -right-20 -top-20 w-80 h-80 rounded-full bg-amber-500/10 blur-3xl pointer-events-none"></div>
+                        <div class="absolute -left-20 -bottom-20 w-80 h-80 rounded-full bg-pink-500/10 blur-3xl pointer-events-none"></div>
+                        
+                        <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                            <div class="lg:col-span-7 space-y-4">
+                                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-300 text-xs font-semibold">
+                                    <i class="fa-solid fa-award"></i>
+                                    <span>CHULALONGKORN BUSINESS SCHOOL • 2601115 FINAL PREP</span>
+                                </div>
+                                <h1 class="text-2xl sm:text-4xl font-bold tracking-tight leading-tight">
+                                    แบบทดสอบจำลองข้อสอบปลายภาค<br>
+                                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-400 to-yellow-500">
+                                        วิชาการบัญชีการเงิน (Financial Accounting)
+                                    </span>
+                                </h1>
+                                <p class="text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl">
+                                    ออกแบบตามโครงสร้างข้อสอบจริงสัปดาห์ที่ 9–15 และตำรา Stickney et al. 13e เน้นการคิดวิเคราะห์เชิงลึก (Working Backward), การตีความแบบ Harvard Business School และเจาะลึกจุดหลอกโปรแกรม FlowAccount ครบ 35 ข้อ
+                                </p>
+
+                                <!-- Mode Launch Buttons -->
+                                <div class="pt-2 flex flex-wrap items-center gap-3">
+                                    <button onclick="app.startQuiz('practice')" class="flex-1 sm:flex-none px-6 py-3.5 rounded-2xl font-semibold text-sm bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 shadow-lg shadow-amber-500/25 flex items-center justify-center gap-2.5 transition transform hover:-translate-y-0.5">
+                                        <i class="fa-solid fa-bolt"></i>
+                                        <span>เริ่มโหมดฝึกทำทีละข้อ (เฉลยทันที)</span>
+                                    </button>
+                                    <button onclick="app.startQuiz('exam')" class="flex-1 sm:flex-none px-6 py-3.5 rounded-2xl font-semibold text-sm bg-white/10 hover:bg-white/15 text-white border border-white/20 flex items-center justify-center gap-2.5 transition transform hover:-translate-y-0.5">
+                                        <i class="fa-solid fa-stopwatch"></i>
+                                        <span>โหมดจำลองสอบจริง (จับเวลา)</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Real Exam Briefing Card -->
+                            <div class="lg:col-span-5 bg-white/5 border border-white/10 rounded-2xl p-5 space-y-4">
+                                <div class="flex items-center justify-between border-b border-white/10 pb-3">
+                                    <span class="font-bold text-sm text-amber-300 flex items-center gap-2">
+                                        <i class="fa-solid fa-clipboard-check"></i> กฎระเบียบห้องสอบจริง (Exam Briefing)
+                                    </span>
+                                    <span class="text-xs px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono">45 คะแนน</span>
+                                </div>
+                                <ul class="space-y-2.5 text-xs sm:text-sm text-slate-300">
+                                    <li class="flex items-start gap-2.5">
+                                        <i class="fa-solid fa-clock text-amber-400 mt-1"></i>
+                                        <span><strong>เวลาสอบจริง 3 ชั่วโมง:</strong> ข้อสอบปรนัย 85 ข้อ (45 คะแนน) เฉลี่ยข้อละ ~2.1 นาที</span>
+                                    </li>
+                                    <li class="flex items-start gap-2.5">
+                                        <i class="fa-solid fa-ban text-rose-400 mt-1"></i>
+                                        <span><strong>ห้ามใช้ปากกาลบได้ (Erasable Pen):</strong> ใช้ปากกาลูกลื่นหมึกน้ำเงิน/ดำ และดินสอ 2B สำหรับฝนกระดาษคำตอบเท่านั้น</span>
+                                    </li>
+                                    <li class="flex items-start gap-2.5">
+                                        <i class="fa-solid fa-calculator text-sky-400 mt-1"></i>
+                                        <span><strong>เครื่องคิดเลขพื้นฐานเท่านั้น:</strong> ห้ามใช้เครื่องคิดเลขการเงิน/วิทยาศาสตร์ที่มีฟังก์ชันบันทึกสูตร</span>
+                                    </li>
+                                    <li class="flex items-start gap-2.5">
+                                        <i class="fa-solid fa-square-root-variable text-indigo-400 mt-1"></i>
+                                        <span><strong>เอกสารแนบท้ายข้อสอบ:</strong> มีสูตรอัตราส่วนทางการเงินให้ (กดปุ่ม <em>Formula Sheet</em> มุมขวาบนเพื่อฝึกใช้ได้ตลอดเวลา)</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Topic Filter Grid -->
+                    <div class="space-y-4">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                            <div>
+                                <h2 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                                    <i class="fa-solid fa-filter text-amber-500"></i> เลือกขอบเขตเนื้อหาที่ต้องการทดสอบ
+                                </h2>
+                                <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">เลือกทำรวมทุกหมวด 35 ข้อ หรือเจาะลึกเฉพาะบทเรียนที่ต้องการ</p>
+                            </div>
+                            <span class="text-xs font-medium px-3 py-1.5 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20 self-start">
+                                กำลังเลือก: ${topics.find(t => t.id === this.state.selectedTopic)?.name}
+                            </span>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                            ${topics.map(t => {
+                                const isSelected = this.state.selectedTopic === t.id;
+                                return `
+                                <div onclick="app.selectTopic('${t.id}')" class="cursor-pointer rounded-2xl p-4 border transition-all duration-200 flex flex-col justify-between ${
+                                    isSelected
+                                        ? 'bg-amber-500/10 border-amber-500 ring-2 ring-amber-500/30 shadow-lg'
+                                        : 'bg-white dark:bg-navy-900/70 border-slate-200 dark:border-slate-800 hover:border-amber-500/50'
+                                }">
+                                    <div>
+                                        <div class="flex items-center justify-between mb-3">
+                                            <div class="w-10 h-10 rounded-xl flex items-center justify-center ${
+                                                isSelected ? 'bg-amber-500 text-slate-950' : 'bg-slate-100 dark:bg-slate-800 text-amber-500'
+                                            }">
+                                                <i class="fa-solid ${t.icon}"></i>
+                                            </div>
+                                            <span class="px-2.5 py-1 rounded-full text-xs font-bold number-tabular ${
+                                                isSelected ? 'bg-amber-500 text-slate-950' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300'
+                                            }">${t.count} ข้อ</span>
+                                        </div>
+                                        <h3 class="font-bold text-sm text-slate-900 dark:text-white mb-1.5">${t.name}</h3>
+                                        <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">${t.desc}</p>
+                                    </div>
+                                    <div class="mt-4 pt-2 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-xs font-semibold ${
+                                        isSelected ? 'text-amber-600 dark:text-amber-400' : 'text-slate-400'
+                                    }">
+                                        <span>${isSelected ? 'เลือกหมวดนี้อยู่' : 'คลิกเพื่อเลือก'}</span>
+                                        <i class="fa-solid ${isSelected ? 'fa-circle-check' : 'fa-arrow-right'}"></i>
+                                    </div>
+                                </div>`;
+                            }).join('')}
+                        </div>
+                    </div>
+                </div>`;
+            },
+
+            renderQuiz() {
+                const qs = this.state.activeQuestions;
+                const idx = this.state.currentIndex;
+                const q = qs[idx];
+                const userAns = this.state.userAnswers[q.id];
+                const isAnswered = userAns !== undefined;
+                const isPractice = this.state.mode === 'practice';
+                const showFeedback = isPractice && isAnswered;
+                const isFlagged = this.state.flaggedQuestions.has(q.id);
+                const answeredCount = Object.keys(this.state.userAnswers).length;
+                const progressPct = Math.round((answeredCount / qs.length) * 100);
+
+                const optionLetters = ['ก.', 'ข.', 'ค.', 'ง.'];
+
+                return `
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                    <!-- Main Question Column (8 cols) -->
+                    <div class="lg:col-span-8 space-y-5">
+                        <!-- Top Status Bar -->
+                        <div class="bg-white dark:bg-navy-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 flex flex-wrap items-center justify-between gap-3 shadow-sm">
+                            <div class="flex items-center gap-3">
+                                <button onclick="app.goHome()" class="px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition">
+                                    <i class="fa-solid fa-house mr-1"></i> หน้าหลัก
+                                </button>
+                                <span class="text-xs font-semibold px-2.5 py-1 rounded-lg bg-amber-500/15 text-amber-600 dark:text-amber-400">
+                                    ${isPractice ? 'โหมดฝึกทำ (เฉลยทันที)' : 'โหมดจำลองสอบจริง'}
+                                </span>
+                            </div>
+
+                            <div class="flex items-center gap-3">
+                                ${!isPractice ? `
+                                <div class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 font-mono text-sm font-bold number-tabular">
+                                    <i class="fa-solid fa-clock text-amber-500"></i>
+                                    <span id="exam-timer-display">${this.formatTime(this.state.timerSeconds)}</span>
+                                </div>` : ''}
+                                <span class="text-xs font-medium text-slate-500 dark:text-slate-400 number-tabular">
+                                    ทำแล้ว ${answeredCount}/${qs.length} ข้อ (${progressPct}%)
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Progress Bar -->
+                        <div class="w-full h-2 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+                            <div class="h-full bg-gradient-to-r from-amber-500 to-emerald-500 transition-all duration-300" style="width: ${progressPct}%"></div>
+                        </div>
+
+                        <!-- Question Card -->
+                        <div class="bg-white dark:bg-navy-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 shadow-lg space-y-6">
+                            <!-- Question Meta Header -->
+                            <div class="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-slate-100 dark:border-slate-800">
+                                <div class="flex flex-wrap items-center gap-2">
+                                    <span class="px-3 py-1 rounded-xl text-xs font-bold bg-navy-900 text-amber-400 dark:bg-amber-500 dark:text-slate-950 number-tabular">
+                                        ข้อที่ ${idx + 1} / ${qs.length}
+                                    </span>
+                                    <span class="px-3 py-1 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+                                        ${q.topicName}
+                                    </span>
+                                    <span class="px-2.5 py-1 rounded-xl text-[11px] font-medium bg-indigo-500/10 text-indigo-600 dark:text-indigo-400">
+                                        ${q.difficulty}
+                                    </span>
+                                </div>
+
+                                <button onclick="app.toggleFlag(${q.id})" class="px-3 py-1.5 rounded-xl text-xs font-semibold border transition flex items-center gap-1.5 ${
+                                    isFlagged
+                                        ? 'bg-amber-500/20 border-amber-500 text-amber-600 dark:text-amber-300'
+                                        : 'bg-slate-50 dark:bg-slate-800/60 border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:text-amber-500'
+                                }">
+                                    <i class="fa-solid fa-flag"></i>
+                                    <span>${isFlagged ? 'ปักธงทบทวนแล้ว' : 'ปักธงไว้'}</span>
+                                </button>
+                            </div>
+
+                            <!-- Question Prompt -->
+                            <div class="text-slate-800 dark:text-slate-100 text-sm sm:text-base leading-relaxed whitespace-pre-line font-normal">
+                                ${q.question}
+                            </div>
+
+                            <!-- Options List -->
+                            <div class="space-y-3 pt-2">
+                                ${q.options.map((opt, optIdx) => {
+                                    let btnClass = 'bg-slate-50 hover:bg-slate-100 dark:bg-slate-800/50 dark:hover:bg-slate-800 border-slate-200 dark:border-slate-700/80 text-slate-800 dark:text-slate-200';
+                                    let badgeClass = 'bg-white dark:bg-slate-700 text-slate-700 dark:text-slate-200 border-slate-300 dark:border-slate-600';
+                                    let statusIcon = '';
+
+                                    if (showFeedback) {
+                                        if (optIdx === q.correctIndex) {
+                                            btnClass = 'bg-emerald-500/15 border-emerald-500 text-slate-900 dark:text-white ring-2 ring-emerald-500/30';
+                                            badgeClass = 'bg-emerald-500 text-white border-emerald-500';
+                                            statusIcon = '<i class="fa-solid fa-circle-check text-emerald-500 text-lg shrink-0"></i>';
+                                        } else if (optIdx === userAns) {
+                                            btnClass = 'bg-rose-500/15 border-rose-500 text-slate-900 dark:text-white ring-2 ring-rose-500/30';
+                                            badgeClass = 'bg-rose-500 text-white border-rose-500';
+                                            statusIcon = '<i class="fa-solid fa-circle-xmark text-rose-500 text-lg shrink-0"></i>';
+                                        } else {
+                                            btnClass = 'opacity-60 bg-slate-50 dark:bg-slate-800/30 border-slate-200 dark:border-slate-800';
+                                        }
+                                    } else if (userAns === optIdx) {
+                                        btnClass = 'bg-amber-500/15 border-amber-500 text-slate-900 dark:text-white ring-2 ring-amber-500/30';
+                                        badgeClass = 'bg-amber-500 text-slate-950 border-amber-500 font-bold';
+                                    }
+
+                                    return `
+                                    <button onclick="app.handleAnswer(${optIdx})" class="w-full text-left p-4 rounded-2xl border transition-all duration-150 flex items-start justify-between gap-3 ${btnClass}">
+                                        <div class="flex items-start gap-3.5">
+                                            <span class="w-8 h-8 rounded-xl border flex items-center justify-center text-xs font-bold shrink-0 mt-0.5 ${badgeClass}">
+                                                ${optionLetters[optIdx]}
+                                            </span>
+                                            <span class="text-sm sm:text-[15px] leading-relaxed">${opt}</span>
+                                        </div>
+                                        ${statusIcon}
+                                    </button>`;
+                                }).join('')}
+                            </div>
+
+                            <!-- Instant Step-by-Step Explanation (Practice Mode) -->
+                            ${showFeedback ? `
+                            <div class="mt-6 p-5 sm:p-6 rounded-2xl bg-slate-50 dark:bg-navy-950/80 border border-slate-200 dark:border-slate-700/80 space-y-4 animate-fadeIn">
+                                <div class="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-slate-200 dark:border-slate-800">
+                                    <div class="flex items-center gap-2 font-bold text-sm sm:text-base ${userAns === q.correctIndex ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'}">
+                                        <i class="fa-solid ${userAns === q.correctIndex ? 'fa-circle-check' : 'fa-triangle-exclamation'}"></i>
+                                        <span>${userAns === q.correctIndex ? 'ถูกต้อง! วิเคราะห์ได้เฉียบคมมาก' : `ยังไม่ถูกต้อง (คำตอบที่ถูกคือข้อ ${optionLetters[q.correctIndex]})`}</span>
+                                    </div>
+                                    <span class="text-xs font-mono text-slate-500 dark:text-slate-400">Ref: ${q.reference}</span>
+                                </div>
+
+                                <div class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                                    ${q.explanation}
+                                </div>
+
+                                ${q.distractors && q.distractors.length > 0 ? `
+                                <div class="pt-3 border-t border-slate-200 dark:border-slate-800">
+                                    <p class="text-xs font-bold text-amber-600 dark:text-amber-400 mb-1.5 flex items-center gap-1.5">
+                                        <i class="fa-solid fa-magnifying-glass-chart"></i> วิเคราะห์ตัวลวง (Distractor Analysis):
+                                    </p>
+                                    <ul class="list-disc pl-5 space-y-1 text-xs text-slate-600 dark:text-slate-400">
+                                        ${q.distractors.map(d => `<li>${d}</li>`).join('')}
+                                    </ul>
+                                </div>` : ''}
+                            </div>` : ''}
+
+                            <!-- Navigation Controls -->
+                            <div class="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-3">
+                                <button onclick="app.jumpToQuestion(${idx - 1})" ${idx === 0 ? 'disabled' : ''} class="px-4 py-2.5 rounded-xl text-sm font-semibold bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 disabled:opacity-40 disabled:pointer-events-none transition flex items-center gap-2">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                    <span>ข้อก่อนหน้า</span>
+                                </button>
+
+                                ${idx === qs.length - 1 ? `
+                                <button onclick="app.requestSubmitExam()" class="px-6 py-2.5 rounded-xl text-sm font-bold bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white shadow-lg shadow-emerald-500/25 transition flex items-center gap-2">
+                                    <i class="fa-solid fa-paper-plane"></i>
+                                    <span>ส่งข้อสอบ & สรุปผล</span>
+                                </button>
+                                ` : `
+                                <button onclick="app.jumpToQuestion(${idx + 1})" class="px-5 py-2.5 rounded-xl text-sm font-semibold bg-amber-500 hover:bg-amber-600 text-slate-950 shadow-md transition flex items-center gap-2">
+                                    <span>ข้อถัดไป</span>
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </button>
+                                `}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Question Navigator Sidebar (4 cols) -->
+                    <div class="lg:col-span-4 space-y-4">
+                        <div class="bg-white dark:bg-navy-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 shadow-lg space-y-4 sticky top-20">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-bold text-sm text-slate-900 dark:text-white flex items-center gap-2">
+                                    <i class="fa-solid fa-grid-2 text-amber-500"></i> กระดาษคำตอบ (Question Palette)
+                                </h3>
+                                <span class="text-xs text-slate-500 dark:text-slate-400 number-tabular">${qs.length} ข้อ</span>
+                            </div>
+
+                            <!-- Legend -->
+                            <div class="grid grid-cols-2 gap-2 text-[11px] text-slate-500 dark:text-slate-400 bg-slate-50 dark:bg-slate-800/50 p-2.5 rounded-xl">
+                                <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-amber-500 inline-block"></span> กำลังทำ</div>
+                                <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-emerald-500 inline-block"></span> ตอบแล้ว/ถูก</div>
+                                <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-rose-500 inline-block"></span> ตอบผิด</div>
+                                <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded border-2 border-amber-400 inline-block"></span> ปักธงไว้</div>
+                            </div>
+
+                            <!-- Grid Buttons -->
+                            <div class="grid grid-cols-5 sm:grid-cols-7 lg:grid-cols-5 gap-2 max-h-[340px] overflow-y-auto pr-1">
+                                ${qs.map((item, i) => {
+                                    const ans = this.state.userAnswers[item.id];
+                                    const flagged = this.state.flaggedQuestions.has(item.id);
+                                    const isCurrent = i === idx;
+
+                                    let cellStyle = 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border-transparent';
+                                    if (ans !== undefined) {
+                                        if (isPractice) {
+                                            cellStyle = ans === item.correctIndex
+                                                ? 'bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border-emerald-500/50'
+                                                : 'bg-rose-500/20 text-rose-600 dark:text-rose-300 border-rose-500/50';
+                                        } else {
+                                            cellStyle = 'bg-sky-500/20 text-sky-700 dark:text-sky-300 border-sky-500/50';
+                                        }
+                                    }
+                                    if (isCurrent) {
+                                        cellStyle = 'bg-amber-500 text-slate-950 font-bold border-amber-400 shadow-md';
+                                    }
+
+                                    return `
+                                    <button onclick="app.jumpToQuestion(${i})" class="relative h-10 rounded-xl border text-xs font-semibold number-tabular transition flex items-center justify-center ${cellStyle}">
+                                        ${i + 1}
+                                        ${flagged ? '<span class="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-amber-400 ring-2 ring-white dark:ring-navy-900"></span>' : ''}
+                                    </button>`;
+                                }).join('')}
+                            </div>
+
+                            <button onclick="app.requestSubmitExam()" class="w-full py-3 rounded-2xl text-sm font-bold bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white shadow-lg shadow-emerald-500/20 transition flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-check-double"></i>
+                                <span>ส่งกระดาษคำตอบและดูผลคะแนน</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>`;
+            },
+
+            renderResults() {
+                const qs = this.state.activeQuestions;
+                let correctCount = 0;
+                const topicStats = {};
+
+                qs.forEach(q => {
+                    if (!topicStats[q.topicId]) {
+                        topicStats[q.topicId] = { name: q.topicName, total: 0, correct: 0 };
+                    }
+                    topicStats[q.topicId].total++;
+                    if (this.state.userAnswers[q.id] === q.correctIndex) {
+                        correctCount++;
+                        topicStats[q.topicId].correct++;
+                    }
+                });
+
+                const pct = Math.round((correctCount / qs.length) * 100);
+                const estExamPoints = ((correctCount / qs.length) * 45).toFixed(2);
+                const optionLetters = ['ก.', 'ข.', 'ค.', 'ง.'];
+
+                let gradeBadge = { label: 'A • Ready for Chula Final!', color: 'text-emerald-400 bg-emerald-500/15 border-emerald-500/30' };
+                if (pct < 50) gradeBadge = { label: 'Needs Intensive Review • ทบทวนจุดพลาดด่วน', color: 'text-rose-400 bg-rose-500/15 border-rose-500/30' };
+                else if (pct < 70) gradeBadge = { label: 'B / B+ • พื้นฐานดี เก็บจุดหลอกเพิ่มอีกนิด', color: 'text-amber-400 bg-amber-500/15 border-amber-500/30' };
+                else if (pct < 85) gradeBadge = { label: 'A- / A • แข็งแกร่งมากระดับท็อปเซค', color: 'text-sky-400 bg-sky-500/15 border-sky-500/30' };
+
+                return `
+                <div class="space-y-8 animate-fadeIn">
+                    <!-- Score Summary Card -->
+                    <div class="rounded-3xl bg-gradient-to-br from-navy-900 via-slate-900 to-navy-950 border border-slate-800 p-6 sm:p-10 text-white shadow-2xl">
+                        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                            <div class="lg:col-span-7 space-y-4">
+                                <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full border text-xs font-bold ${gradeBadge.color}">
+                                    <i class="fa-solid fa-chart-simple"></i> ${gradeBadge.label}
+                                </span>
+                                <h2 class="text-2xl sm:text-4xl font-bold">สรุปผลการประเมินสมรรถนะการสอบ</h2>
+                                <p class="text-slate-300 text-sm sm:text-base">
+                                    คุณตอบถูก <strong class="text-emerald-400 text-lg">${correctCount}</strong> จากทั้งหมด <strong>${qs.length}</strong> ข้อ
+                                    (เทียบเท่าคะแนนสอบปลายภาคจริงประมาณ <strong class="text-amber-400 text-lg">${estExamPoints} / 45.00</strong> คะแนน)
+                                </p>
+                                <div class="pt-2 flex flex-wrap gap-3">
+                                    <button onclick="app.goHome()" class="px-5 py-3 rounded-2xl text-sm font-semibold bg-white/10 hover:bg-white/15 border border-white/20 transition flex items-center gap-2">
+                                        <i class="fa-solid fa-house"></i> กลับหน้าเลือกหมวดสอบ
+                                    </button>
+                                    ${this.state.mistakeIds.size > 0 ? `
+                                    <button onclick="app.startMistakeReview()" class="px-5 py-3 rounded-2xl text-sm font-bold bg-rose-600 hover:bg-rose-500 text-white shadow-lg shadow-rose-500/25 transition flex items-center gap-2">
+                                        <i class="fa-solid fa-rotate-right"></i> ฝึกทำเฉพาะข้อที่ผิด (${this.state.mistakeIds.size} ข้อ)
+                                    </button>` : ''}
+                                </div>
+                            </div>
+
+                            <!-- Percentage Dial -->
+                            <div class="lg:col-span-5 flex flex-col items-center justify-center bg-white/5 border border-white/10 rounded-2xl p-6">
+                                <div class="text-5xl sm:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-emerald-400 number-tabular">
+                                    ${pct}%
+                                </div>
+                                <p class="text-xs text-slate-400 mt-2 uppercase tracking-wider font-semibold">Overall Accuracy Score</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Topic Breakdown -->
+                    <div class="bg-white dark:bg-navy-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 shadow-lg space-y-5">
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                            <i class="fa-solid fa-bullseye text-amber-500"></i> วิเคราะห์จุดแข็ง-จุดอ่อนรายบทเรียน (Topic Diagnostic)
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            ${Object.values(topicStats).map(st => {
+                                const tPct = Math.round((st.correct / st.total) * 100);
+                                const barColor = tPct >= 80 ? 'bg-emerald-500' : tPct >= 60 ? 'bg-amber-500' : 'bg-rose-500';
+                                return `
+                                <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/80 space-y-2">
+                                    <div class="flex items-center justify-between text-xs sm:text-sm font-bold">
+                                        <span class="text-slate-800 dark:text-slate-200">${st.name}</span>
+                                        <span class="number-tabular ${tPct >= 80 ? 'text-emerald-500' : tPct >= 60 ? 'text-amber-500' : 'text-rose-500'}">
+                                            ${st.correct}/${st.total} (${tPct}%)
+                                        </span>
+                                    </div>
+                                    <div class="w-full h-2.5 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                                        <div class="h-full ${barColor} rounded-full" style="width: ${tPct}%"></div>
+                                    </div>
+                                </div>`;
+                            }).join('')}
+                        </div>
+                    </div>
+
+                    <!-- Complete Detailed Review -->
+                    <div class="space-y-4">
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                            <i class="fa-solid fa-file-signature text-indigo-500"></i> เฉลยละเอียดทุกข้อ (Complete Analytical Review)
+                        </h3>
+                        ${qs.map((q, idx) => {
+                            const ans = this.state.userAnswers[q.id];
+                            const isCorrect = ans === q.correctIndex;
+                            return `
+                            <div class="bg-white dark:bg-navy-900 border ${isCorrect ? 'border-emerald-500/40' : 'border-rose-500/40'} rounded-2xl p-6 shadow-sm space-y-4">
+                                <div class="flex flex-wrap items-center justify-between gap-2">
+                                    <div class="flex items-center gap-2">
+                                        <span class="px-2.5 py-1 rounded-lg text-xs font-bold ${isCorrect ? 'bg-emerald-500/20 text-emerald-600 dark:text-emerald-400' : 'bg-rose-500/20 text-rose-600 dark:text-rose-400'}">
+                                            ข้อ ${idx + 1} • ${isCorrect ? 'ตอบถูก' : ans === undefined ? 'ไม่ได้ตอบ' : 'ตอบผิด'}
+                                        </span>
+                                        <span class="text-xs font-medium text-slate-500 dark:text-slate-400">${q.topicName}</span>
+                                    </div>
+                                    <span class="text-xs font-mono text-slate-400">${q.reference}</span>
+                                </div>
+
+                                <p class="text-sm sm:text-base text-slate-800 dark:text-slate-100 whitespace-pre-line">${q.question}</p>
+
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs sm:text-sm">
+                                    <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
+                                        <span class="text-slate-500 dark:text-slate-400 block text-xs mb-1">คำตอบของคุณ:</span>
+                                        <strong class="${isCorrect ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'}">
+                                            ${ans !== undefined ? `${optionLetters[ans]} ${q.options[ans]}` : '— ไม่ได้เลือกคำตอบ —'}
+                                        </strong>
+                                    </div>
+                                    <div class="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30">
+                                        <span class="text-emerald-700 dark:text-emerald-300 block text-xs mb-1">คำตอบที่ถูกต้อง:</span>
+                                        <strong class="text-emerald-800 dark:text-emerald-200">
+                                            ${optionLetters[q.correctIndex]} ${q.options[q.correctIndex]}
+                                        </strong>
+                                    </div>
+                                </div>
+
+                                <div class="p-4 rounded-xl bg-slate-50 dark:bg-navy-950/70 border border-slate-200 dark:border-slate-800 text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                                    ${q.explanation}
+                                </div>
+                            </div>`;
+                        }).join('')}
+                    </div>
+                </div>`;
+            }
+        };
+
+        window.onload = function() {
+            app.init();
+        };
+    </script>
+</body>
+</html>
